@@ -22,15 +22,22 @@ RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC, and addit
 and automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
 The output files are directly usable with LePHARE, CIGALE, GRAHSP.
 
-Install
--------
+Prerequisites
+-------------
 
-You need to install
+You need to have installed the programs:
 
-* stilts
+* `stilts <http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sun256.html>`_
 * make
+
+and the following python libraries:
+
 * requests_cache, astropy, numpy, pandas, tqdm
-* dl (from noirlab)
+* dl (from `noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`)
+
+which you could get with something like::
+
+	pip install requests_cache astropy numpy pandas tqdm noirlab
 
 
 Usage
