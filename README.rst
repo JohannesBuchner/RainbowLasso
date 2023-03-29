@@ -27,10 +27,10 @@ Install
 
 You need to install
 
- * stilts
- * make
- * requests_cache, astropy, numpy, pandas, tqdm
- * dl (from noirlab)
+* stilts
+* make
+* requests_cache, astropy, numpy, pandas, tqdm
+* dl (from noirlab)
 
 
 Usage
@@ -47,7 +47,7 @@ Create a visualisation of the errors and fluxes::
 
 	make dr16QWX_selection_lite.fits_errors.pdf dr16QWX_selection_lite.fits_fluxes.pdf
 
-How to read:
+How to read the diagnostic plot:
 
 * each page is a filter. 
 * fluxes.pdf compares the flux (mJy) from one band to the next. If the spectrum is relatively flat, and bands are close together, they should follow the 1:1 line.
