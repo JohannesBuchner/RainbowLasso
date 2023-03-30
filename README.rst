@@ -3,6 +3,7 @@ RainbowLasso
 
 RainbowLasso compiles matched aperture fluxes from ultraviolet to infrared
 all-sky astronomical surveys of stars, galaxies and Active Galactic Nuclei.
+The output file is ready for SED-fitting.
 
 .. image:: logo.png
 
