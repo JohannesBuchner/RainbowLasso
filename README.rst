@@ -25,8 +25,9 @@ Only sources within the Legacy Survey area are handled.
 
 This allows modelling a physically consistent region of a extended source.
 
-RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC, and additional columns that are copied to the output),
-and automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
+RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC) and
+automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
+Additional input catalog columns are copied to the output and are not uploaded anywhere.
 The output files are directly usable with LePhare (TODO), Cigale (TODO) and GRAHSP.
 
 Prerequisites
@@ -53,6 +54,10 @@ Usage
 If for example the input file is dr16QWX_selection.fits, then run::
 
 	make dr16QWX_selection_lite.fits
+
+Some steps are manual (instructions are shown).
+
+The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
 Checking photometry
 --------------------
