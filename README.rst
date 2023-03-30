@@ -92,14 +92,14 @@ How to read the diagnostic plot:
 TODO
 ----
 
-* ◻ discard blended or problematic photometry in LS&WISE (mostly done, but needs to be checked)
-* ◻ discard blended or problematic photometry in GALEX
-* ◻ discard blended or problematic photometry in VHS
-* ◻ discard blended or problematic photometry in UKIDSS
-* ◻ provide upper limits for GALEX, in case of non-detections
-* ◻ provide upper limits from the AllWISE bands
-* ◻ provide upper limits for VHS, UKIDSS (need the area for that)
-* ◻ improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.
+* ☐ discard blended or problematic photometry in LS&WISE (mostly done, but needs to be checked)
+* ☐ discard blended or problematic photometry in GALEX
+* ☐ discard blended or problematic photometry in VHS
+* ☐ discard blended or problematic photometry in UKIDSS
+* ☐ provide upper limits for GALEX, in case of non-detections
+* ☐ provide upper limits from the AllWISE bands
+* ☐ provide upper limits for VHS, UKIDSS (need the area for that)
+* ☐ improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.
 
 To add more surveys, contributions are welcome.
 
