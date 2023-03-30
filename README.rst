@@ -3,12 +3,15 @@ RainbowLasso
 
 RainbowLasso compiles matched aperture fluxes from ultraviolet to infrared
 all-sky astronomical surveys of stars, galaxies and Active Galactic Nuclei.
+
+.. image:: logo.png
+
 Matched aperture flux means that the same extraction region is used in 
 each wavelength, which includes 
 
 * GALEX (far-UV and near-UV), 
 * optical (griz bands from Legacy Survey), 
-* near-infrared (UltraVISTA hemisphere survey)
+* near-infrared (UltraVISTA hemisphere survey, UKIDSS)
 * infrared (WISE, decomposed by Legacy Survey)
 
 Depending on whether the source is extended or point-like 
@@ -25,7 +28,7 @@ The output files are directly usable with LePHARE, CIGALE, GRAHSP.
 Prerequisites
 -------------
 
-You need to have installed the programs:
+You need to have the programs installed:
 
 * `stilts <http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sun256.html>`_
 * make
@@ -33,7 +36,7 @@ You need to have installed the programs:
 and the following python libraries:
 
 * requests_cache, astropy, numpy, pandas, tqdm
-* dl (from `noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`)
+* dl (from `noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`_)
 
 which you could get with something like::
 
