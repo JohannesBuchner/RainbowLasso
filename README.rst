@@ -15,7 +15,7 @@ each wavelength, which includes
 
 * GALEX (far-UV and near-UV), 
 * optical (griz bands from Legacy Survey), 
-* near-infrared (JKH, UltraVISTA hemisphere survey, UKIDSS)
+* near-infrared (JKH from VISTA hemisphere survey and UKIDSS)
 * infrared (WISE W1,W2,W3,W4, deblended by Legacy Survey)
 
 Depending on whether the source is extended or point-like 
@@ -29,10 +29,16 @@ This allows modelling a physically consistent region of a extended source.
 RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC) and
 automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
 Additional input catalog columns are copied to the output and are not uploaded anywhere.
-The output files are directly usable with LePhare (TODO), Cigale (TODO) and GRAHSP.
+The output files are usable with LePhare, Cigale (TODO) and GRAHSP.
 
-Flux errors are also provided. 
-If needed, they are conservatively estimated from magnitude errors.
+Features
+--------
+
+* Milky Way attenuation by dust is corrected for each band up until the near-infrared. The E(B-V) is taken from `here <https://www.legacysurvey.org/dr10/catalogs/#galactic-extinction-coefficients>`_ and for other wavelengths as listed to the COSMOS2015 Laigle+ paper.
+* Reliable flux errors are computed. If needed, they are conservatively estimated from magnitude errors.
+* Unreliable flux estimates are discarded, indicated by flags on blending and image fitting problems
+* Efficient handling of very large catalogs.
+* Missing information (lacking information) is indicated (e.g. -99 entries).
 
 Prerequisites
 -------------
@@ -80,13 +86,14 @@ How to read the diagnostic plot:
 TODO
 ----
 
-* [ ] Discard blended or problematic photometry in LS&WISE (mostly done, but needs to be checked)
-* [ ] Discard blended or problematic photometry in GALEX
-* [ ] Discard blended or problematic photometry in VHS
-* [ ] Discard blended or problematic photometry in UKIDSS
+* [ ] discard blended or problematic photometry in LS&WISE (mostly done, but needs to be checked)
+* [ ] discard blended or problematic photometry in GALEX
+* [ ] discard blended or problematic photometry in VHS
+* [ ] discard blended or problematic photometry in UKIDSS
 * [ ] provide upper limits for GALEX, in case of non-detections
 * [ ] provide upper limits from the AllWISE bands
 * [ ] provide upper limits for VHS, UKIDSS (need the area for that)
+* [ ] improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.
 
 To add more surveys, contributions are welcome.
 
