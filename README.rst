@@ -6,6 +6,9 @@ all-sky astronomical surveys of stars, galaxies and Active Galactic Nuclei.
 
 .. image:: logo.png
 
+How it works
+------------
+
 Matched aperture flux means that the same extraction region is used in 
 each wavelength, which includes 
 
@@ -15,15 +18,16 @@ each wavelength, which includes
 * infrared (WISE, decomposed by Legacy Survey)
 
 Depending on whether the source is extended or point-like 
-(information from the simulatenous Legacy Survey analysis from optical to mid-infrared),
+(information from the Legacy Survey multi-wavelength source fitting from optical to mid-infrared),
 either PSF-like photometry or a total flux based on an extraction aperture is used.
 If the latter, the same aperture radius is used also for the UV and near-infrared (matched aperture).
+Only sources within the Legacy Survey area are handled.
 
 This allows modelling a physically consistent region of a extended source.
 
 RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC, and additional columns that are copied to the output),
 and automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
-The output files are directly usable with LePHARE, CIGALE, GRAHSP.
+The output files are directly usable with LePhare (TODO), Cigale (TODO) and GRAHSP.
 
 Prerequisites
 -------------
@@ -75,7 +79,9 @@ Contributors
 Citing
 ------
 
-Please cite the accompaning paper. You can also include the repository URL as a footnote.
+1. Cite the accompaning paper. 
+2. You can also include the repository URL as a footnote.
+3. Cite the relevant data products. See the accompaning paper for a list of references.
 
 Licence
 -------
