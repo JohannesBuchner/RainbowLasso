@@ -1,30 +1,34 @@
 RainbowLasso
 ============
 
-RainbowLasso compiles matched aperture fluxes from ultraviolet to infrared
-all-sky astronomical surveys of stars, galaxies and Active Galactic Nuclei.
-The output file is ready for SED-fitting.
+RainbowLasso compiles reliable ultraviolet to infrared for 
+modelling stars, galaxies and Active Galactic Nuclei
+from public all-sky astronomical surveys.
 
 .. image:: logo.png
 
 How it works
 ------------
 
-Matched aperture flux means that the same extraction region is used in 
-each wavelength, which includes 
+Understanding the stellar population in galaxies requires constraining 
+a model with reliable multi-wavelength (ultraviolet to infrared) 
+flux measurements. Since galaxies are extended, to model the same object 
+at all wavelength, the same aperture needs to be extracted. This is called 
+matched aperture. For point sources (stars or distant quasars),
+measuring the flux weighted by the survey point-spread-function provides
+the best constraints.
+
+Depending on whether the source is extended or point-like, 
+information from the Legacy Survey multi-wavelength source fitting from optical to mid-infrared,
+either PSF-like photometry or a total flux based on an extraction aperture is used.
+Only sources within the Legacy Survey area are handled.
+
+RainbowLasso fetches and calculates fluxes from these surveys:
 
 * GALEX (far-UV and near-UV), 
 * optical (griz bands from Legacy Survey), 
 * near-infrared (JKH from VISTA hemisphere survey and UKIDSS)
 * infrared (WISE W1,W2,W3,W4, deblended by Legacy Survey)
-
-Depending on whether the source is extended or point-like 
-(information from the Legacy Survey multi-wavelength source fitting from optical to mid-infrared),
-either PSF-like photometry or a total flux based on an extraction aperture is used.
-If the latter, the same aperture radius is used also for the UV and near-infrared (matched aperture).
-Only sources within the Legacy Survey area are handled.
-
-This allows modelling a physically consistent region of a extended source.
 
 RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC) and
 automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
@@ -69,12 +73,14 @@ Some steps are manual (instructions are shown).
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
-Checking photometry
---------------------
+Quality control
+---------------
 
 Create a visualisation of the errors and fluxes::
 
 	make dr16QWX_selection_lite.fits_errors.pdf dr16QWX_selection_lite.fits_fluxes.pdf
+
+Examples are uploaded to this repository.
 
 How to read the diagnostic plot:
 
