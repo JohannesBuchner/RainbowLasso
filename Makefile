@@ -243,7 +243,51 @@ all:
 		ocmd='addcol WISE4 "(WISE4_ERR_ALLWISE>0&&!W34_blended?LU_flux_w4_LS*1e26:-99)"' \
 		ocmd='addcol WISE4_err "(WISE4_ERR_ALLWISE>0&&!W34_blended?LU_flux_w4_err_LS*1e26:-99)"' \
 
-%_lite.fits: %_all.fits
+%_automatic.fits: %.fits %_GALEX.fits %_LS.fits %_VHS.fits %_ALLWISE.fits
+	# merge everything together and use sensible column names
+	# keep only WISE fluxes when ALLWISE also has a detection there
+	# and if there are no blending issues
+	# check LS9 fitbits for issues. bits 1, 2, 3, 7, 9, 12 are acceptable.
+	# otherwise delete
+	stilts tmatchn nin=5 out=$@ \
+		in1=$*.fits suffix1= values1=id \
+		in2=$*_GALEX.fits suffix2=_GALEX values2=id \
+		in3=$*_LS.fits suffix3=_LS values3=id \
+		in4=$*_VHS.fits suffix4=_VHS values4=t1_id \
+		in5=$*_ALLWISE.fits suffix5=_ALLWISE values5=id_in \
+		fixcols=all matcher=exact \
+		ocmd='addcol pointlike "!(type_LS != \"PSF\")"' \
+		ocmd='addcol FUV Fflux_real_LU_GALEX*1e26' \
+		ocmd='addcol NUV Nflux_real_LU_GALEX*1e26' \
+		ocmd='addcol FUV_err e_Fflux_real_LU_GALEX*1e26' \
+		ocmd='addcol NUV_err e_Nflux_real_LU_GALEX*1e26' \
+		ocmd='addcol decam_g LU_flux_g_LS*1e26' \
+		ocmd='addcol decam_r LU_flux_r_LS*1e26' \
+		ocmd='addcol decam_z LU_flux_z_LS*1e26' \
+		ocmd='addcol decam_g_err LU_flux_g_err_LS*1e26' \
+		ocmd='addcol decam_r_err LU_flux_r_err_LS*1e26' \
+		ocmd='addcol decam_z_err LU_flux_z_err_LS*1e26' \
+		ocmd='addcol UV_Y "(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26"' \
+		ocmd='addcol UV_J "(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26"' \
+		ocmd='addcol UV_H "(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26"' \
+		ocmd='addcol UV_K "(pointlike?UV_Ksapc4flux_VHS:UV_Ksap6flux_VHS)*1e26"' \
+		ocmd='addcol UV_Y_err "(pointlike?UV_Yapc4flux_err_VHS:UV_Yap6flux_err_VHS)*1e26"' \
+		ocmd='addcol UV_J_err "(pointlike?UV_Japc4flux_err_VHS:UV_Jap6flux_err_VHS)*1e26"' \
+		ocmd='addcol UV_H_err "(pointlike?UV_Hapc4flux_err_VHS:UV_Hap6flux_err_VHS)*1e26"' \
+		ocmd='addcol UV_K_err "(pointlike?UV_Ksapc4flux_err_VHS:UV_Ksap6flux_err_VHS)*1e26"' \
+		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8 | 128 | 512 | 4096)) == 0)"' \
+		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
+		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
+		ocmd='addcol WISE1 "(WISE1_ERR_ALLWISE>0?LU_flux_w1_LS*1e26:-99)"' \
+		ocmd='addcol WISE1_err "(WISE1_ERR_ALLWISE>0?LU_flux_w1_err_LS*1e26:-99)"' \
+		ocmd='addcol WISE2 "(WISE2_ERR_ALLWISE>0?LU_flux_w2_LS*1e26:-99)"' \
+		ocmd='addcol WISE2_err "(WISE2_ERR_ALLWISE>0?LU_flux_w2_err_LS*1e26:-99)"' \
+		ocmd='addcol WISE3 "(WISE3_ERR_ALLWISE>0&&!W34_blended?LU_flux_w3_LS*1e26:-99)"' \
+		ocmd='addcol WISE3_err "(WISE3_ERR_ALLWISE>0&&!W34_blended?LU_flux_w3_err_LS*1e26:-99)"' \
+		ocmd='addcol WISE4 "(WISE4_ERR_ALLWISE>0&&!W34_blended?LU_flux_w4_LS*1e26:-99)"' \
+		ocmd='addcol WISE4_err "(WISE4_ERR_ALLWISE>0&&!W34_blended?LU_flux_w4_err_LS*1e26:-99)"' \
+
+%_lite.fits: %.fits
 	stilts tpipe in=$^ out=$@ cmd='delcols "adflux*_LS LU_flux*_LS *_GALEX *_VHS *_UKIDSS _*ALLWISE"'
 	stilts tpipe in=$@ omode=stats
 

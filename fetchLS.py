@@ -16,8 +16,8 @@ t = Table.read(sys.argv[1])
 elements = []
 for row in tqdm.tqdm(t):
     ra0, dec0, radius = row['RA'], row['DEC'], 0.00028 # ra0,dec0,radius all in decimal degrees
-    query = """SELECT TOP 1 * FROM ls_dr9.tractor 
-    INNER JOIN ls_dr9.apflux ON ls_dr9.tractor.ls_id = ls_dr9.apflux.ls_id 
+    query = """SELECT TOP 1 * FROM ls_dr10.tractor 
+    INNER JOIN ls_dr10.apflux ON ls_dr10.tractor.ls_id = ls_dr10.apflux.ls_id 
     WHERE  q3c_radial_query(ra,dec,{:f},{:f},{:f})""".format(ra0,dec0,radius)
     rowdf = qc.query(query, fmt='pandas')
     rowdf['id'] = pd.Series([row['id']])
