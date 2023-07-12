@@ -231,8 +231,8 @@ all:
 		ocmd='addcol WFCAM_J_err "(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_H_err "(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_Ks_err "(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol goodfits_LS "((fitbits_LS & (16383 ^ (2 | 4 | 8 | 128 | 512 | 4096))) == 0)"' \
-		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_z_LS,fracflux_w2_LS)<0.1&&max(fracflux_w4_LS,fracflux_w3_LS)<10)"' \
+		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8 | 128 | 512 | 4096)) == 0)"' \
+		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
 		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
 		ocmd='addcol WISE1 "(WISE1_ERR_ALLWISE>0?LU_flux_w1_LS*1e26:-99)"' \
 		ocmd='addcol WISE1_err "(WISE1_ERR_ALLWISE>0?LU_flux_w1_err_LS*1e26:-99)"' \

@@ -55,21 +55,24 @@ You need to have the programs installed:
 and the following python libraries:
 
 * requests_cache, astropy, numpy, pandas, tqdm
-* dl (from `noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`_)
+* astro-datalab (`see noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`_)
 
 which you could get with something like::
 
-	pip install requests_cache astropy numpy pandas tqdm noirlab
+	pip install requests_cache astropy numpy pandas tqdm astro-datalab
 
 
 Usage
 -----
 
+Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine.
+
 If for example the input file is dr16QWX_selection.fits, then run::
 
 	make dr16QWX_selection_lite.fits
 
-Some steps are manual (instructions are shown).
+Some steps are manual, and instructions are shown. After you have completed
+the instructions, rerun the make command.
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
