@@ -41,8 +41,14 @@ Features
 * Milky Way attenuation by dust is corrected for each band up until the near-infrared. The E(B-V) is taken from `here <https://www.legacysurvey.org/dr10/catalogs/#galactic-extinction-coefficients>`_ and for other wavelengths as listed to the COSMOS2015 Laigle+ paper.
 * Reliable flux errors are computed. If needed, they are conservatively estimated from magnitude errors.
 * Unreliable flux estimates are discarded, indicated by flags on blending and image fitting problems
-* Efficient handling of very large catalogs.
+* Discards blended or problematic photometry in GALEX (artifact and extraction flag, magnitude error)
+* Discards blended or problematic photometry in LS&WISE (fracin, fracflux)
+* Provides upper limits for blended WISE cases
+  * conservative 3 sigma upper limits are computed for WISE3&4 based on the total flux of all nearby sources (fracflux) and the error bars.
 * Missing information (lacking information) is indicated (e.g. -99 entries).
+* Automated
+* For a clean sample, you can sub-select sources flagged "isolated"
+
 
 Prerequisites
 -------------
@@ -69,10 +75,17 @@ Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns
 
 If for example the input file is dr16QWX_selection.fits, then run::
 
-	make dr16QWX_selection_lite.fits
+	make dr16QWX_selection_all_lite.fits
 
-Some steps are manual, and instructions are shown. After you have completed
-the instructions, rerun the make command.
+Files can also be outside the RainbowLasso directory.
+
+In that case you can run from the RainbowLasso directory::
+
+	$ make path/to/data/dr16QWX_selection_all_lite.fits
+
+Or you can run from the data directory::
+
+	$ make -C path/to/RainbowLasso/ dr16QWX_selection_all_lite.fits
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
@@ -95,13 +108,9 @@ How to read the diagnostic plot:
 TODO
 ----
 
-* ☐ discard blended or problematic photometry in LS&WISE (mostly done, but needs to be checked)
-* ☐ discard blended or problematic photometry in GALEX
 * ☐ discard blended or problematic photometry in VHS
 * ☐ discard blended or problematic photometry in UKIDSS
-* ☐ provide upper limits for GALEX, in case of non-detections
-* ☐ provide upper limits from the AllWISE bands
-* ☐ provide upper limits for VHS, UKIDSS (need the area for that)
+* ☐ provide upper limits for VHS, UKIDSS (need coverage information for that)
 * ☐ improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.
 
 To add more surveys, contributions are welcome.
