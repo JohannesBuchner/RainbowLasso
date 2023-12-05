@@ -2,7 +2,7 @@
 Retrieves aperture fluxes from legacy survey via noirlab.
 """
 import requests_cache
-requests_cache.install_cache('demo_cache', allowable_methods=('GET', 'POST'), expire_after=3600*24*7)
+requests_cache.install_cache('demo_cache', allowable_methods=('GET', 'POST')) #, expire_after=3600*24*7)
 
 import numpy as np
 from astropy.table import Table
@@ -19,8 +19,9 @@ for row in tqdm.tqdm(t):
     query = """SELECT TOP 1 * FROM ukidss_dr11plus.lassource 
     WHERE  q3c_radial_query(ra,dec,{:f},{:f},{:f})""".format(ra0,dec0,radius)
     rowdf = qc.query(query, fmt='pandas')
-    rowdf['id'] = pd.Series([row['id']])
-    elements.append(rowdf)
+    if len(rowdf) > 0:
+        rowdf['id'] = pd.Series([row['id']] * len(rowdf))
+        elements.append(rowdf)
 
 data = Table.from_pandas(pd.concat(elements))
 
