@@ -271,6 +271,7 @@ all:
 	#    !!! there are ONLY aperture corrected fluxes provided!
 	# filter-specific offsets is the conversion from Vega to AB
 	# 48.6 is to convert to erg/s/cm^2/Hz
+	# AB offsets from http://wsa.roe.ac.uk/pubs/hewett-ukidss.pdf
 	stilts tpipe in=$^ out=$@ \
 		cmd='addcol WFCAM_Yapc4flux "Yapermag4>0 ? (pow(10, -(Yapermag4-ay+0.634+48.60)/(2.5))): -99."' \
 		cmd='addcol WFCAM_Yapc4flux_err "Yapermag4err>0 ? (pow(10, -(Yapermag4-ay-Yapermag4err+0.634+48.60)/(2.5)))-WFCAM_Yapc4flux: -99."' \
@@ -336,7 +337,7 @@ all:
 		ocmd='addcol WFCAM_J_err "(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_H_err "(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_Ks_err "(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8 | 128 | 512 | 4096)) == 0)"' \
+		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8)) == 0)"' \
 		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
 		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
 		ocmd='addcol WISE1 "(isolated_LS ? LU_flux_w1_LS * 1e26 : (WISE1_ERR_ALLWISE > 0 ? WISE1_ALLWISE : -99))"' \
@@ -372,31 +373,31 @@ all:
 		ocmd='addcol NUV Nflux_real_LU_GALEX*1e26' \
 		ocmd='addcol FUV_err e_Fflux_real_LU_GALEX*1e26' \
 		ocmd='addcol NUV_err e_Nflux_real_LU_GALEX*1e26' \
-		ocmd='addcol decam_g "(fracin_g_LS>0.75?LU_flux_g_LS*1e26:-99)"' \
-		ocmd='addcol decam_r "(fracin_r_LS>0.75?LU_flux_r_LS*1e26:-99)"' \
-		ocmd='addcol decam_i "(fracin_i_LS>0.75?LU_flux_i_LS*1e26:-99)"' \
-		ocmd='addcol decam_z "(fracin_z_LS>0.75?LU_flux_z_LS*1e26:-99)"' \
-		ocmd='addcol decam_g_err "(fracin_g_LS>0.75?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
-		ocmd='addcol decam_r_err "(fracin_r_LS>0.75?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
-		ocmd='addcol decam_i_err "(fracin_i_LS>0.75?LU_flux_i_err_LS*1e26/fracin_i_LS:-99)"' \
-		ocmd='addcol decam_z_err "(fracin_z_LS>0.75?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
-		ocmd='addcol UV_Y "(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26"' \
-		ocmd='addcol UV_J "(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26"' \
-		ocmd='addcol UV_H "(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26"' \
-		ocmd='addcol UV_K "(pointlike?UV_Ksapc4flux_VHS:UV_Ksap6flux_VHS)*1e26"' \
-		ocmd='addcol UV_Y_err "(pointlike?UV_Yapc4flux_err_VHS:UV_Yap6flux_err_VHS)*1e26"' \
-		ocmd='addcol UV_J_err "(pointlike?UV_Japc4flux_err_VHS:UV_Jap6flux_err_VHS)*1e26"' \
-		ocmd='addcol UV_H_err "(pointlike?UV_Hapc4flux_err_VHS:UV_Hap6flux_err_VHS)*1e26"' \
-		ocmd='addcol UV_K_err "(pointlike?UV_Ksapc4flux_err_VHS:UV_Ksap6flux_err_VHS)*1e26"' \
-		ocmd='addcol WFCAM_Y "(pointlike?WFCAM_Yapc4flux_UKIDSS:WFCAM_Yap6flux_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_J "(pointlike?WFCAM_Japc4flux_UKIDSS:WFCAM_Jap6flux_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_H "(pointlike?WFCAM_Hapc4flux_UKIDSS:WFCAM_Hap6flux_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_Ks "(pointlike?WFCAM_Kapc4flux_UKIDSS:WFCAM_Kap6flux_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_Y_err "(pointlike?WFCAM_Yapc4flux_err_UKIDSS:WFCAM_Yap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_J_err "(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_H_err "(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol WFCAM_Ks_err "(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8 | 128 | 512 | 4096)) == 0)"' \
+		ocmd='addcol decam_g "(fracin_g_LS>0.5?LU_flux_g_LS*1e26:-99)"' \
+		ocmd='addcol decam_r "(fracin_r_LS>0.5?LU_flux_r_LS*1e26:-99)"' \
+		ocmd='addcol decam_i "(fracin_i_LS>0.5?LU_flux_i_LS*1e26:-99)"' \
+		ocmd='addcol decam_z "(fracin_z_LS>0.5?LU_flux_z_LS*1e26:-99)"' \
+		ocmd='addcol decam_g_err "(fracin_g_LS>0.5?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
+		ocmd='addcol decam_r_err "(fracin_r_LS>0.5?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
+		ocmd='addcol decam_i_err "(fracin_i_LS>0.5?LU_flux_i_err_LS*1e26/fracin_i_LS:-99)"' \
+		ocmd='addcol decam_z_err "(fracin_z_LS>0.5?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
+		ocmd='addcol UV_Y "Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26:-99"' \
+		ocmd='addcol UV_J "Jerrbits_VHS==0?(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26:-99"' \
+		ocmd='addcol UV_H "Herrbits_VHS==0?(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26:-99"' \
+		ocmd='addcol UV_K "Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_VHS:UV_Ksap6flux_VHS)*1e26:-99"' \
+		ocmd='addcol UV_Y_err "Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_err_VHS:UV_Yap6flux_err_VHS)*1e26:-99"' \
+		ocmd='addcol UV_J_err "Jerrbits_VHS==0?(pointlike?UV_Japc4flux_err_VHS:UV_Jap6flux_err_VHS)*1e26:-99"' \
+		ocmd='addcol UV_H_err "Herrbits_VHS==0?(pointlike?UV_Hapc4flux_err_VHS:UV_Hap6flux_err_VHS)*1e26:-99"' \
+		ocmd='addcol UV_K_err "Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_err_VHS:UV_Ksap6flux_err_VHS)*1e26:-99"' \
+		ocmd='addcol WFCAM_Y "Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_UKIDSS:WFCAM_Yap6flux_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_J "Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_UKIDSS:WFCAM_Jap6flux_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_H "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_UKIDSS:WFCAM_Hap6flux_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_Ks "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_UKIDSS:WFCAM_Kap6flux_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_Y_err "Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_err_UKIDSS:WFCAM_Yap6flux_err_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_J_err "Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_H_err "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26:-99"' \
+		ocmd='addcol WFCAM_Ks_err "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26:-99"' \
+		ocmd='addcol goodfits_LS "(fitbits_LS & (1 | 4 | 8)) == 0"' \
 		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
 		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
 		ocmd='addcol WISE1 "isolated_LS ? LU_flux_w1_LS * 1e26 : LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)"' \
