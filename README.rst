@@ -94,7 +94,7 @@ Quality control
 
 Create a visualisation of the errors and fluxes::
 
-	make dr16QWX_selection_lite.fits_errors.pdf dr16QWX_selection_lite.fits_fluxes.pdf
+	make dr16QWX_selection_all_lite.fits_errors.pdf dr16QWX_selection_all_lite.fits_fluxes.pdf
 
 Examples are uploaded to this repository.
 
