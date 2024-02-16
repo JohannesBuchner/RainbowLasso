@@ -85,7 +85,7 @@ In that case you can run from the RainbowLasso directory::
 
 Or you can run from the data directory::
 
-	$ make -C path/to/RainbowLasso/ dr16QWX_selection_all_lite.fits
+	$ make -C path/to/RainbowLasso/ $PWD/dr16QWX_selection_all_lite.fits
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
