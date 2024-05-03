@@ -58,13 +58,19 @@ for row in tqdm.tqdm(t):
             rowdf[k] = rowdf[k].astype(str).astype(newtype)
     rowdf['id'] = pd.Series([row['id'] * len(rowdf)])
     elements.append(rowdf)
+    if len(elements) > 100000:
+      elements = [pd.concat(elements)]
 
+print("concatenating ...")
 df = pd.concat(elements)
+print("converting ...")
 data = Table.from_pandas(df)
+del df
 
 for c in data.colnames:
     if data.columns[c].dtype == np.dtype('O'):
         print("  stripping complex column", c)
         del data[c]
 
+print("writing ...")
 data.write(sys.argv[2], overwrite=True)

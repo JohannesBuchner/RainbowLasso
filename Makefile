@@ -16,6 +16,14 @@ all:
 %_LS_aper.fits: fetchLS.py %.fits
 	python3 $^ $@
 
+%_LS_staraper.fits: fetchLSstar.py %.fits
+	python3 $^ $@
+
+%_LS_extaper_in.fits: %_LS_staraper.fits %_LS_aper.fits
+	stilts tmatch2 out=$@ fixcols=all matcher=exact \
+		in1=$*_LS_aper.fits suffix1= values1=id \
+		in2=$*_LS_staraper.fits suffix2=_STAR values2=id
+
 %_LS.fits: %_LS_aper.fits
 	# adflux_* = adaptive flux column, depending on source type
 	# for extended sources: 5'' aperture = OPT:apflux_*_7 and IR:apflux_*_2
@@ -79,15 +87,13 @@ all:
 		ocmd='addcol A_lam_fuv "A_v>0 ? A_v*(-0.3459882441104826 + 9.173790513029425/3.1): -99."' \
 		ocmd='addcol A_lam_nuv "A_v>0 ? A_v*(0.6743929174392934 + 1.2480067831962458/3.1): -99."' \
 		\
-		ocmd='addcol FUV "FUVmag>0&&FUVmag<20.8 ? FUVmag-(8.286*$22): -99."' \
-		ocmd='addcol NUV "NUVmag>0&&NUVmag<19.9 ? NUVmag-(8.621*$22): -99."' \
+		ocmd='addcol FUV "FUVmag>0&&FUVmag<20.8 ? FUVmag-(8.286*EBmV): -99."' \
+		ocmd='addcol NUV "NUVmag>0&&NUVmag<19.9 ? NUVmag-(8.621*EBmV): -99."' \
 		ocmd='addcol e_FUV "FUVmag>0&&FUVmag<20.8 ?e_FUVmag:-99"' \
 		ocmd='addcol e_NUV "NUVmag>0&&NUVmag<19.9?e_NUVmag:-99"' \
 		\
 		ocmd='addcol Fgood_extraction "e_Fflux>0&&Fafl==0&&Fexf==0"' \
 		ocmd='addcol Ngood_extraction "e_Nflux>0&&Nafl==0&&Nexf==0"' \
-		ocmd='addcol Fflux_LU "Fflux>39.7&&Fgood_extraction ? Fflux*(pow(10, -29)): -99."' \
-		ocmd='addcol Nflux_LU "Nflux>17.4&&Ngood_extraction ? Nflux*(pow(10, -29)): -99."' \
 		ocmd='addcol Fflux_LU "Fflux>39.7&&Fgood_extraction ? Fflux*(pow(10, -29)): -99."' \
 		ocmd='addcol Nflux_LU "Nflux>17.4&&Ngood_extraction ? Nflux*(pow(10, -29)): -99."' \
 		ocmd='addcol e_Fflux_LU "Fflux>39.7&&Fgood_extraction ? e_Fflux*(pow(10, -29)): -99."' \
