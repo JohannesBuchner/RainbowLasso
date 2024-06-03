@@ -131,9 +131,9 @@ Contributors
 Citing
 ------
 
-1. Cite the accompaning paper. 
+1. Cite the `accompaning paper <https://arxiv.org/abs/2405.19297>`_. 
 2. You can also include the repository URL as a footnote.
-3. Cite the relevant data products. See the accompaning paper for a list of references.
+3. Cite the data products of the surveys used. See the accompaning paper for a list of references.
 
 Licence
 -------
