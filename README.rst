@@ -105,6 +105,13 @@ How to read the diagnostic plot:
 * errors.pdf compares the flux error to the significance of the value (value / error ratio). 
 * The previous filter is shown in gray. Within one telescope and filter system, the error properties should be comparable.
 
+Known issues
+------------
+
+* If none of the sources in the input catalog are in VHS/UKIDSS, the query retrieval returns with no file produced (pandas data frames cannot be concatenated), and the pipeline fails
+
+  * workaround: insert some source coordinates from the provided example, then delete them after. (thanks to Pietro Baldini)
+
 TODO
 ----
 
