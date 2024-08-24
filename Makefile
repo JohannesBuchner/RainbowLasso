@@ -110,7 +110,20 @@ all:
 		ocmd='addcol Fflux_real_LU "Fflux_real_LU_A>0 ? Fflux_real_LU_A*(3.34*pow(10, -19))*(pow(1538.6, 2)): -99."' \
 		ocmd='addcol Nflux_real_LU "Nflux_real_LU_A>0 ? Nflux_real_LU_A*(3.34*pow(10, -19))*(pow(2315.7, 2)): -99."' \
 		ocmd='addcol e_Fflux_real_LU "e_Fflux_real_LU_A>0 ? e_Fflux_real_LU_A*(3.34*pow(10, -19))*(pow(1538.6, 2)): -99."' \
-		ocmd='addcol e_Nflux_real_LU "e_Nflux_real_LU_A>0 ? e_Nflux_real_LU_A*(3.34*pow(10, -19))*(pow(2315.7, 2)): -99."' \
+		ocmd='addcol e_Nflux_real_LU "e_Nflux_real_LU_A>0 ? e_Nflux_real_LU_A*(3.34*pow(10, -19))*(pow(2315.7, 2)): -99."'
+
+galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
+	python3 $<
+
+%_GALEX_UL.fits: %_coords.csv galex_ais_ctrs_ebv.fits
+	# search within 0.56 degrees
+	stilts tmatch2 out=$@ matcher=sky find=best params=1980 \
+		in1=$< values1="RA Dec" \
+		in2=galex_ais_ctrs_ebv.fits values2="RAfdeg DEfdeg" \
+		ocmd='addcol NUV_fluxlim "0.02 * pow(10, EBV_min * 1.35)"'
+		#ocmd='addcol NUV_maglim "20.8 - 8.621 * EBV_min"' \
+		#ocmd='addcol NUV_fluxlim "3.631 * pow(10, (NUV_maglim - 22.5) / 2.5)"'
+
 
 %_ALLWISE_all.fits: %_coords.csv
 	# match to AllWISE
@@ -129,8 +142,8 @@ all:
 		ocmd='addcol WISE4 "W4mag>0 ? (pow(10, -(W4mag+6.620+48.60)/(2.5)))*1e26: -99."' \
 		ocmd='addcol WISE4_err "e_W4mag>0 ? (pow(10, -(W4mag-e_W4mag+6.620+48.60)/(2.5)))*1e26-WISE4: -99."' \
 
-%_ALLWISE_sum.fits: %_ALLWISE_all.fits %_coords.csv
-	python3 groupsumWISE.py $*_coords.csv $*_ALLWISE_all.fits $@
+%_ALLWISE_sum.fits: groupsumWISE.py %_coords.csv %_ALLWISE_all.fits
+	python3 $^ $@
 
 %_ALLWISE.fits: %_coords.csv
 	# match to AllWISE
@@ -304,8 +317,9 @@ all:
 	# merge everything together and use sensible column names
 	# keep only WISE fluxes when ALLWISE also has a detection there
 	# and if there are no blending issues
-	# check LS9 fitbits for issues. bits 1, 2, 3, 7, 9, 12 are acceptable.
+	# check LS10 fitbits for issues. bits 1, 2, 3, 7, 9, 12 are acceptable.
 	# otherwise delete
+	# take GALEX upper limits from eFEDS   0.02mJy = 20.8 mag; depth = 0.02mJy * pow(10, -3 + E(B-V)*1.35)
 	stilts tmatchn nin=6 out=$@ \
 		in1=$*.fits suffix1= values1=id \
 		in2=$*_GALEX.fits suffix2=_GALEX values2=id \
@@ -316,9 +330,9 @@ all:
 		fixcols=all matcher=exact \
 		ocmd='addcol pointlike "!(type_LS != \"PSF\")"' \
 		ocmd='addcol FUV Fflux_real_LU_GALEX*1e26' \
-		ocmd='addcol NUV Nflux_real_LU_GALEX*1e26' \
 		ocmd='addcol FUV_err "e_Fflux_real_LU_GALEX*1e26"' \
-		ocmd='addcol NUV_err "e_Nflux_real_LU_GALEX*1e26"' \
+		ocmd='addcol NUV "e_Nflux_real_LU_GALEX>0 ? Nflux_real_LU_GALEX*1e26 : GALEX"' \
+		ocmd='addcol NUV_err "e_Nflux_real_LU_GALEX>0 ? e_Nflux_real_LU_GALEX*1e26 : -0.02"' \
 		ocmd='addcol decam_g "(fracflux_g_LS>0.9?LU_flux_g_LS*1e26:-99)"' \
 		ocmd='addcol decam_r "(fracflux_r_LS>0.9?LU_flux_r_LS*1e26:-99)"' \
 		ocmd='addcol decam_i "(fracflux_i_LS>0.9?LU_flux_i_LS*1e26:-99)"' \
@@ -343,8 +357,8 @@ all:
 		ocmd='addcol WFCAM_J_err "(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_H_err "(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26"' \
 		ocmd='addcol WFCAM_Ks_err "(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26"' \
-		ocmd='addcol goodfits_LS "((fitbits_LS & (1 | 4 | 8)) == 0)"' \
-		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
+		ocmd='addcol goodfitsLS "((fitbits_LS & (1 | 4 | 8)) == 0)"' \
+		ocmd='addcol isolatedLS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
 		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
 		ocmd='addcol WISE1 "(isolated_LS ? LU_flux_w1_LS * 1e26 : (WISE1_ERR_ALLWISE > 0 ? WISE1_ALLWISE : -99))"' \
 		ocmd='addcol WISE1_err "(isolated_LS ? LU_flux_w1_err_LS * 1e26 : (WISE1_ERR_ALLWISE > 0 ? -WISE1_ERR_ALLWISE : -99))"' \
@@ -355,7 +369,7 @@ all:
 		ocmd='addcol WISE4 "(isolated_LS&&!W34_blended ? LU_flux_w4_LS * 1e26 : (WISE4_ERR_ALLWISE > 0 ? WISE4_ALLWISE : -99))"' \
 		ocmd='addcol WISE4_err "(isolated_LS&&!W34_blended ? LU_flux_w4_err_LS * 1e26 : (WISE4_ERR_ALLWISE > 0 ? -WISE4_ERR_ALLWISE : -99))"' \
 
-%_all.fits: %.fits %_GALEX.fits %_LS.fits %_UKIDSS.fits %_VHS.fits
+%_all.fits: %.fits %_GALEX.fits %_LS.fits %_UKIDSS.fits %_VHS.fits %_ALLWISE_sum.fits %_GALEX_UL.fits
 	# merge everything together and use sensible column names
 	# keep only WISE fluxes when ALLWISE also has a detection there
 	# and if there are no blending issues
@@ -367,18 +381,20 @@ all:
 	# for WISE, check if W3 or W4 are blended
 	#    if they are, use 3sigma-flux * (3 * fracflux + 1) to estimate a conservative 3 sigma total flux of all sources
 	#    and use that as a (3 sigma) upper limit
-	stilts tmatchn nin=5 out=$@ \
+	stilts tmatchn nin=7 out=$@ \
 		in1=$*.fits suffix1= values1=id \
 		in2=$*_GALEX.fits suffix2=_GALEX values2=id \
 		in3=$*_LS.fits suffix3=_LS values3=id \
 		in4=$*_UKIDSS.fits suffix4=_UKIDSS values4=id \
 		in5=$*_VHS.fits suffix5=_VHS values5=id \
+		in6=$*_ALLWISE_sum.fits suffix6=_ALLWISE values6=id \
+		in7=$*_GALEX_UL.fits suffix7=_GALEXUL values7=id \
 		fixcols=all matcher=exact \
 		ocmd='addcol pointlike "!(type_LS != \"PSF\")"' \
 		ocmd='addcol FUV Fflux_real_LU_GALEX*1e26' \
-		ocmd='addcol NUV Nflux_real_LU_GALEX*1e26' \
-		ocmd='addcol FUV_err e_Fflux_real_LU_GALEX*1e26' \
-		ocmd='addcol NUV_err e_Nflux_real_LU_GALEX*1e26' \
+		ocmd='addcol NUV "e_Nflux_real_LU_GALEX>0 ? Nflux_real_LU_GALEX*1e26 : 3 * NUV_fluxlim_GALEXUL"' \
+		ocmd='addcol FUV_err "e_Fflux_real_LU_GALEX*1e26"' \
+		ocmd='addcol NUV_err "e_Nflux_real_LU_GALEX>0 ? e_Nflux_real_LU_GALEX*1e26 : -NUV"' \
 		ocmd='addcol decam_g "(fracin_g_LS>0.5?LU_flux_g_LS*1e26:-99)"' \
 		ocmd='addcol decam_r "(fracin_r_LS>0.5?LU_flux_r_LS*1e26:-99)"' \
 		ocmd='addcol decam_i "(fracin_i_LS>0.5?LU_flux_i_LS*1e26:-99)"' \
@@ -403,20 +419,23 @@ all:
 		ocmd='addcol WFCAM_J_err "Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26:-99"' \
 		ocmd='addcol WFCAM_H_err "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26:-99"' \
 		ocmd='addcol WFCAM_Ks_err "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26:-99"' \
-		ocmd='addcol goodfits_LS "(fitbits_LS & (1 | 4 | 8)) == 0"' \
-		ocmd='addcol isolated_LS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
+		ocmd='addcol goodfitsLS "(fitbits_LS & (1 | 4 | 8)) == 0"' \
+		ocmd='addcol isolatedLS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \
 		ocmd='addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)>0.1||max(fracflux_w4_LS,fracflux_w3_LS)>1"' \
-		ocmd='addcol WISE1 "isolated_LS ? LU_flux_w1_LS * 1e26 : LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)"' \
-		ocmd='addcol WISE1_err "isolated_LS ? LU_flux_w1_err_LS * 1e26 : WISE1"' \
-		ocmd='addcol WISE2 "isolated_LS ? LU_flux_w2_LS * 1e26 : LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)"' \
-		ocmd='addcol WISE2_err "isolated_LS ? LU_flux_w2_err_LS * 1e26 : WISE2"' \
-		ocmd='addcol WISE3 "isolated_LS&&!W34_blended ? LU_flux_w3_LS*1e26 : abs(LU_flux_w3_LS + 3 * LU_flux_w3_err_LS) * 1e26 * (1 + 3 * max(fracflux_w3_LS, fracflux_w4_LS))"' \
-		ocmd='addcol WISE3_err "isolated_LS&&!W34_blended ? LU_flux_w3_err_LS*1e26 : -WISE3 / 3"' \
-		ocmd='addcol WISE4 "isolated_LS&&!W34_blended ? LU_flux_w4_LS*1e26 : abs(LU_flux_w4_LS + 3 * LU_flux_w4_err_LS) * 1e26 * (1 + 3 * max(fracflux_w3_LS, fracflux_w4_LS))"' \
-		ocmd='addcol WISE4_err "isolated_LS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -WISE4 / 3"' \
+		ocmd='addcol WISE1_origin "isolatedLS ? \"LS10\" : ( (fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? \"AllWISE\" : \"LS10UL\")"' \
+		ocmd='addcol WISE1        "isolatedLS ? LU_flux_w1_LS * 1e26 : ((fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? WISE1_ALLWISE : LU_flux_w1_LS * 1e26)"' \
+		ocmd='addcol WISE1_err "isolatedLS ? LU_flux_w1_err_LS * 1e26 : -WISE1"' \
+		ocmd='addcol WISE2_origin "isolatedLS ? \"LS10\" : ( (fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? \"AllWISE\" : \"LS10UL\")"' \
+		ocmd='addcol WISE2 "isolatedLS ? LU_flux_w2_LS * 1e26 : ((fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? WISE2_ALLWISE : LU_flux_w2_LS * 1e26)"' \
+		ocmd='addcol WISE2_err "isolatedLS ? LU_flux_w2_err_LS * 1e26 : -WISE2"' \
+		ocmd='addcol WISE34_origin "isolatedLS&&!W34_blended ? \"LS10\" : \"AllWISE\""' \
+		ocmd='addcol WISE3 "isolatedLS&&!W34_blended ? LU_flux_w3_LS*1e26 : WISE3_ALLWISE"' \
+		ocmd='addcol WISE3_err "isolatedLS&&!W34_blended ? LU_flux_w3_err_LS*1e26 : -WISE3"' \
+		ocmd='addcol WISE4 "isolatedLS&&!W34_blended ? LU_flux_w4_LS*1e26 : WISE4_ALLWISE"' \
+		ocmd='addcol WISE4_err "isolatedLS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -WISE4"' \
 
 %_lite.fits: %.fits
-	stilts tpipe in=$^ out=$@ cmd='delcols "adflux*_LS *_LS LU_flux*_LS *_GALEX *_VHS *_UKIDSS *_ALLWISE"'
+	stilts tpipe in=$^ out=$@ cmd='delcols "adflux*_LS *_LS LU_flux*_LS *_GALEX *_VHS *_UKIDSS *_ALLWISE *_GALEXUL"'
 	stilts tpipe in=$@ omode=stats
 
 %.fits_errors.pdf %.fits_fluxes.pdf: %.fits
