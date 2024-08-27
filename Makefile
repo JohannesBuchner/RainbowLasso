@@ -431,14 +431,20 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol NUV "e_Nflux_real_LU_GALEX>0 ? Nflux_real_LU_GALEX*1e26 : 3 * NUV_fluxlim_GALEXUL"' \
 		ocmd='addcol FUV_err "e_Fflux_real_LU_GALEX*1e26"' \
 		ocmd='addcol NUV_err "e_Nflux_real_LU_GALEX>0 ? e_Nflux_real_LU_GALEX*1e26 : -NUV"' \
-		ocmd='addcol decam_g "(fracin_g_LS>0.5?LU_flux_g_LS*1e26:-99)"' \
-		ocmd='addcol decam_r "(fracin_r_LS>0.5?LU_flux_r_LS*1e26:-99)"' \
+		ocmd='addcol decam_g "(DEC<32 && fracin_g_LS>0.5?LU_flux_g_LS*1e26:-99)"' \
+		ocmd='addcol decam_r "(DEC<32 && fracin_r_LS>0.5?LU_flux_r_LS*1e26:-99)"' \
 		ocmd='addcol decam_i "(fracin_i_LS>0.5?LU_flux_i_LS*1e26:-99)"' \
-		ocmd='addcol decam_z "(fracin_z_LS>0.5?LU_flux_z_LS*1e26:-99)"' \
-		ocmd='addcol decam_g_err "(fracin_g_LS>0.5?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
-		ocmd='addcol decam_r_err "(fracin_r_LS>0.5?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
+		ocmd='addcol decam_z "(DEC<32 && fracin_z_LS>0.5?LU_flux_z_LS*1e26:-99)"' \
+		ocmd='addcol decam_g_err "(DEC<32 && fracin_g_LS>0.5?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
+		ocmd='addcol decam_r_err "(DEC<32 && fracin_r_LS>0.5?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
 		ocmd='addcol decam_i_err "(fracin_i_LS>0.5?LU_flux_i_err_LS*1e26/fracin_i_LS:-99)"' \
-		ocmd='addcol decam_z_err "(fracin_z_LS>0.5?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
+		ocmd='addcol decam_z_err "(DEC<32 && fracin_z_LS>0.5?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
+		ocmd='addcol 90prime_r "(DEC>=32 && fracin_r_LS>0.5?LU_flux_r_LS*1e26:-99)"' \
+		ocmd='addcol 90prime_g "(DEC>=32 && fracin_g_LS>0.5?LU_flux_g_LS*1e26:-99)"' \
+		ocmd='addcol zd_mosaic "(DEC>=32 && fracin_z_LS>0.5?LU_flux_z_LS*1e26:-99)"' \
+		ocmd='addcol 90prime_r_err "(DEC>=32 && fracin_r_LS>0.5?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
+		ocmd='addcol zd_mosaic_err "(DEC>=32 && fracin_z_LS>0.5?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
+		ocmd='addcol 90prime_g_err "(DEC>=32 && fracin_g_LS>0.5?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
 		ocmd='addcol HSC_g "(!g_psfflux_flag_HSC&&!g_apertureflux_57_flag_HSC?LU_flux_g_HSC*1e26:-99)"' \
 		ocmd='addcol HSC_r "(!r_psfflux_flag_HSC&&!r_apertureflux_57_flag_HSC?LU_flux_r_HSC*1e26:-99)"' \
 		ocmd='addcol HSC_i "(!i_psfflux_flag_HSC&&!i_apertureflux_57_flag_HSC?LU_flux_i_HSC*1e26:-99)"' \
