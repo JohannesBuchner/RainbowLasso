@@ -23,11 +23,21 @@ for row in tqdm.tqdm(t):
         rowdf['id'] = pd.Series([row['id']] * len(rowdf))
         elements.append(rowdf)
 
-data = Table.from_pandas(pd.concat(elements))
+if len(elements) == 0:
+    data = Table()
+    data['id'] = []
+    for band in 'Y', 'J', 'H', 'Ks':
+        data['a%s' % (band.lower())] = []
+        data['%serrbits' % (band.lower())] = []
+        for ap in 'apermag4', 'apermag4err', 'apermagnoapercorr6', 'apermag6err':
+            data['%s%s' % (band, ap)] = []
 
-for c in data.colnames:
-    if data.columns[c].dtype == np.dtype('O'):
-        print("  stripping complex column", c)
-        del data[c]
+else:
+    data = Table.from_pandas(pd.concat(elements))
+
+    for c in data.colnames:
+        if data.columns[c].dtype == np.dtype('O'):
+            print("  stripping complex column", c)
+            del data[c]
 
 data.write(sys.argv[2], overwrite=True)
