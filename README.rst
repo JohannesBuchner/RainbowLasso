@@ -85,7 +85,7 @@ In that case you can run from the RainbowLasso directory::
 
 Or you can run from the data directory::
 
-	$ make -C path/to/RainbowLasso/ dr16QWX_selection_all_lite.fits
+	$ make -C path/to/RainbowLasso/ $PWD/dr16QWX_selection_all_lite.fits
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
@@ -94,7 +94,7 @@ Quality control
 
 Create a visualisation of the errors and fluxes::
 
-	make dr16QWX_selection_lite.fits_errors.pdf dr16QWX_selection_lite.fits_fluxes.pdf
+	make dr16QWX_selection_all_lite.fits_errors.pdf dr16QWX_selection_all_lite.fits_fluxes.pdf
 
 Examples are uploaded to this repository.
 
@@ -104,6 +104,13 @@ How to read the diagnostic plot:
 * fluxes.pdf compares the flux (mJy) from one band to the next. If the spectrum is relatively flat, and bands are close together, they should follow the 1:1 line.
 * errors.pdf compares the flux error to the significance of the value (value / error ratio). 
 * The previous filter is shown in gray. Within one telescope and filter system, the error properties should be comparable.
+
+Known issues
+------------
+
+* If none of the sources in the input catalog are in VHS/UKIDSS, the query retrieval returns with no file produced (pandas data frames cannot be concatenated), and the pipeline fails
+
+  * workaround: insert some source coordinates from the provided example, then delete them after. (thanks to Pietro Baldini)
 
 TODO
 ----
@@ -131,9 +138,9 @@ Contributors
 Citing
 ------
 
-1. Cite the accompaning paper. 
+1. Cite the `accompaning paper <https://arxiv.org/abs/2405.19297>`_. 
 2. You can also include the repository URL as a footnote.
-3. Cite the relevant data products. See the accompaning paper for a list of references.
+3. Cite the data products of the surveys used. See the accompaning paper for a list of references.
 
 Licence
 -------
