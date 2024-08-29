@@ -67,34 +67,37 @@ all:
 %_HSC_aper.fits: fetchHSC.py %.fits
 	python3 $^ $@
 
-%_HSC.fits: %_HSC_aper.fits
+%_HSC.fits: %_HSC_aper.fits %.fits
 	# adflux_* = adaptive flux column, depending on source type
 	# for extended sources: 5'' aperture = OPT:apflux_*_7 and IR:apflux_*_2
 	# for point sources: model flux
 	# Milky way extinction correction
 	# 28.44 is to convert to erg/s/cm^2/Hz
-	stilts tpipe in=$^ out=$@ \
-		cmd='addcol extended "g_extendedness_value==1||r_extendedness_value==1||i_extendedness_value==1||z_extendedness_value==1||y_extendedness_value==1"' \
-		cmd='addcol adflux_g "extended ? g_psfflux_flux : g_apertureflux_57_flux"' \
-		cmd='addcol adflux_r "extended ? r_psfflux_flux : r_apertureflux_57_flux"' \
-		cmd='addcol adflux_i "extended ? i_psfflux_flux : i_apertureflux_57_flux"' \
-		cmd='addcol adflux_z "extended ? z_psfflux_flux : z_apertureflux_57_flux"' \
-		cmd='addcol adflux_y "extended ? y_psfflux_flux : y_apertureflux_57_flux"' \
-		cmd='addcol adflux_g_err "extended ? g_psfflux_fluxerr : g_apertureflux_57_fluxerr"' \
-		cmd='addcol adflux_r_err "extended ? r_psfflux_fluxerr : r_apertureflux_57_fluxerr"' \
-		cmd='addcol adflux_i_err "extended ? i_psfflux_fluxerr : i_apertureflux_57_fluxerr"' \
-		cmd='addcol adflux_z_err "extended ? z_psfflux_fluxerr : z_apertureflux_57_fluxerr"' \
-		cmd='addcol adflux_y_err "extended ? y_psfflux_fluxerr : y_apertureflux_57_fluxerr"' \
-		cmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_z "ADFLUX_Z>-10000000000L ? ((ADFLUX_Z/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_y "ADFLUX_Y>-10000000000L ? ((ADFLUX_Y/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_g_err "ADFLUX_G_err>-10000000000L ? ((ADFLUX_G_err/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_r_err "ADFLUX_R_err>-10000000000L ? ((ADFLUX_R_err/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_i_err "ADFLUX_I_err>-10000000000L ? ((ADFLUX_I_err/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_z_err "ADFLUX_Z_err>-10000000000L ? ((ADFLUX_Z_err/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_y_err "ADFLUX_Y_err>-10000000000L ? ((ADFLUX_Y_err/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."'
+	stilts tmatch2 out=$@ matcher=sky find=best params=1 fixcols=all \
+		in1=$*.fits values1="RA DEC" icmd1='keepcols "id RA DEC"' suffix1=_in \
+		in2=$< values2="RA DEC" suffix2= \
+		ocmd='addcol extended "g_extendedness_value==1||r_extendedness_value==1||i_extendedness_value==1||z_extendedness_value==1||y_extendedness_value==1"' \
+		ocmd='addcol adflux_g "extended ? g_psfflux_flux : g_apertureflux_57_flux"' \
+		ocmd='addcol adflux_r "extended ? r_psfflux_flux : r_apertureflux_57_flux"' \
+		ocmd='addcol adflux_i "extended ? i_psfflux_flux : i_apertureflux_57_flux"' \
+		ocmd='addcol adflux_z "extended ? z_psfflux_flux : z_apertureflux_57_flux"' \
+		ocmd='addcol adflux_y "extended ? y_psfflux_flux : y_apertureflux_57_flux"' \
+		ocmd='addcol adflux_g_err "extended ? g_psfflux_fluxerr : g_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_r_err "extended ? r_psfflux_fluxerr : r_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_i_err "extended ? i_psfflux_fluxerr : i_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_z_err "extended ? z_psfflux_fluxerr : z_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_y_err "extended ? y_psfflux_fluxerr : y_apertureflux_57_fluxerr"' \
+		ocmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_z "ADFLUX_Z>-10000000000L ? ((ADFLUX_Z/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_y "ADFLUX_Y>-10000000000L ? ((ADFLUX_Y/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_g_err "ADFLUX_G_err>-10000000000L ? ((ADFLUX_G_err/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_r_err "ADFLUX_R_err>-10000000000L ? ((ADFLUX_R_err/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_i_err "ADFLUX_I_err>-10000000000L ? ((ADFLUX_I_err/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_z_err "ADFLUX_Z_err>-10000000000L ? ((ADFLUX_Z_err/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_y_err "ADFLUX_Y_err>-10000000000L ? ((ADFLUX_Y_err/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='delcols "RA_in DEC_in"; colmeta -name id id_in'
 
 %_GALEX.fits: %_coords.csv
 	# NUV measurements are only valid down to NUVmag<20.8 AB mag NFlux>17.4
@@ -474,6 +477,9 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol WISE4_err "isolatedLS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -WISE4"' \
 
 %_HSCall.fits: %.fits %_GALEX.fits %_LS.fits %_UKIDSS.fits %_VHS.fits %_ALLWISE_sum.fits %_GALEX_UL.fits %_HSC.fits
+	# this is the same as above, except
+	# 1) requires both LS & HSC detections -- could remove LS but then we don't have WISE?
+	# 2) uses extended or not from HSC
 	stilts tmatchn nin=8 out=$@ \
 		in1=$*.fits suffix1= values1=id \
 		in2=$*_GALEX.fits suffix2=_GALEX values2=id \
@@ -484,7 +490,7 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		in7=$*_GALEX_UL.fits suffix7=_GALEXUL values7=id \
 		in8=$*_HSC.fits suffix8=_HSC values8=id \
 		fixcols=all matcher=exact \
-		ocmd='addcol pointlike "!(type_LS != \"PSF\") && !(extended_HSC)"' \
+		ocmd='addcol pointlike "!(extended_HSC)"' \
 		ocmd='addcol inMzLSBASS "DEC>32&&RA>90&&RA<300"' \
 		ocmd='addcol goodfitsLS "(fitbits_LS & (1 | 4 | 8)) == 0"' \
 		ocmd='addcol isolatedLS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)<0.1&&max(fracflux_w3_LS,fracflux_w4_LS)<10)"' \

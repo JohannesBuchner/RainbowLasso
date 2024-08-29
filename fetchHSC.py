@@ -2,8 +2,7 @@
 """
 Retrieves aperture fluxes from HSC survey via noirlab.
 """
-import requests_cache
-requests_cache.install_cache('demo_cache', allowable_methods=('GET', 'POST')) #, expire_after=3600*24*7)
+#from requests_cache import CachedSession
 import requests
 import json
 import os
@@ -12,7 +11,6 @@ import sys
 import csv
 from astropy.table import Table, vstack
 import astropy.io.fits as pyfits
-import tqdm
 import io
 import joblib
 
@@ -24,12 +22,14 @@ skip_syntax_check = False
 nomail = True
 version = 20190514.1
 
+#cached_session = requests_cache.CachedSession('demo_cache', allowable_methods=('GET', 'POST')) #, expire_after=3600*24*7)
+
 class QueryError(Exception):
     pass
 
-def httpJsonPost(url, data):
+def httpJsonPost(url, data, session=requests):
     data['clientVersion'] = version
-    return requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+    return session.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
 
 def preview(credential, sql, out):
     url = api_url + 'preview'
@@ -58,6 +58,7 @@ def submitJob(credential, sql, out_format):
     }
     postData = {'credential': credential, 'catalog_job': catalog_job, 'nomail': nomail, 'skip_syntax_check': skip_syntax_check}
     res = httpJsonPost(url, postData)
+    assert res.status_code == 200, ('ERROR in query, response status code:', res.status_code, 'message:', res.text)
     return res.json()
 
 
@@ -74,19 +75,22 @@ def jobCancel(credential, job_id):
     httpJsonPost(url, postData)
 
 
-def blockUntilJobFinishes(credential, job_id):
+def blockUntilJobFinishes(credential, job_id, verbose=True):
     max_interval = 60 # sec.
     interval = 1
+    last_status = 'submitted'
     while True:
+        if verbose:
+            sys.stderr.write(f"job {job_id}: {last_status}, checking again in {interval:.1f}s ...\r")
         time.sleep(interval)
         job = jobStatus(credential, job_id)
         if job['status'] == 'error':
             raise QueryError('query error: ' + job['error'])
         if job['status'] == 'done':
             break
-        interval *= 2
-        if interval > max_interval:
-            interval = max_interval
+        if job['status'] != last_status and verbose:
+            last_status = job['status']
+        interval = min(max_interval, 1.2 * interval)
 
 def download(credential, job_id):
     url = api_url + 'download'
@@ -113,14 +117,8 @@ except IOError:
 @mem.cache
 def fetchTable(query):
     job = submitJob(credential, query, out_format)
-    time.sleep(0.1)
     blockUntilJobFinishes(credential, job['id'])
     ttmp = Table.read(download(credential, job['id']))
-    if len(ttmp) > 0:
-        for col in ttmp.colnames:
-            if col.endswith('_isnull'):
-                del ttmp[col]
-        ttmp['id'] = row['id']
     deleteJob(credential, job['id'])
     return ttmp
 
@@ -152,8 +150,10 @@ for band in bands:
 out_format = 'fits'
 t = Table.read(sys.argv[1])
 
-elements = []
-for row in tqdm.tqdm(t):
+id_dtype = 'int' if t['id'].dtype == int else 'text'
+values = []
+for row in t:
+    i = row['id']
     ra0, dec0 = row['RA'], row['DEC'] # in decimal degrees
     if ra0 > 325 or ra0 < 45 and -8 < dec0 < 9:
         pass # HSC-WIDE overlapping with XMM-LSS
@@ -163,20 +163,65 @@ for row in tqdm.tqdm(t):
         pass # Hectomap
     elif 210 < ra0 < 218 and 51 < dec0 < 54:
         pass # AEGIS
-    else:
-        print("skipping", row['id'], row['RA'], row['DEC'])
-    radius = 1 # in arcsec
+    values.append(f"('{i}'::{id_dtype},'{row['RA']:.16e}'::double precision,'{row['DEC']:.16e}'::double precision)")
+
+#new_column_names = [
+#    ('forced2' if '_psfflux_' in colname else ('forced3' if '_apertureflux_' in colname else 'forced')) + '.' + colname + ' as ' + colname for colname in all_column_names]
+id_query = 'WITH user_catalog("user.myid","user.RA","user.DEC") AS (VALUES' + ','.join(values) + """),
+    match AS (
+        SELECT
+            object_id
+        FROM
+            user_catalog
+        JOIN pdr3_wide.forced ON coneSearch(coord, "user.RA", "user.DEC", 1)
+    )
+SELECT *
+FROM match
+"""
+
+print(id_query)
+
+object_ids = fetchTable(id_query)['object_id']
+print(object_ids)
+
+chunksize = 60
+elements = []
+for i in range(0, len(object_ids), chunksize):
     query = 'SELECT ' + ','.join(all_column_names) + """
 FROM pdr3_wide.forced
 LEFT JOIN pdr3_wide.forced2 USING (object_id)
 LEFT JOIN pdr3_wide.forced3 USING (object_id)
-WHERE coneSearch(coord, {:f}, {:f}, {:d})
-LIMIT 1
-  """.format(ra0,dec0,radius)
-    # print(query)
-    elements.append(fetchTable(query))
+WHERE object_id in (""" + ','.join(('%d' % i for i in object_ids[i:i+chunksize])) + """)
+"""
+    #print(query)
+    #print("submitting query...")
+    ttmp = fetchTable(query)
+    if len(ttmp) > 0:
+        for col in ttmp.colnames:
+            if col.endswith('_isnull'):
+                del ttmp[col]
+    elements.append(ttmp)
 
-print("storing...")
+"""
+job = submitJob(credential, query, out_format)
+time.sleep(0.1)
+print("waiting for results...")
+blockUntilJobFinishes(credential, job['id'])
+print("downloading results...")
+ttmp = Table.read(download(credential, job['id']))
+"""
+"""
+if len(ttmp) > 0:
+    for col in ttmp.colnames:
+        if col.endswith('_isnull'):
+            del ttmp[col]
+    ttmp['id'] = ttmp['user_id']
+    del ttmp['user_id']
+    del ttmp['user_RA']
+    del ttmp['user_DEC']
+deleteJob(credential, job['id'])
+"""
+print("\nstoring results...")
 data = vstack(elements)
 data.write(sys.argv[2], overwrite=True)
 
