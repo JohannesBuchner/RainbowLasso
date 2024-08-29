@@ -6,44 +6,30 @@ import requests_cache
 requests_cache.install_cache('demo_cache', allowable_methods=('GET', 'POST')) #, expire_after=3600*24*7)
 import requests
 import json
-#import urllib.request, urllib.error, urllib.parse
-#import astropy.io.fits
+import os
 import time
 import sys
 import csv
 from astropy.table import Table, vstack
+import astropy.io.fits as pyfits
 import tqdm
 import io
+import joblib
+
+mem = joblib.Memory('.', verbose=False)
 
 api_url = 'https://hsc-release.mtk.nao.ac.jp/datasearch/api/catalog_jobs/'
 release_version = 'pdr3'
 skip_syntax_check = False
-nomail = False
+nomail = True
 version = 20190514.1
 
 class QueryError(Exception):
     pass
 
-"""
-def httpPost(url, postData, headers):
-    req = urllib.request.Request(url, postData.encode('utf-8'), headers)
-    res = urllib.request.urlopen(req)
-    return res
-
 def httpJsonPost(url, data):
     data['clientVersion'] = version
-    postData = json.dumps(data)
-    return httpPost(url, postData, {'Content-type': 'application/json'})
-"""
-
-def httpPost(url, data, headers):
-    response = requests.post(url, data=json.dumps(data), headers=headers)
-    return response
-
-def httpJsonPost(url, data):
-    data['clientVersion'] = version
-    response = httpPost(url, data, {'Content-Type': 'application/json'})
-    return response
+    return requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
 
 def preview(credential, sql, out):
     url = api_url + 'preview'
@@ -89,7 +75,7 @@ def jobCancel(credential, job_id):
 
 
 def blockUntilJobFinishes(credential, job_id):
-    max_interval = 5 * 60 # sec.
+    max_interval = 60 # sec.
     interval = 1
     while True:
         time.sleep(interval)
@@ -107,12 +93,6 @@ def download(credential, job_id):
     postData = {'credential': credential, 'id': job_id}
     res = httpJsonPost(url, postData)
     return io.BytesIO(res.content)
-    #bufSize = 64 * 1<<10 # 64k
-    #while True:
-    #    buf = res.read(bufSize)
-    #    out.write(buf)
-    #    if len(buf) < bufSize:
-    #        break
 
 def deleteJob(credential, job_id):
     url = api_url + 'delete'
@@ -120,12 +100,29 @@ def deleteJob(credential, job_id):
     httpJsonPost(url, postData)
 
 
+try:
+    with open(os.path.expanduser('~/.config/hsc-password')) as fpass:
+        credential = {
+            'account_name': fpass.readline().strip(),
+            'password': fpass.readline().strip()
+        }
+except IOError:
+    print("create '~/.config/hsc-password' with two lines: user name and password, from https://hsc-release.mtk.nao.ac.jp/datasearch/new_user/new")
+    sys.exit(1)
 
-with open('/home/user/.config/hsc-password') as fpass:
-    credential = {
-        'account_name': fpass.readline().strip(),
-        'password': fpass.readline().strip()
-    }
+@mem.cache
+def fetchTable(query):
+    job = submitJob(credential, query, out_format)
+    time.sleep(0.1)
+    blockUntilJobFinishes(credential, job['id'])
+    ttmp = Table.read(download(credential, job['id']))
+    if len(ttmp) > 0:
+        for col in ttmp.colnames:
+            if col.endswith('_isnull'):
+                del ttmp[col]
+        ttmp['id'] = row['id']
+    deleteJob(credential, job['id'])
+    return ttmp
 
 columns = [
 '_extendedness_value|Set to 1 for extended sources, 0 for point sources.',
@@ -146,43 +143,53 @@ r_columns = [
 #'_apertureflux_%d_flag_sinccoeffstruncated|full sinc coefficient image did not fit within measurement image',
 ]
 bands = 'grizy'
-#bands = 'gz'
 all_column_names = ['ra', 'dec']
 for band in bands:
     all_column_names.append('a_' + band)
     all_column_names += [band + c.split("|")[0] for c in columns]
     for radius in 10, 15, 20, 30, 40, 57, 84, 118:
         all_column_names += [band + (c.split("|")[0] % radius) for c in r_columns]
-#print("\n".join(all_column_names))
 out_format = 'fits'
 t = Table.read(sys.argv[1])
 
 elements = []
 for row in tqdm.tqdm(t):
     ra0, dec0 = row['RA'], row['DEC'] # in decimal degrees
+    if ra0 > 325 or ra0 < 45 and -8 < dec0 < 9:
+        pass # HSC-WIDE overlapping with XMM-LSS
+    elif 120 < ra0 < 230 and -3.5 < dec0 < 6.5:
+        pass # HSC-WIDE overlapping with COSMOS
+    elif 195 < ra0 < 225 and 41 < dec0 < 46:
+        pass # Hectomap
+    elif 210 < ra0 < 218 and 51 < dec0 < 54:
+        pass # AEGIS
+    else:
+        print("skipping", row['id'], row['RA'], row['DEC'])
     radius = 1 # in arcsec
     query = 'SELECT ' + ','.join(all_column_names) + """
 FROM pdr3_wide.forced
 LEFT JOIN pdr3_wide.forced2 USING (object_id)
 LEFT JOIN pdr3_wide.forced3 USING (object_id)
-WHERE  coneSearch(coord,{:f},{:f},{:d})
+WHERE coneSearch(coord, {:f}, {:f}, {:d})
 LIMIT 1
   """.format(ra0,dec0,radius)
-    print(query)
-
-    job = submitJob(credential, query, out_format)
-    blockUntilJobFinishes(credential, job['id'])
-    #with open('tmp.fits', 'wb') as ftmp:
-    #    download(credential, job['id'], ftmp)
-    ttmp = Table.read(download(credential, job['id']))
-    for col in ttmp.colnames:
-        if col.endswith('_isnull'):
-            del ttmp[col]
-    ttmp['id'] = row['id']
-    deleteJob(credential, job['id'])
-    elements.append(ttmp)
+    # print(query)
+    elements.append(fetchTable(query))
 
 print("storing...")
 data = vstack(elements)
-# add comments
 data.write(sys.argv[2], overwrite=True)
+
+fout = pyfits.open(sys.argv[2])
+for band in bands:
+    for c in columns:
+        colname, coldesc = c.split("|")
+        i = fout[1].data.columns.names.index(band + colname)
+        fout[1].header['TCOMM%d' % i] = coldesc
+    for radius in 10, 15, 20, 30, 40, 57, 84, 118:
+        for c in r_columns:
+            colname, coldesc = c.split("|")
+            i = fout[1].data.columns.names.index(band + colname % radius)
+            fout[1].header['TCOMM%d' % i] = coldesc
+fout.writeto(sys.argv[2], overwrite=True)
+

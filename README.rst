@@ -89,6 +89,22 @@ Or you can run from the data directory::
 
 The Makefile contains the steps performed to fetch the various multiwavelength surveys.
 
+Important output files:
+
+ * $PWD/dr16QWX_selection_all_lite.fits : File ready for use with GRAHSP/CIGALE.
+ * $PWD/dr16QWX_selection_all.fits : this contains all columns from the input catalogs.
+ 
+If you get the following warning::
+
+	WARNING: Using non-standard extended column convention
+	WARNING: Other FITS software may not see columns 999-1188
+
+Then _all.fits has over 1000 columns, and astropy will not be able to read the last columns.
+
+If you also want HSC-WIDE fluxes, you can run:
+
+  $ make path/to/data/dr16QWX_selection_allHSC_lite.fits
+
 Quality control
 ---------------
 
