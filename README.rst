@@ -33,7 +33,7 @@ RainbowLasso fetches and calculates fluxes from these surveys:
 RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC) and
 automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
 Additional input catalog columns are copied to the output and are not uploaded anywhere.
-The output files are usable with LePhare, Cigale (TODO) and GRAHSP.
+The output files should be usable with `GRAHSP <https://arxiv.org/abs/2405.19297>`_, Cigale, LePHARE (TODO).
 
 Features
 --------

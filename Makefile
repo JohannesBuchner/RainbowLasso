@@ -49,7 +49,7 @@ all:
 		cmd='addcol adflux_ivar_W4 "type==\"PSF\" ? flux_ivar_W4 : apflux_ivar_W4_2"' \
 		cmd='addcol LU_flux_g "FLUX_G>-10000000000L ? ((ADFLUX_G/MW_TRANSMISSION_G))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_r "FLUX_R>-10000000000L ? ((ADFLUX_R/MW_TRANSMISSION_R))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_i "FLUX_R>-10000000000L ? ((ADFLUX_I/MW_TRANSMISSION_I))*pow(10, -28.44):-99."' \
+		cmd='addcol LU_flux_i "FLUX_I>-10000000000L ? ((ADFLUX_I/MW_TRANSMISSION_I))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_z "FLUX_Z>-10000000000L ? ((ADFLUX_Z/MW_TRANSMISSION_Z))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_w1 "FLUX_W1>-10000000000L ? ((ADFLUX_W1/MW_TRANSMISSION_W1))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_w2 "FLUX_W2>-10000000000L ? ((ADFLUX_W2/MW_TRANSMISSION_W2))*pow(10, -28.44):-99."' \
@@ -57,7 +57,7 @@ all:
 		cmd='addcol LU_flux_w4 "FLUX_W4>-10000000000L ? ((ADFLUX_W4/MW_TRANSMISSION_W4))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_g_err "ADFLUX_IVAR_G>0 ? (((1/pow(ADFLUX_IVAR_G, 0.5))/MW_TRANSMISSION_G))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_r_err "ADFLUX_IVAR_R>0 ? (((1/pow(ADFLUX_IVAR_R, 0.5))/MW_TRANSMISSION_R))*pow(10, -28.44):-99."' \
-		cmd='addcol LU_flux_i_err "ADFLUX_IVAR_R>0 ? (((1/pow(ADFLUX_IVAR_I, 0.5))/MW_TRANSMISSION_I))*pow(10, -28.44):-99."' \
+		cmd='addcol LU_flux_i_err "ADFLUX_IVAR_I>0 ? (((1/pow(ADFLUX_IVAR_I, 0.5))/MW_TRANSMISSION_I))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_z_err "ADFLUX_IVAR_Z>0 ? (((1/pow(ADFLUX_IVAR_Z, 0.5))/MW_TRANSMISSION_Z))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_w1_err "ADFLUX_IVAR_W1>0 ? (((1/pow(ADFLUX_IVAR_W1, 0.5))/MW_TRANSMISSION_W1))*pow(10, -28.44):-99."' \
 		cmd='addcol LU_flux_w2_err "ADFLUX_IVAR_W2>0 ? (((1/pow(ADFLUX_IVAR_W2, 0.5))/MW_TRANSMISSION_W2))*pow(10, -28.44):-99."' \
@@ -557,3 +557,7 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 
 %.fits_errors.pdf %.fits_fluxes.pdf: %.fits
 	python3 checkphotometry.py $<
+
+.SECONDARY:
+.PRECIOUS:
+

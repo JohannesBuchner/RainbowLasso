@@ -2,7 +2,7 @@
 """
 Retrieves aperture fluxes from HSC survey via noirlab.
 """
-#from requests_cache import CachedSession
+import tqdm
 import requests
 import json
 import os
@@ -74,8 +74,9 @@ def jobCancel(credential, job_id):
     postData = {'credential': credential, 'id': job_id}
     httpJsonPost(url, postData)
 
+verbose = False
 
-def blockUntilJobFinishes(credential, job_id, verbose=True):
+def blockUntilJobFinishes(credential, job_id):
     max_interval = 60 # sec.
     interval = 1
     last_status = 'submitted'
@@ -179,22 +180,22 @@ SELECT *
 FROM match
 """
 
-print(id_query)
+if verbose:
+    print(id_query)
 
 object_ids = fetchTable(id_query)['object_id']
-print(object_ids)
+if verbose:
+    print('object ids:', list(object_ids))
 
 chunksize = 60
 elements = []
-for i in range(0, len(object_ids), chunksize):
+for i in tqdm.trange(0, len(object_ids), chunksize):
     query = 'SELECT ' + ','.join(all_column_names) + """
 FROM pdr3_wide.forced
 LEFT JOIN pdr3_wide.forced2 USING (object_id)
 LEFT JOIN pdr3_wide.forced3 USING (object_id)
 WHERE object_id in (""" + ','.join(('%d' % i for i in object_ids[i:i+chunksize])) + """)
 """
-    #print(query)
-    #print("submitting query...")
     ttmp = fetchTable(query)
     if len(ttmp) > 0:
         for col in ttmp.colnames:
