@@ -24,6 +24,25 @@ all:
 		in1=$*_LS_aper.fits suffix1= values1=id \
 		in2=$*_LS_staraper.fits suffix2=_STAR values2=id
 
+%_LS_extaper.fits: addextflux.py %_LS_aper.fits
+	python3 $^ $@
+
+%_all_extflux.fits: %_all.fits %_LS_extaper.fits
+	stilts tmatch2 out=$@ matcher=exact find=best join=all1 fixcols=dups \
+		in1=$*_all.fits values1=id \
+		in2=$*_LS_extaper.fits values2=id  icmd2='keepcols "id apfluxext*_7 MW_TRANSMISSION_*"' \
+		ocmd='addcol prior_GALflux_decam_g "(fracflux_g_LS<0.1&&decam_g_err>0)?(apfluxext_g_7/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_r "(fracflux_r_LS<0.1&&decam_r_err>0)?(apfluxext_r_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_z "(fracflux_z_LS<0.1&&decam_z_err>0)?(apfluxext_z_7/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_g_errlo "(fracflux_g_LS<0.1&&decam_g_err>0)?(apfluxext_err_g_7/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_r_errlo "(fracflux_r_LS<0.1&&decam_r_err>0)?(apfluxext_err_r_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_z_errlo "(fracflux_z_LS<0.1&&decam_z_err>0)?(apfluxext_err_z_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_g_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_decam_r_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_decam_z_errhi "1e10"' \
+		ocmd='delcols "apfluxext*_7 MW_TRANSMISSION_* id_2"' \
+		ocmd='colmeta -name id "id_1"'
+
 %_LS.fits: %_LS_aper.fits
 	# adflux_* = adaptive flux column, depending on source type
 	# for extended sources: 5'' aperture = OPT:apflux_*_7 and IR:apflux_*_2
