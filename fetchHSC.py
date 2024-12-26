@@ -17,7 +17,7 @@ import joblib
 mem = joblib.Memory('.', verbose=False)
 
 api_url = 'https://hsc-release.mtk.nao.ac.jp/datasearch/api/catalog_jobs/'
-release_version = 'pdr3'
+release_version = 'pdr3-citus-columnar'
 skip_syntax_check = False
 nomail = True
 version = 20190514.1
@@ -77,8 +77,8 @@ def jobCancel(credential, job_id):
 verbose = False
 
 def blockUntilJobFinishes(credential, job_id):
-    max_interval = 60 # sec.
-    interval = 1
+    max_interval = 5  # seconds
+    interval = 1  # how long to wait at first
     last_status = 'submitted'
     while True:
         if verbose:
@@ -124,7 +124,22 @@ def fetchTable(query):
     return ttmp
 
 columns = [
+'_inputcount_value|Number of images contributing at center, not including anyclipping',
+'_inputcount_flag|Set for any fatal failure',
+'_localbackground_flag|General Failure Flag',
+'_pixelflags|General failure flag, set if anything went wrong',
+'_pixelflags_bad|Bad pixel in the Source footprint',
+'_pixelflags_cr|Cosmic ray in the Source footprint',
+'_pixelflags_saturatedcenter|Saturated pixel in the Source footprint',
+'_pixelflags_saturated|Saturated pixel in the Source center',
+'_pixelflags_edge|Source is outside usable exposure region (masked EDGE or NO_DATA)',
 '_extendedness_value|Set to 1 for extended sources, 0 for point sources.',
+'_extendedness_flag|Set to 1 for any fatal failure.',
+'_kronflux_psf_radius|Radius of PSF',
+'_kronflux_flag_bad_shape_no_psf|bad shape and no PSF',
+'_sdssshape_psf_shape11|adaptive moments of the PSF model at the object position [arcsec^2]',
+'_sdssshape_psf_shape12|adaptive moments of the PSF model at the object position [arcsec^2]',
+'_sdssshape_psf_shape22|adaptive moments of the PSF model at the object position [arcsec^2]',
 '_psfflux_flux|instFlux derived from linear least-squares fit of PSF model',
 '_psfflux_fluxerr|1-sigma instFlux uncertainty',
 '_psfflux_flag|General Failure Flag', 
@@ -133,6 +148,7 @@ columns = [
 '_psfflux_flag_apcorr|set if unable to aperture correct base_PsfFlux',
 '_psfflux_flag_badcentroid|whether the reference centroid is marked as bad',
 '_apertureflux_flag_badcentroid|whether the reference centroid is marked as bad',
+'_sdsscentroid_flag|General Failure Flag',
 ]
 r_columns = [
 '_apertureflux_%d_flux|aperture flux',
@@ -142,7 +158,7 @@ r_columns = [
 #'_apertureflux_%d_flag_sinccoeffstruncated|full sinc coefficient image did not fit within measurement image',
 ]
 bands = 'grizy'
-all_column_names = ['ra', 'dec']
+all_column_names = ['ra', 'dec','detect_ispatchinner']
 for band in bands:
     all_column_names.append('a_' + band)
     all_column_names += [band + c.split("|")[0] for c in columns]
@@ -164,6 +180,8 @@ for row in t:
         pass # Hectomap
     elif 210 < ra0 < 218 and 51 < dec0 < 54:
         pass # AEGIS
+    else:
+        continue # skip outside
     values.append(f"('{i}'::{id_dtype},'{row['RA']:.16e}'::double precision,'{row['DEC']:.16e}'::double precision)")
 
 #new_column_names = [
@@ -203,25 +221,6 @@ WHERE object_id in (""" + ','.join(('%d' % i for i in object_ids[i:i+chunksize])
                 del ttmp[col]
     elements.append(ttmp)
 
-"""
-job = submitJob(credential, query, out_format)
-time.sleep(0.1)
-print("waiting for results...")
-blockUntilJobFinishes(credential, job['id'])
-print("downloading results...")
-ttmp = Table.read(download(credential, job['id']))
-"""
-"""
-if len(ttmp) > 0:
-    for col in ttmp.colnames:
-        if col.endswith('_isnull'):
-            del ttmp[col]
-    ttmp['id'] = ttmp['user_id']
-    del ttmp['user_id']
-    del ttmp['user_RA']
-    del ttmp['user_DEC']
-deleteJob(credential, job['id'])
-"""
 print("\nstoring results...")
 data = vstack(elements)
 data.write(sys.argv[2], overwrite=True)

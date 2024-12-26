@@ -28,20 +28,23 @@ all:
 	python3 $^ $@
 
 %_all_extflux.fits: %_all.fits %_LS_extaper.fits
+	# use aperture photometry until 1.5'', after that the PSF wings are not Gaussian anymore
 	stilts tmatch2 out=$@ matcher=exact find=best join=all1 fixcols=dups \
-		in1=$*_all.fits values1=id \
-		in2=$*_LS_extaper.fits values2=id  icmd2='keepcols "id apfluxext*_7 MW_TRANSMISSION_*"' \
-		ocmd='addcol prior_GALflux_decam_g "(fracflux_g_LS<0.1&&decam_g_err>0)?(apfluxext_g_7/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_r "(fracflux_r_LS<0.1&&decam_r_err>0)?(apfluxext_r_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_z "(fracflux_z_LS<0.1&&decam_z_err>0)?(apfluxext_z_7/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_g_errlo "(fracflux_g_LS<0.1&&decam_g_err>0)?(apfluxext_err_g_7/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_r_errlo "(fracflux_r_LS<0.1&&decam_r_err>0)?(apfluxext_err_r_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_z_errlo "(fracflux_z_LS<0.1&&decam_z_err>0)?(apfluxext_err_z_7/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		in1=$*_all.fits values1=id suffix1= \
+		in2=$*_LS_extaper.fits values2=id  icmd2='keepcols "id apfluxext*_4 MW_TRANSMISSION_*"' suffix2=_LS_extaper \
+		ocmd='addcol usable_extflux_g "(TYPE_LS!=\"PSF\"&&fracflux_g_LS<0.1&&decam_g_err>0&&apfluxext_err_g_4>0&&(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26>decam_g*0.01)"' \
+		ocmd='addcol usable_extflux_r "(TYPE_LS!=\"PSF\"&&fracflux_r_LS<0.1&&decam_r_err>0&&apfluxext_err_r_4>0&&(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26>decam_r*0.01)"' \
+		ocmd='addcol usable_extflux_z "(TYPE_LS!=\"PSF\"&&fracflux_z_LS<0.1&&decam_z_err>0&&apfluxext_err_z_4>0&&(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26>decam_z*0.01)"' \
+		ocmd='addcol prior_GALflux_decam_g "usable_extflux_g?(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_r "usable_extflux_r?(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_z "usable_extflux_z?(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_g_errlo "usable_extflux_g?(apfluxext_err_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_r_errlo "usable_extflux_r?(apfluxext_err_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_z_errlo "usable_extflux_z?(apfluxext_err_z_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
 		ocmd='addcol prior_GALflux_decam_g_errhi "1e10"' \
 		ocmd='addcol prior_GALflux_decam_r_errhi "1e10"' \
 		ocmd='addcol prior_GALflux_decam_z_errhi "1e10"' \
-		ocmd='delcols "apfluxext*_7 MW_TRANSMISSION_* id_2"' \
-		ocmd='colmeta -name id "id_1"'
+		ocmd='delcols "apfluxext* usable_extflux* MW_TRANSMISSION_* *_LS_extaper"'
 
 %_LS.fits: %_LS_aper.fits
 	# adflux_* = adaptive flux column, depending on source type
@@ -86,6 +89,9 @@ all:
 %_HSC_aper.fits: fetchHSC.py %.fits
 	python3 $^ $@
 
+%_HSC_extaper.fits: addextflux_HSC.py %_HSC_aper.fits
+	python3 $^ $@
+
 %_HSC.fits: %_HSC_aper.fits %.fits
 	# adflux_* = adaptive flux column, depending on source type
 	# for extended sources: 5'' aperture = OPT:apflux_*_7 and IR:apflux_*_2
@@ -106,16 +112,16 @@ all:
 		ocmd='addcol adflux_i_err "extended ? i_psfflux_fluxerr : i_apertureflux_57_fluxerr"' \
 		ocmd='addcol adflux_z_err "extended ? z_psfflux_fluxerr : z_apertureflux_57_fluxerr"' \
 		ocmd='addcol adflux_y_err "extended ? y_psfflux_fluxerr : y_apertureflux_57_fluxerr"' \
-		ocmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_z "ADFLUX_Z>-10000000000L ? ((ADFLUX_Z/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_y "ADFLUX_Y>-10000000000L ? ((ADFLUX_Y/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_g_err "ADFLUX_G_err>-10000000000L ? ((ADFLUX_G_err/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_r_err "ADFLUX_R_err>-10000000000L ? ((ADFLUX_R_err/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_i_err "ADFLUX_I_err>-10000000000L ? ((ADFLUX_I_err/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_z_err "ADFLUX_Z_err>-10000000000L ? ((ADFLUX_Z_err/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -28.44):-99."' \
-		ocmd='addcol LU_flux_y_err "ADFLUX_Y_err>-10000000000L ? ((ADFLUX_Y_err/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -28.44):-99."' \
+		ocmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_z "ADFLUX_Z>-10000000000L ? ((ADFLUX_Z/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_y "ADFLUX_Y>-10000000000L ? ((ADFLUX_Y/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_g_err "ADFLUX_G_err>-10000000000L ? ((ADFLUX_G_err/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_r_err "ADFLUX_R_err>-10000000000L ? ((ADFLUX_R_err/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_i_err "ADFLUX_I_err>-10000000000L ? ((ADFLUX_I_err/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_z_err "ADFLUX_Z_err>-10000000000L ? ((ADFLUX_Z_err/1000*(pow(10, -(-a_z)/(2.5)))))*pow(10, -29):-99."' \
+		ocmd='addcol LU_flux_y_err "ADFLUX_Y_err>-10000000000L ? ((ADFLUX_Y_err/1000*(pow(10, -(-a_y)/(2.5)))))*pow(10, -29):-99."' \
 		ocmd='delcols "RA_in DEC_in"; colmeta -name id id_in'
 
 %_GALEX.fits: %_coords.csv
@@ -484,16 +490,16 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol WFCAM_H_err "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26:-99"' \
 		ocmd='addcol WFCAM_Ks_err "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26:-99"' \
 		ocmd='addcol WISE1_origin "isolatedLS ? \"LS10\" : ( (fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? \"AllWISE\" : \"LS10UL\")"' \
-		ocmd='addcol WISE1        "isolatedLS ? LU_flux_w1_LS * 1e26 : ((fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? WISE1_ALLWISE : LU_flux_w1_LS * 1e26)"' \
-		ocmd='addcol WISE1_err "isolatedLS ? LU_flux_w1_err_LS * 1e26 : -WISE1"' \
-		ocmd='addcol WISE2_origin "isolatedLS ? \"LS10\" : ( (fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? \"AllWISE\" : \"LS10UL\")"' \
-		ocmd='addcol WISE2 "isolatedLS ? LU_flux_w2_LS * 1e26 : ((fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? WISE2_ALLWISE : LU_flux_w2_LS * 1e26)"' \
-		ocmd='addcol WISE2_err "isolatedLS ? LU_flux_w2_err_LS * 1e26 : -WISE2"' \
+		ocmd='addcol WISE1        "isolatedLS ? LU_flux_w1_LS * 1e26 : ((fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? WISE1_ALLWISE : (LU_flux_w1_LS + LU_flux_w1_err_LS) * 1e26 * (1 + fracflux_w1_LS))"' \
+		ocmd='addcol WISE1_err "isolatedLS ? LU_flux_w1_err_LS * 1e26 : ((fracflux_w1_LS > 1 || WISE1_ALLWISE < LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? -WISE1_ALLWISE : -LU_flux_w1_err_LS * 1e26 * (1 + fracflux_w1_LS))"' \
+		ocmd='addcol WISE2_origin "isolatedLS ? \"LS10\" : ((fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? \"AllWISE\" : \"LS10UL\")"' \
+		ocmd='addcol WISE2 "isolatedLS ? LU_flux_w2_LS * 1e26 : ((fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? WISE2_ALLWISE : (LU_flux_w2_LS + LU_flux_w2_err_LS) * 1e26 * (1 + fracflux_w2_LS))"' \
+		ocmd='addcol WISE2_err "isolatedLS ? LU_flux_w2_err_LS * 1e26 : ((fracflux_w2_LS > 1 || WISE2_ALLWISE < LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? -WISE2_ALLWISE : -LU_flux_w2_err_LS * 1e26 * (1 + fracflux_w2_LS))"' \
 		ocmd='addcol WISE34_origin "isolatedLS&&!W34_blended ? \"LS10\" : \"AllWISE\""' \
-		ocmd='addcol WISE3 "isolatedLS&&!W34_blended ? LU_flux_w3_LS*1e26 : WISE3_ALLWISE"' \
-		ocmd='addcol WISE3_err "isolatedLS&&!W34_blended ? LU_flux_w3_err_LS*1e26 : -WISE3"' \
-		ocmd='addcol WISE4 "isolatedLS&&!W34_blended ? LU_flux_w4_LS*1e26 : WISE4_ALLWISE"' \
-		ocmd='addcol WISE4_err "isolatedLS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -WISE4"' \
+		ocmd='addcol WISE3 "isolatedLS&&!W34_blended ? LU_flux_w3_LS*1e26 : -99"' \
+		ocmd='addcol WISE3_err "isolatedLS&&!W34_blended ? LU_flux_w3_err_LS*1e26 : -99"' \
+		ocmd='addcol WISE4 "isolatedLS&&!W34_blended ? LU_flux_w4_LS*1e26 : -99"' \
+		ocmd='addcol WISE4_err "isolatedLS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -99"' \
 
 %_HSCall.fits: %.fits %_GALEX.fits %_LS.fits %_UKIDSS.fits %_VHS.fits %_ALLWISE_sum.fits %_GALEX_UL.fits %_HSC.fits
 	# this is the same as above, except
@@ -532,16 +538,21 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol 90prime_r_err "(inMzLSBASS && fracin_r_LS>0.5?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"' \
 		ocmd='addcol zd_mosaic_err "(inMzLSBASS && fracin_z_LS>0.5?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"' \
 		ocmd='addcol 90prime_g_err "(inMzLSBASS && fracin_g_LS>0.5?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"' \
-		ocmd='addcol HSC_g "(!g_psfflux_flag_HSC&&!g_apertureflux_57_flag_HSC?LU_flux_g_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_r "(!r_psfflux_flag_HSC&&!r_apertureflux_57_flag_HSC?LU_flux_r_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_i "(!i_psfflux_flag_HSC&&!i_apertureflux_57_flag_HSC?LU_flux_i_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_z "(!z_psfflux_flag_HSC&&!z_apertureflux_57_flag_HSC?LU_flux_z_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_y "(!y_psfflux_flag_HSC&&!y_apertureflux_57_flag_HSC?LU_flux_y_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_g_err "(!g_psfflux_flag_HSC&&!g_apertureflux_57_flag_HSC?LU_flux_g_err_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_r_err "(!r_psfflux_flag_HSC&&!r_apertureflux_57_flag_HSC?LU_flux_r_err_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_i_err "(!i_psfflux_flag_HSC&&!i_apertureflux_57_flag_HSC?LU_flux_i_err_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_z_err "(!z_psfflux_flag_HSC&&!z_apertureflux_57_flag_HSC?LU_flux_z_err_HSC*1e26:-99)"' \
-		ocmd='addcol HSC_y_err "(!y_psfflux_flag_HSC&&!y_apertureflux_57_flag_HSC?LU_flux_y_err_HSC*1e26:-99)"' \
+		icmd8='addcol psf_g_usable "!g_pixelflags_saturated&&!g_pixelflags_saturatedcenter&&g_inputcount_value>0&&!g_inputcount_flag&&!g_localbackground_flag&&!g_pixelflags&&!g_psfflux_flag"' \
+		icmd8='addcol psf_r_usable "!r_pixelflags_saturated&&!r_pixelflags_saturatedcenter&&r_inputcount_value>0&&!r_inputcount_flag&&!r_localbackground_flag&&!r_pixelflags&&!r_psfflux_flag"' \
+		icmd8='addcol psf_i_usable "!i_pixelflags_saturated&&!i_pixelflags_saturatedcenter&&i_inputcount_value>0&&!i_inputcount_flag&&!i_localbackground_flag&&!i_pixelflags&&!i_psfflux_flag"' \
+		icmd8='addcol psf_z_usable "!z_pixelflags_saturated&&!z_pixelflags_saturatedcenter&&z_inputcount_value>0&&!z_inputcount_flag&&!z_localbackground_flag&&!z_pixelflags&&!z_psfflux_flag"' \
+		icmd8='addcol psf_y_usable "!y_pixelflags_saturated&&!y_pixelflags_saturatedcenter&&y_inputcount_value>0&&!y_inputcount_flag&&!y_localbackground_flag&&!y_pixelflags&&!y_psfflux_flag"' \
+		ocmd='addcol HSC_g "(psf_g_usable_HSC&&!g_psfflux_flag_HSC&&!g_apertureflux_57_flag_HSC?LU_flux_g_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_r "(psf_r_usable_HSC&&!r_psfflux_flag_HSC&&!r_apertureflux_57_flag_HSC?LU_flux_r_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_i "(psf_i_usable_HSC&&!i_psfflux_flag_HSC&&!i_apertureflux_57_flag_HSC?LU_flux_i_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_z "(psf_z_usable_HSC&&!z_psfflux_flag_HSC&&!z_apertureflux_57_flag_HSC?LU_flux_z_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_y "(psf_y_usable_HSC&&!y_psfflux_flag_HSC&&!y_apertureflux_57_flag_HSC?LU_flux_y_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_g_err "(psf_g_usable_HSC&&!g_psfflux_flag_HSC&&!g_apertureflux_57_flag_HSC?LU_flux_g_err_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_r_err "(psf_r_usable_HSC&&!r_psfflux_flag_HSC&&!r_apertureflux_57_flag_HSC?LU_flux_r_err_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_i_err "(psf_i_usable_HSC&&!i_psfflux_flag_HSC&&!i_apertureflux_57_flag_HSC?LU_flux_i_err_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_z_err "(psf_z_usable_HSC&&!z_psfflux_flag_HSC&&!z_apertureflux_57_flag_HSC?LU_flux_z_err_HSC*1e26:-99)"' \
+		ocmd='addcol HSC_y_err "(psf_y_usable_HSC&&!y_psfflux_flag_HSC&&!y_apertureflux_57_flag_HSC?LU_flux_y_err_HSC*1e26:-99)"' \
 		ocmd='addcol UV_Y "Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26:-99"' \
 		ocmd='addcol UV_J "Jerrbits_VHS==0?(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26:-99"' \
 		ocmd='addcol UV_H "Herrbits_VHS==0?(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26:-99"' \
@@ -569,6 +580,36 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol WISE3_err "isolatedLS&&!W34_blended ? LU_flux_w3_err_LS*1e26 : -WISE3"' \
 		ocmd='addcol WISE4 "isolatedLS&&!W34_blended ? LU_flux_w4_LS*1e26 : WISE4_ALLWISE"' \
 		ocmd='addcol WISE4_err "isolatedLS&&!W34_blended ? LU_flux_w4_err_LS*1e26 : -WISE4"' \
+
+#	stilts tmatch2 out=$@ matcher=exact find=best join=all1 fixcols=dups \
+#		in1=$*_HSCall.fits values1=id suffix1= \
+#		in2=$*_HSC_extaper.fits values2=id  icmd2='keepcols "id apfluxext*_7 a_*"' suffix2=_HSC_extaper \
+
+%_HSCall_extflux.fits: %_HSCall.fits %_HSC_extaper.fits
+	stilts tmatch2 out=$@ matcher=sky find=best params=1 fixcols=all \
+		in1=$*_HSCall.fits values1="RA DEC" suffix1= \
+		in2=$*_HSC_extaper.fits values2="RA DEC" suffix2=_HSC_extaper \
+		icmd2='addcol g_usable "!g_pixelflags_saturated&&!g_pixelflags_saturatedcenter&&g_inputcount_value>0&&!g_inputcount_flag&&!g_localbackground_flag&&!g_pixelflags&&!g_apertureflux_40_flag&&apfluxext_err_g_40>0&&g_extendedness_value>0&&!g_extendedness_flag"' \
+		icmd2='addcol r_usable "!r_pixelflags_saturated&&!r_pixelflags_saturatedcenter&&r_inputcount_value>0&&!r_inputcount_flag&&!r_localbackground_flag&&!r_pixelflags&&!r_apertureflux_40_flag&&apfluxext_err_r_40>0&&r_extendedness_value>0&&!r_extendedness_flag"' \
+		icmd2='addcol i_usable "!i_pixelflags_saturated&&!i_pixelflags_saturatedcenter&&i_inputcount_value>0&&!i_inputcount_flag&&!i_localbackground_flag&&!i_pixelflags&&!i_apertureflux_40_flag&&apfluxext_err_i_40>0&&i_extendedness_value>0&&!i_extendedness_flag"' \
+		icmd2='addcol z_usable "!z_pixelflags_saturated&&!z_pixelflags_saturatedcenter&&z_inputcount_value>0&&!z_inputcount_flag&&!z_localbackground_flag&&!z_pixelflags&&!z_apertureflux_40_flag&&apfluxext_err_z_40>0&&z_extendedness_value>0&&!z_extendedness_flag"' \
+		icmd2='addcol y_usable "!y_pixelflags_saturated&&!y_pixelflags_saturatedcenter&&y_inputcount_value>0&&!y_inputcount_flag&&!y_localbackground_flag&&!y_pixelflags&&!y_apertureflux_40_flag&&apfluxext_err_y_40>0&&y_extendedness_value>0&&!y_extendedness_flag"' \
+		ocmd='addcol prior_GALflux_HSC_g "(g_usable_HSC_extaper&&fracflux_g_LS<0.1)?(apfluxext_g_40_HSC_extaper/pow(10, -0.4*a_g_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_r "(r_usable_HSC_extaper&&fracflux_r_LS<0.1)?(apfluxext_r_40_HSC_extaper/pow(10, -0.4*a_r_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_i "(i_usable_HSC_extaper&&fracflux_r_LS<0.1)?(apfluxext_i_40_HSC_extaper/pow(10, -0.4*a_i_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_z "(z_usable_HSC_extaper&&fracflux_z_LS<0.1)?(apfluxext_z_40_HSC_extaper/pow(10, -0.4*a_z_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_y "(y_usable_HSC_extaper&&fracflux_z_LS<0.1)?(apfluxext_y_40_HSC_extaper/pow(10, -0.4*a_y_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_g_errlo "(g_usable_HSC_extaper&&fracflux_g_LS<0.1)?(apfluxext_err_g_40_HSC_extaper/pow(10, -0.4*a_g_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_r_errlo "(r_usable_HSC_extaper&&fracflux_r_LS<0.1)?(apfluxext_err_r_40_HSC_extaper/pow(10, -0.4*a_r_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_i_errlo "(i_usable_HSC_extaper&&fracflux_r_LS<0.1)?(apfluxext_err_i_40_HSC_extaper/pow(10, -0.4*a_i_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_z_errlo "(z_usable_HSC_extaper&&fracflux_z_LS<0.1)?(apfluxext_err_z_40_HSC_extaper/pow(10, -0.4*a_z_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_y_errlo "(y_usable_HSC_extaper&&fracflux_z_LS<0.1)?(apfluxext_err_y_40_HSC_extaper/pow(10, -0.4*a_y_HSC_extaper))/1000*pow(10,-29)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_HSC_g_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_HSC_r_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_HSC_i_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_HSC_z_errhi "1e10"' \
+		ocmd='addcol prior_GALflux_HSC_y_errhi "1e10"' \
+		ocmd='delcols "apfluxext*_7 MW_TRANSMISSION_* *_HSC_extaper"'
 
 %_lite.fits: %.fits
 	stilts tpipe in=$^ out=$@ cmd='delcols "adflux*_LS *_LS LU_flux*_LS *_GALEX *_VHS *_UKIDSS *_ALLWISE *_GALEXUL *_HSC"'
