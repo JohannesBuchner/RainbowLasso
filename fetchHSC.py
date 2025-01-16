@@ -123,6 +123,8 @@ def fetchTable(query):
     deleteJob(credential, job['id'])
     return ttmp
 
+chunksize = 60
+
 columns = [
 '_inputcount_value|Number of images contributing at center, not including anyclipping',
 '_inputcount_flag|Set for any fatal failure',
@@ -168,58 +170,56 @@ out_format = 'fits'
 t = Table.read(sys.argv[1])
 
 id_dtype = 'int' if t['id'].dtype == int else 'text'
+query_radius = os.environ.get('QUERY_RADIUS', '1')
+
+elements = []
 values = []
-for row in t:
+for k, row in enumerate(t):
     i = row['id']
     ra0, dec0 = row['RA'], row['DEC'] # in decimal degrees
-    if ra0 > 325 or ra0 < 45 and -8 < dec0 < 9:
-        pass # HSC-WIDE overlapping with XMM-LSS
-    elif 120 < ra0 < 230 and -3.5 < dec0 < 6.5:
-        pass # HSC-WIDE overlapping with COSMOS
-    elif 195 < ra0 < 225 and 41 < dec0 < 46:
-        pass # Hectomap
-    elif 210 < ra0 < 218 and 51 < dec0 < 54:
-        pass # AEGIS
-    else:
-        continue # skip outside
-    values.append(f"('{i}'::{id_dtype},'{row['RA']:.16e}'::double precision,'{row['DEC']:.16e}'::double precision)")
+    # HSC-WIDE overlapping with XMM-LSS
+    in_XMMLSS = ra0 > 325 or ra0 < 45 and -8 < dec0 < 9
+    # HSC-WIDE overlapping with COSMOS
+    in_COSMOS = 120 < ra0 < 230 and -3.5 < dec0 < 6.5
+    in_Hectomap = 195 < ra0 < 225 and 41 < dec0 < 46
+    in_AEGIS = 210 < ra0 < 218 and 51 < dec0 < 54
 
-#new_column_names = [
-#    ('forced2' if '_psfflux_' in colname else ('forced3' if '_apertureflux_' in colname else 'forced')) + '.' + colname + ' as ' + colname for colname in all_column_names]
-id_query = 'WITH user_catalog("user.myid","user.RA","user.DEC") AS (VALUES' + ','.join(values) + """),
+    if in_XMMLSS or in_COSMOS or in_Hectomap or in_AEGIS:
+        values.append(f"('{i}'::{id_dtype},'{row['RA']:.16e}'::double precision,'{row['DEC']:.16e}'::double precision)")
+
+    if len(values) > chunksize or k == len(t) - 1:
+        id_query = 'WITH user_catalog("user.myid","user.RA","user.DEC") AS (VALUES' + ','.join(values) + """),
     match AS (
         SELECT
             object_id
         FROM
             user_catalog
-        JOIN pdr3_wide.forced ON coneSearch(coord, "user.RA", "user.DEC", 1)
+        JOIN pdr3_wide.forced ON coneSearch(coord, "user.RA", "user.DEC", """ + query_radius + """)
     )
 SELECT *
 FROM match
 """
 
-if verbose:
-    print(id_query)
+        if verbose:
+            print(id_query)
 
-object_ids = fetchTable(id_query)['object_id']
-if verbose:
-    print('object ids:', list(object_ids))
+        object_ids = fetchTable(id_query)['object_id']
+        if verbose:
+            print('object ids:', list(object_ids))
 
-chunksize = 60
-elements = []
-for i in tqdm.trange(0, len(object_ids), chunksize):
-    query = 'SELECT ' + ','.join(all_column_names) + """
+        query = 'SELECT ' + ','.join(all_column_names) + """
 FROM pdr3_wide.forced
 LEFT JOIN pdr3_wide.forced2 USING (object_id)
 LEFT JOIN pdr3_wide.forced3 USING (object_id)
-WHERE object_id in (""" + ','.join(('%d' % i for i in object_ids[i:i+chunksize])) + """)
+WHERE object_id in (""" + ','.join(('%d' % i for i in object_ids)) + """)
 """
-    ttmp = fetchTable(query)
-    if len(ttmp) > 0:
-        for col in ttmp.colnames:
-            if col.endswith('_isnull'):
-                del ttmp[col]
-    elements.append(ttmp)
+        ttmp = fetchTable(query)
+        if len(ttmp) > 0:
+            for col in ttmp.colnames:
+                if col.endswith('_isnull'):
+                    del ttmp[col]
+        elements.append(ttmp)
+        values = []
 
 print("\nstoring results...")
 data = vstack(elements)

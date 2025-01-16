@@ -1,6 +1,7 @@
 """
 Retrieves aperture fluxes from legacy survey via noirlab.
 """
+import os
 import requests_cache
 requests_cache.install_cache('demo_cache', allowable_methods=('GET', 'POST')) #, expire_after=3600*24*7)
 
@@ -10,6 +11,8 @@ import pandas as pd
 import tqdm
 import sys
 from dl import queryClient as qc
+
+query_radius = float(os.environ.get('QUERY_RADIUS', '1'))
 
 t = Table.read(sys.argv[1])
 
@@ -45,7 +48,7 @@ dtypes = dict(
 
 elements = []
 for row in tqdm.tqdm(t):
-    ra0, dec0, radius = row['RA'], row['DEC'], 0.00028 # ra0,dec0,radius all in decimal degrees
+    ra0, dec0, radius = row['RA'], row['DEC'], 0.00028 * query_radius # ra0,dec0,radius all in decimal degrees
     query = """SELECT TOP 1 * FROM ls_dr10.tractor 
     INNER JOIN ls_dr10.apflux ON ls_dr10.tractor.ls_id = ls_dr10.apflux.ls_id 
     WHERE  q3c_radial_query(ra,dec,{:f},{:f},{:f})""".format(ra0,dec0,radius)
