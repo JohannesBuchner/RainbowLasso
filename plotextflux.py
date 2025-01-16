@@ -347,6 +347,7 @@ for obj in objs[:20]:
 
         if psf_apertures is not None:
             plot_aperture_flux_model(ax, radius, psf_apertures / psf_apertures[0] * fits_apertures[0], plot_areas=plot_areas, label='imgPSF', color='red')
+            np.savetxt(f'psfapertures_{obj["id"]}_{band}.txt', np.transpose([radius, psf_apertures / psf_apertures[0], plot_areas]))
         if fits_apertures is not None:
             plot_aperture_flux_model(ax, radius, fits_apertures, plot_areas=plot_areas, label='img', color='k')
 

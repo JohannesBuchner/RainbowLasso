@@ -34,4 +34,4 @@ for band in 'grz':
         table['apfluxext_%s_%d' % (band, i)] = np.where(finite, unumpy.nominal_values(c), np.nan)
         table['apfluxext_err_%s_%d' % (band, i)] = np.where(finite, unumpy.std_devs(c), np.nan)
         
-table.write(sys.argv[2], overwrite=True)
+table.write(sys.argv[-1], overwrite=True)
