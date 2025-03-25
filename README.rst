@@ -67,6 +67,7 @@ which you could get with something like::
 
 	pip install requests_cache astropy numpy pandas tqdm astro-datalab uncertainties dustmaps
 
+* dustmaps need to be `set up and SFD downloaded <https://github.com/gregreen/dustmaps/?tab=readme-ov-file#getting-the-data>`_
 
 Usage
 -----
