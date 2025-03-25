@@ -60,12 +60,12 @@ You need to have the programs installed:
 
 and the following python libraries:
 
-* requests_cache, astropy, numpy, pandas, tqdm, uncertainties
+* requests_cache, astropy, numpy, pandas, tqdm, uncertainties, dustmaps
 * astro-datalab (`see noirlab <https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html>`_)
 
 which you could get with something like::
 
-	pip install requests_cache astropy numpy pandas tqdm astro-datalab uncertainties
+	pip install requests_cache astropy numpy pandas tqdm astro-datalab uncertainties dustmaps
 
 
 Usage
