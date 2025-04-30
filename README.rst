@@ -101,7 +101,7 @@ If you get the following warning::
 
 Then _all.fits has over 1000 columns, and astropy will not be able to read the last columns.
 
-If you also want HSC-WIDE fluxes, you can run:
+(experimental) If you also want HSC-WIDE fluxes, you can run:
 
   $ make path/to/data/dr16QWX_selection_allHSC_lite.fits
 
