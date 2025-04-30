@@ -90,7 +90,7 @@ all:
 		cmd='addcol LU_flux_w4_err "ADFLUX_IVAR_W4>0 ? (((1/pow(ADFLUX_IVAR_W4, 0.5))/MW_TRANSMISSION_W4))*pow(10, -28.44):-99."'
 
 %_SDSS.fits: fetchSDSS.py %.fits
-	python3 $^ $@
+	python3 $^ $@ || stilts tpipe in=$^ out=$@ cmd='keepcols "id"'
 
 %_HSC_aper.fits: fetchHSC.py %.fits
 	python3 $^ $@

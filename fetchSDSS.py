@@ -15,8 +15,6 @@ import tqdm
 from joblib import Memory
 from SciServer import Authentication, CasJobs
 
-token1 = Authentication.login(*open(os.path.expanduser('~/.config/sciserver/login.txt')).readline().strip().split(':'));
-
 flagnames = [
     'CANONICAL_CENTER', 'BRIGHT', 'EDGE', 'BLENDED', 'CHILD', 'PEAKCENTER', 'NODEBLEND',
     'NOPROFILE', 'NOPETRO', 'MANYPETRO', 'NOPETRO_BIG', 'DEBLEND_TOO_MANY_PEAKS',
@@ -138,6 +136,19 @@ def fetch_one(ra, dec, bad_flags):
 
 def main(query_radius, input_table, output_table):
     t = Table.read(sys.argv[1]).filled()
+    try:
+        Authentication.login(*open(os.path.expanduser('~/.config/sciserver/login.txt')).readline().strip().split(':'))
+    except FileNotFoundError:
+        print("Could not log into sciserver, not filling in SDSS information")
+        tmock = t[['id']]
+        for i, band in enumerate('ugriz'):
+            tmock['psfMag_' + band] = np.nan
+            tmock['psfMagErr_' + band] = np.nan
+            tmock['aper_' + band] = np.nan
+            tmock['aper_' + band + '_err'] = np.nan
+        tmock.write(output_table, overwrite=True)
+        print(tmock)
+        return
 
     elements = []
     # ra0,dec0,radius all in decimal degrees

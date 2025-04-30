@@ -133,7 +133,7 @@ TODO
 
 * ☐ discard blended or problematic photometry in VHS
 * ☐ discard blended or problematic photometry in UKIDSS
-* ☐ provide upper limits for VHS, UKIDSS (need coverage information for that)
+* ☐ provide upper limits for VHS, UKIDSS (need coverage information for that), available `here <https://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/>`_
 * ☐ improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.
 
 To add more surveys, contributions are welcome.
