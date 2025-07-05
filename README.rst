@@ -74,17 +74,24 @@ Usage
 
 Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine.
 
+Log in to datalab::
+
+	datalab login
+
+Then run::
+
+	make <yourfilename>_all_lite.fits
+
 If for example the input file is dr16QWX_selection.fits, then run::
 
 	make dr16QWX_selection_all_lite.fits
 
 Files can also be outside the RainbowLasso directory.
-
-In that case you can run from the RainbowLasso directory::
+In that case you can either run from the RainbowLasso directory::
 
 	$ make path/to/data/dr16QWX_selection_all_lite.fits
 
-Or you can run from the data directory::
+Or you can run from the directory where the file is::
 
 	$ make -C path/to/RainbowLasso/ $PWD/dr16QWX_selection_all_lite.fits
 
@@ -102,7 +109,15 @@ If you get the following warning::
 
 Then _all.fits has over 1000 columns, and astropy will not be able to read the last columns.
 
-(experimental) If you also want HSC-WIDE fluxes, you can run:
+Additional surveys
+------------------
+
+If you also want SDSS fluxes, you need to put a sciserver username and password
+into a text file ~/.config/sciserver/login.txt:
+
+    username:password
+
+If you also want HSC-WIDE fluxes, you can run:
 
   $ make path/to/data/dr16QWX_selection_allHSC_lite.fits
 

@@ -139,7 +139,7 @@ def main(query_radius, input_table, output_table):
     try:
         Authentication.login(*open(os.path.expanduser('~/.config/sciserver/login.txt')).readline().strip().split(':'))
     except FileNotFoundError:
-        print("Could not log into sciserver, not filling in SDSS information")
+        print("Could not log into sciserver (need '~/.config/sciserver/login.txt' file with username:password), SDSS columns will be NaN.")
         tmock = t[['id']]
         for i, band in enumerate('ugriz'):
             tmock['psfMag_' + band] = np.nan
@@ -147,7 +147,7 @@ def main(query_radius, input_table, output_table):
             tmock['aper_' + band] = np.nan
             tmock['aper_' + band + '_err'] = np.nan
         tmock.write(output_table, overwrite=True)
-        print(tmock)
+        #print(tmock)
         return
 
     elements = []
