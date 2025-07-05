@@ -112,7 +112,7 @@ Then _all.fits has over 1000 columns, and astropy will not be able to read the l
 Additional surveys
 ------------------
 
-If you also want SDSS fluxes, you need to put a sciserver username and password
+If you want SDSS fluxes, you need to put a sciserver username and password
 into a text file ~/.config/sciserver/login.txt:
 
     username:password
