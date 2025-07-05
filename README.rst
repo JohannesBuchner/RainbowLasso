@@ -89,7 +89,7 @@ Usage
 
 1. Make sure RainbowLasso is downloaded and up to date (see above).
 
-2. Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine.
+2. Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine. See dr16QWX_selection.fits for an example .
 
 3. Log in to datalab::
 
