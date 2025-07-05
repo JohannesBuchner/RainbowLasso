@@ -69,16 +69,33 @@ which you could get with something like::
 
 * dustmaps need to be `set up and SFD downloaded <https://github.com/gregreen/dustmaps/?tab=readme-ov-file#getting-the-data>`_
 
+
+Download RainbowLasso
+---------------------
+
+Get RainbowLasso onto your computer::
+
+	git clone git@github.com:JohannesBuchner/RainbowLasso.git
+	cd RainbowLasso
+
+This directory contains several scripts and the Makefile.
+
+Update RainbowLasso to the latest version::
+
+	git pull
+
 Usage
 -----
 
-Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine.
+1. Make sure RainbowLasso is downloaded and up to date (see above).
 
-Log in to datalab::
+2. Prepare an input fits file with columns 'id', 'RA' and 'DEC'. Additional columns are fine.
+
+3. Log in to datalab::
 
 	datalab login
 
-Then run::
+4. Then run::
 
 	make <yourfilename>_all_lite.fits
 
