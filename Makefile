@@ -285,7 +285,7 @@ DLLONGQARGS := --drop=True --timeout=10000
 
 %_EuclidQ1_noirlab.fits: %_coords.csv
 	datalab mydb_import --table=rbeuclidq1 --data=$^ --append=False
-	datalab query --sql="select id, euclid.* from euclid_q1.object as euclid, mydb://rbeuclidq1 as input WHERE q3c_join(input.ra, input.dec, ukidss.right_ascension, ukidss.declination, 1./60/60)" ${DLLONGQARGS} --out=mydb://rbeuclidq1out
+	datalab query --sql="select id, euclid.* from euclid_q1.object as euclid, mydb://rbeuclidq1 as input WHERE q3c_join(input.ra, input.dec, euclid.right_ascension, euclid.declination, 1./60/60)" ${DLLONGQARGS} --out=mydb://rbeuclidq1out
 	datalab query --sql="select * from mydb://rbeuclidq1out" ${DLLONGQARGS} --fmt=fits --out=$@
 	stilts tpipe in=$@ ifmt=fits omode=count
 	datalab mydb_drop --table=rbeuclidq1 || true
@@ -571,6 +571,28 @@ DLLONGQARGS := --drop=True --timeout=10000
 %_lite.fits: %.fits
 	stilts tpipe in=$^ out=$@ cmd='delcols "adflux*_LS *_LS LU_flux*_LS *_GALEX *_VHS *_UKIDSS *_ALLWISE *_GALEXUL *_HSC_extaper *_HSC psf*_SDSS aper*_SDSS id*_SDSS ra*_SDSS dec*_SDSS"'
 	stilts tpipe in=$@ omode=stats
+
+%_all_lite_EuclidQ1.fits: %_all_lite.fits %_EuclidQ1_noirlab.fits
+	# use information from euclid whether a source is extended
+	# here we use mumax_minus_mag_Euclid<2.3 -- TODO: check Euclid papers for recommended threshold
+	# we do not know the fraction of the galaxy flux that is extended
+	# we assume at least 5% if mumax_minus_mag_Euclid<2.3
+	# this is applied to Euclid flux in the Y band
+	# although it is (?) derived in VIS (which is not included here)
+	stilts tmatch2 matcher=exact find=best1 out=$@ fixcols=all \
+		in1=$< values1=id suffix1= \
+		in2=$*_EuclidQ1_noirlab.fits values2=id suffix2=_Euclid \
+		ocmd='addcol Euclid_NISP_Y "flux_y_sersic_Euclid/1000"' \
+		ocmd='addcol Euclid_NISP_J "flux_j_sersic_Euclid/1000"' \
+		ocmd='addcol Euclid_NISP_H "flux_h_sersic_Euclid/1000"' \
+		ocmd='addcol Euclid_NISP_Y_err "fluxerr_y_sersic_Euclid/1000"' \
+		ocmd='addcol Euclid_NISP_J_err "fluxerr_j_sersic_Euclid/1000"' \
+		ocmd='addcol Euclid_NISP_H_err "fluxerr_h_sersic_Euclid/1000"' \
+		ocmd='addcol is_extended_euclid "mumax_minus_mag_Euclid<2.3&&(decam_z<0.8||decam_r<0.8)&&flux_y_sersic_Euclid<1"' \
+		ocmd='addcol prior_GALflux_Euclid_NISP_Y "is_extended_euclid?Euclid_NISP_Y/20:-99"' \
+		ocmd='addcol prior_GALflux_Euclid_NISP_Y_errlo "is_extended_euclid?Euclid_NISP_Y_err:-99"' \
+		ocmd='addcol prior_GALflux_Euclid_NISP_Y_errhi "1e10"' 
+
 
 %.fits_errors.pdf %.fits_fluxes.pdf: %.fits
 	python3 checkphotometry.py $<
