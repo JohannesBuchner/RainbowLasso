@@ -43,7 +43,7 @@ all:
 		ocmd='addcol prior_GALflux_decam_z "usable_extflux_z?(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"' \
 		ocmd='addcol prior_GALflux_decam_g_errlo "usable_extflux_g?(apfluxext_err_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"' \
 		ocmd='addcol prior_GALflux_decam_r_errlo "usable_extflux_r?(apfluxext_err_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
-		ocmd='addcol prior_GALflux_decam_z_errlo "usable_extflux_z?(apfluxext_err_z_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"' \
+		ocmd='addcol prior_GALflux_decam_z_errlo "usable_extflux_z?(apfluxext_err_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"' \
 		ocmd='addcol prior_GALflux_decam_g_errhi "1e10"' \
 		ocmd='addcol prior_GALflux_decam_r_errhi "1e10"' \
 		ocmd='addcol prior_GALflux_decam_z_errhi "1e10"' \
@@ -352,7 +352,7 @@ ALLOW_POINTLIKE ?= 1
 	# merge everything together and use sensible column names
 	# keep only WISE fluxes when ALLWISE also has a detection there
 	# and if there are no blending issues
-	# check LS fitbits for issues. bits 1 | 4 | 8 | 128 | 512 | 4096 are problematic.
+	# check LS fitbits for issues. bits 1 | 4 | 8 are problematic.
 	#    otherwise delete bands
 	# for check fracin_ columns, and unly use fluxes if large
 	#     correct up error by these values, because we may miss 10% of the flux
