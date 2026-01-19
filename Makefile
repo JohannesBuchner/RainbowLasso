@@ -245,7 +245,7 @@ galex_ais_ctrs_ebv.fits: galexebv.py galex_ais_ctrs.fits
 		ocmd='addcol WISE4 "W4mag>0 ? (pow(10, -(W4mag+6.620+48.60)/(2.5)))*1e26: -99."' \
 		ocmd='addcol WISE4_err "e_W4mag>0 ? (pow(10, -(W4mag-e_W4mag+6.620+48.60)/(2.5)))*1e26-WISE4: -99."' \
 
-DLLONGQARGS := --drop=True --timeout=10000
+DLLONGQARGS := --drop=True --timeout=100000
 
 %_VHS_noirlab.fits: %_coords.csv
 	datalab mydb_import --table=rblvhs --data=$^ --append=False
