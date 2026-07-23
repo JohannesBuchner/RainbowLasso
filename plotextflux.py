@@ -12,6 +12,8 @@ import astropy.io.fits as pyfits
 from io import BytesIO
 import os
 from photutils.aperture import aperture_photometry, CircularAperture
+from uncertainties import unumpy as unp
+
 
 def get_image_center(input_img):
     img = np.array(input_img)
@@ -81,11 +83,11 @@ def download_psf_image(ra, dec, band, layer):
     response = my_session.get(url, auth=auth)
     print(url, response.status_code)
     f = pyfits.open(BytesIO(response.content))[0]
-    center_header = x0, y0 = (-(f.header['CRVAL1A']), -(f.header['CRVAL2A']))
+    # center_header = x0, y0 = (-(f.header['CRVAL1A']), -(f.header['CRVAL2A']))
     image = np.array(f.data[::-1,:])
     nx, ny = image.shape[0], image.shape[1]
     y0, x0 = np.unravel_index(image.argmax(), image.shape)
-    center = x0, y0
+    # center = x0, y0
     print(nx, ny, x0, y0, (nx - 1)/2 - x0, (ny - 1)/2 - y0)
     if (nx - 1)/2 == x0 - 1:
         image = image[:-1,:]
@@ -100,8 +102,8 @@ def download_psf_image(ra, dec, band, layer):
     #image = image[:-2, 2:]
     return image
 
-def download_fits_image(ra, dec, band, layer):
-    url = f'https://hsc-release.mtk.nao.ac.jp/das_cutout/pdr3/cgi-bin/cutout?ra={ra}&dec={dec}&sw=0.001&sh=0.001&type=coadd&image=on&filter=HSC-{band.upper()}&tract=&rerun=pdr3_wide'
+def download_fits_image(ra, dec, band, layer, side=0.001):
+    url = f'https://hsc-release.mtk.nao.ac.jp/das_cutout/pdr3/cgi-bin/cutout?ra={ra}&dec={dec}&sw={side}&sh={side}&type=coadd&image=on&filter=HSC-{band.upper()}&tract=&rerun=pdr3_wide'
     print(url)
     response = my_session.get(url, auth=auth)
     print(url, response.status_code)
@@ -112,15 +114,18 @@ def download_fits_image(ra, dec, band, layer):
 def plot_image(ax, pil_img):
     img = np.array(pil_img)
     nx, ny = img.shape[0] - 1, img.shape[1] - 1
-    ax.imshow(img)
+    ax.imshow(img - np.nanmax(img), vmin=-4, vmax=0, cmap='RdYlGn')
     ax.set_yticks([])
     ax.set_xticks([])
     #ax.plot([nx / 2 - 4, nx / 2 - 10], [ny / 2, ny / 2])
     #ax.plot([nx / 2 + 10, nx / 2 + 4], [ny / 2, ny / 2])
     ax.plot([nx / 2 + 10, nx / 2 + 4], [ny / 2, ny / 2], color='white', lw=0.4)
     ax.plot([nx / 2 - 4, nx / 2 - 10], [ny / 2, ny / 2], color='white', lw=0.4)
-    ax.plot([nx / 2, nx / 2], [ny / 2 + 10, ny / 2 + 4], color='white', lw=0.4)
-    ax.plot([nx / 2, nx / 2], [ny / 2 - 4, ny / 2 - 10], color='white', lw=0.4)
+    ax.plot([nx / 2, nx / 2], [ny / 2 + 12, ny / 2 + 4], color='white', lw=0.4)
+    ax.plot([nx / 2, nx / 2], [ny / 2 - 4, ny / 2 - 12], color='white', lw=0.4)
+    ax.set_xticks([nx / 2 - 3 / arcsec_per_px, nx / 2, nx / 2 + 3 / arcsec_per_px])
+    ax.set_xticklabels([-3, 0, 3])
+    ax.set_xlim(0, nx)
 
 def monotonic_floodfill(array, start_pos):
     """
@@ -179,9 +184,9 @@ def monotonic_floodfill(array, start_pos):
     return array
 
 # cumulative area-normalised:
-#AP_UNITS = 'mJy / arcsec$^2$'
+AP_UNITS = 'mJy / arcsec$^2$'
 # differential:
-AP_UNITS = 'mJy'
+#AP_UNITS = 'mJy'
 
 def plot_aperture_flux_model(ax, radius, apfluxes, plot_areas, **kwargs):
     # cumulative style:
@@ -194,40 +199,40 @@ def plot_aperture_flux_model(ax, radius, apfluxes, plot_areas, **kwargs):
     #aper_areas = np.diff(np.array([0] + list(plot_areas)))
     return ax.plot(
         radius,
-        np.diff(np.array([0] + list(apfluxes))),
+        np.diff(np.array([0] + list(apfluxes))) / plot_areas,
         **kwargs)
 
 def plot_aperture_flux_data(ax, x, y, yerr, plot_areas, **kwargs):
-    # cumulative style:
-    #return ax.errorbar(
-    #    x=x, y=np.array(y), yerr=np.array(yerr),
-    #    **kwargs)
-    # area-normalised cumulative style:
-    #return ax.errorbar(
-    #    x=x, y=np.array(y) / plot_areas, yerr=np.array(yerr) / plot_areas,
-    #    **kwargs)
-    # differential style
-    #aper_areas = np.diff(np.array([0] + list(plot_areas)))
+    # Create uncertainty objects
+    y_u = unp.uarray(y, yerr)
+
+    # Compute annular fluxes
+    y_ann = np.diff(unp.uarray([0.0], [0.0]).tolist() + list(y_u)) / plot_areas
+
     return ax.errorbar(
         x=x,
-        y=np.diff(np.array([0] + list(y))),
-        yerr=np.diff(np.array([0] + list(yerr))),
-        **kwargs)
+        y=unp.nominal_values(y_ann),
+        yerr=unp.std_devs(y_ann),
+        **kwargs
+    )
 
 table = Table.read(sys.argv[1]).filled()
 
+arcsec_per_px_LS10 = 0.262
 if 'y_apertureflux_118_flux' in table.colnames:
     layer = 'hsc-dr3'
     bands = 'grizy'
     annuli = np.array([10, 15, 20, 30, 40, 57, 84, 118])
     radius = annuli / 10.0 / 2
     areas = np.pi * radius**2
+    arcsec_per_px = 0.17
 elif 'apflux_g_1' in table.colnames:
     layer = 'ls-dr10-grz'
     bands = 'grz'
     annuli = np.arange(1, 9)
     radius = np.array([0.5, 0.75, 1.0, 1.5, 2.0, 3.5, 5.0, 7.0])
     areas = np.pi * radius**2
+    arcsec_per_px = 0.262
 else:
     assert False, table.colnames
 
@@ -248,67 +253,84 @@ else:
 plot_areas = areas
 for obj in objs[:20]:
     fig, axs = plt.subplots(
-        len(bands), 5, figsize=(8, 1 + 2.5 * len(bands)),
-        gridspec_kw=dict(hspace=0, wspace=0), sharex='col', sharey=False
+        len(bands), 5, figsize=(8, 1 + 1.4 * len(bands)),
+        gridspec_kw=dict(hspace=0, wspace=0), sharex='col', sharey=False,
     )
     for i, band in enumerate(bands):
         #if obj[band + '_inputcount_value'] == 0:
         #    continue
-        plot_image(axs[i,1], download_image(obj['ra'], obj['dec'], band, layer))
+        if band in 'grzy':
+            img = download_image(obj['ra'], obj['dec'], band, layer)
+            # img = download_fits_image(obj['ra'], obj['dec'], band, layer, side=60./3600)
+            print(np.shape(img))
+            plot_image(axs[i,0], img) # np.array(img)[14:-14,14:-14])
+            textcolor = 'white'
+        else:
+            axs[i,0].set_yticklabels([])
+            textcolor = 'black'
         fits_apertures = None
         psf_apertures = None
+        axs[0,4].set_title("Surface brightness")
+        axs[0,0].set_title("60'' FOV")
+        axs[0,1].set_title("7'' FOV")
+        axs[0,2].set_title("Monotonic Image")
+        axs[0,3].set_title("PSF")
         try:
             if obj[band + '_inputcount_value'] > 0:
-                origfitsimage, center = get_image_center(download_fits_image(obj['ra'], obj['dec'], band, layer))
+                origfitsimage, center = get_image_center(download_fits_image(obj['ra'], obj['dec'], band, layer, side=3.6/3600))
                 psfimage, psfcenter = get_image_center(download_psf_image(obj['ra'], obj['dec'], band, layer))
                 fitsimage = monotonic_floodfill(origfitsimage.copy(), center)
                 #fitsimage = origfitsimage.copy()
-                plot_image(axs[i,2], np.log10(origfitsimage))
-                plot_image(axs[i,3], np.log10(fitsimage))
-                plot_image(axs[i,4], np.log10(psfimage))
-                axs[i,2].text(
-                    0.02, 0.98, 'FITS image', size=6,
-                    color='white', transform=axs[i,2].transAxes, va='top')
-                axs[i,3].text(
-                    0.02, 0.98, 'floodfill', size=6,
-                    color='white', transform=axs[i,2].transAxes, va='top')
-                axs[i,4].text(
-                    0.02, 0.98, 'PSF', size=6,
-                    color='white', transform=axs[i,3].transAxes, va='top')
-                arcsec_per_px = 0.17
+                plot_image(axs[i,1], np.log10(origfitsimage))
+                plot_image(axs[i,2], np.log10(fitsimage))
+                plot_image(axs[i,3], np.log10(psfimage))
+                #axs[i,2].text(
+                #    0.5, 0.98, 'FITS image', size=6,
+                #    color='white', transform=axs[i,2].transAxes, va='top', ha='center')
+                #axs[i,3].text(
+                #    0.5, 0.98, 'floodfill', size=6,
+                #    color='white', transform=axs[i,3].transAxes, va='top', ha='center')
+                #axs[i,4].text(
+                #    0.5, 0.98, 'PSF', size=6,
+                #    color='white', transform=axs[i,4].transAxes, va='top', ha='center')
                 fits_apertures = get_aperture_curve_from_image(
-                    fitsimage, center, radius / arcsec_per_px, axs[i,3], edgecolor='white', fill=False, linewidth=0.1) / arcsec_per_px**2 * 1.7
+                    fitsimage, center, radius / arcsec_per_px, axs[i,2], edgecolor='k', fill=False, linewidth=0.1, alpha=0.5) / arcsec_per_px**2 * 1.7
                 psf_apertures = get_aperture_curve_from_image(
-                    psfimage, psfcenter, radius / arcsec_per_px, axs[i,4], edgecolor='white', fill=False, linewidth=0.1) / arcsec_per_px**2 * 1.7
+                    psfimage, psfcenter, radius / arcsec_per_px, axs[i,3], edgecolor='k', fill=False, linewidth=0.1, alpha=0.5) / arcsec_per_px**2 * 1.7
         except OSError as e:
             print('ERROR:', e)
             pass
 
-        diagnostic_str = f"{obj['ra']:6f} {obj['dec']:6f}\n"
+        diagnostic_str = "" # f"{obj['ra']:6f} {obj['dec']:6f}\n"
         if layer == 'hsc-dr3':
-            diagnostic_str += f"#:{obj[band + '_inputcount_value']*1}[{obj[band + '_inputcount_flag']*1}] bkg:{obj[band + '_localbackground_flag']*1}\n"
-            diagnostic_str += f"pix:{obj[band + '_pixelflags']*1}: bad:{obj[band + '_pixelflags_bad']*1}  edge:{obj[band + '_pixelflags_edge']*1}\n"
-            diagnostic_str += f"sat:{obj[band + '_pixelflags_saturated']*1}: ctr:{obj[band + '_pixelflags_saturatedcenter']*1}\n"
-            diagnostic_str += f"flag:{obj[band + '_apertureflux_10_flag']*1}:{obj[band + '_apertureflux_40_flag']*1} trunc:{obj[band + '_apertureflux_10_flag_aperturetruncated']*1}:{obj[band + '_apertureflux_40_flag_aperturetruncated']*1}\n"
-            diagnostic_str += f"PSF:{obj[band + '_kronflux_psf_radius']:.2f} {obj[band + '_sdssshape_psf_shape11']**0.5:.2f}/{obj[band + '_sdssshape_psf_shape12']/obj[band + '_sdssshape_psf_shape11']**0.5/obj[band + '_sdssshape_psf_shape22']**0.5:.2f}/{obj[band + '_sdssshape_psf_shape22']**0.5:.2f} flag:{obj[band + '_kronflux_flag_bad_shape_no_psf']*1}\n"
+            #diagnostic_str += f"#:{obj[band + '_inputcount_value']*1}[{obj[band + '_inputcount_flag']*1}] bkg:{obj[band + '_localbackground_flag']*1}\n"
+            #diagnostic_str += f"pix:{obj[band + '_pixelflags']*1}: bad:{obj[band + '_pixelflags_bad']*1}  edge:{obj[band + '_pixelflags_edge']*1}\n"
+            diagnostic_str += f"flags: sat:{obj[band + '_pixelflags_saturated']*1}: satctr:{obj[band + '_pixelflags_saturatedcenter']*1} \n"
+            diagnostic_str += f"    aper:{obj[band + '_apertureflux_10_flag']*1}:{obj[band + '_apertureflux_40_flag']*1} trunc:{obj[band + '_apertureflux_10_flag_aperturetruncated']*1}:{obj[band + '_apertureflux_40_flag_aperturetruncated']*1}\n"
+            diagnostic_str += f"PSF radius:{obj[band + '_kronflux_psf_radius']:.2f}''" # {obj[band + '_sdssshape_psf_shape11']**0.5:.2f}/{obj[band + '_sdssshape_psf_shape12']/obj[band + '_sdssshape_psf_shape11']**0.5/obj[band + '_sdssshape_psf_shape22']**0.5:.2f}/{obj[band + '_sdssshape_psf_shape22']**0.5:.2f} flag:{obj[band + '_kronflux_flag_bad_shape_no_psf']*1}\n"
         else:
             diagnostic_str += f"mask:{obj['fracmasked_' + band]*100:.1f}% in:{obj['fracin_' + band]*100:.1f}% flux:{obj['fracflux_' + band]*100:.1f}%\n"
             diagnostic_str += f"mask:{obj['maskbits']} fit:{obj['fitbits']}"
-        axs[i,1].text(
+        axs[i,0].text(
             0.02, 0.98, diagnostic_str, size=6,
-            color='white', transform=axs[i,1].transAxes, va='top')
-        ax = axs[i,0]
-        ax.set_ylabel(f'{band} flux [{AP_UNITS}]')
+            color=textcolor, transform=axs[i,1].transAxes, va='top')
+        axs[-1,0].set_xticks([128 - 20 / arcsec_per_px, 128, 128 + 20 / arcsec_per_px])
+        axs[-1,0].set_xticklabels([-20, 0, 20])
+        axs[i,0].set_ylabel(f'{band}', size=20, rotation=0, ha='right', va='center')
+        ax = axs[i,-1]
+        ax.set_ylabel(f'{band} [{AP_UNITS}]')
         ax.set_xlabel('Radius [arcsec]')
         if layer == 'hsc-dr3':
+            flux_factor = 1. / 1000
             apflux = np.array([obj['%s_apertureflux_%d_flux' % (band, i)] for i in annuli])
             apflux_err = np.array([obj['%s_apertureflux_%d_fluxerr' % (band, i)] for i in annuli])
         else:
+            flux_factor = 1
             apflux = np.array([obj['apflux_%s_%d' % (band, i)] for i in annuli])
             apflux_err = np.array([obj['apflux_ivar_%s_%d' % (band, i)]**-0.5 for i in annuli])
         if not np.isfinite(apflux_err).any():
             continue
-        plot_aperture_flux_data(ax, x=radius, y=apflux, yerr=apflux_err, plot_areas=plot_areas, label='Total', ls='--', color='gray')
+        src_cat = plot_aperture_flux_data(ax, x=radius, y=apflux * flux_factor, yerr=apflux_err * flux_factor, plot_areas=plot_areas, label='src (cat)', ls='--', color='gray')
 
         # Gaussian PSF, convert PSF FWHM to sigma
         if layer == 'hsc-dr3':
@@ -330,7 +352,7 @@ for obj in objs[:20]:
         # match gaussian PSF in the center
         gaussflux = scipy.stats.rayleigh.cdf(radius, loc=0, scale=sigma)
         gaussflux2 = gaussflux # * 0.85 + 0.15 * scipy.stats.rayleigh.cdf(radius, loc=0, scale=sigma * 3.0)
-        plot_aperture_flux_model(ax, radius, apflux[0] * gaussflux / gaussflux[0], plot_areas=plot_areas, label='PSF', color='pink', ls=':')
+        #psf_cat = plot_aperture_flux_model(ax, radius, apflux[0] * gaussflux / gaussflux[0] * flux_factor, plot_areas=plot_areas, label='PSF (cat)', color='pink', ls=':')
         # bkgflux = (apflux[-2] - apflux[-1]) / (areas[-2] - areas[-1]) * areas
         # match flux in outer-most annulus as a flat background
         # ax.plot(radius, (apflux[0] / gaussflux[0] * gaussflux + bkgflux) / plot_areas, label='PSF+bkg')
@@ -340,18 +362,22 @@ for obj in objs[:20]:
             extflux_err = [obj['apfluxext_err_%s_%d' % (band, i)] for i in annuli]
             # print(gaussflux, apflux[0], extflux)
 
-            plot_aperture_flux_data(ax, x=radius, y=extflux, plot_areas=plot_areas, yerr=np.array(extflux_err) / plot_areas, label='Extended', color='green')
-        ax.set_xlim(0, None)
+            plot_aperture_flux_data(ax, x=radius, y=extflux * flux_factor, plot_areas=plot_areas, yerr=np.array(extflux_err), label='Extended', color='green')
+        ax.set_xlim(0, ax.get_xlim()[1])
+        ax.set_xticks([0, 2, 4,])
+        ax.yaxis.set_label_position("right")
+        ax.yaxis.tick_right()
         ymin, ymax = ax.get_ylim()
-        ax.set_ylim(max(ymin, -ymax*0.05), ymax)
+        #ax.set_ylim(max(ymin, -ymax*0.05), ymax)
+        ax.set_ylim(ymax * 1e-4, ymax)
+        ax.set_yscale('log')
 
         if psf_apertures is not None:
-            plot_aperture_flux_model(ax, radius, psf_apertures / psf_apertures[0] * fits_apertures[0], plot_areas=plot_areas, label='imgPSF', color='red')
+            psf_img = plot_aperture_flux_model(ax, radius, psf_apertures / psf_apertures[0] * fits_apertures[0] * flux_factor, plot_areas=plot_areas, label='PSF (img)', color='red')
             np.savetxt(f'psfapertures_{obj["id"]}_{band}.txt', np.transpose([radius, psf_apertures / psf_apertures[0], plot_areas]))
         if fits_apertures is not None:
-            plot_aperture_flux_model(ax, radius, fits_apertures, plot_areas=plot_areas, label='img', color='k')
-
+            src_img = plot_aperture_flux_model(ax, radius, fits_apertures * flux_factor, plot_areas=plot_areas, label='src (img)', color='k')
     print(f'writing "extflux_{obj["id"]}.pdf"')
-    axs[0,0].legend(fontsize=8)
+    ax.legend(fontsize=8, loc='upper right', prop=dict(size=8))
     plt.savefig(f'extflux_{obj["id"]}.pdf')
     plt.close()
