@@ -8,5 +8,4 @@ scipy
 tqdm
 uncertainties
 pillow
-astro-datalab
 dustmaps
