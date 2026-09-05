@@ -1,0 +1,12 @@
+numpy
+matplotlib
+joblib
+astropy
+requests
+requests_cache
+scipy
+tqdm
+uncertainties
+pillow
+astro-datalab
+dustmaps
