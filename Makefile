@@ -1,4 +1,4 @@
-.PHONY: all
+.PHONY: all test
 .SUFFIXES: # no built-in rules
 .SECONDARY: # do not delete intermediate products
 
@@ -620,3 +620,11 @@ ALLOW_POINTLIKE ?= 1
 .SECONDARY:
 .PRECIOUS:
 
+release: ## package and upload a release
+	echo "releases are directly through the git repo"
+
+test:
+	$(MAKE) -B dr16QWX_selection_all_lite.fits
+
+install: ## install the required packages 
+	pip install requests_cache astropy numpy pandas tqdm astro-datalab uncertainties dustmaps
