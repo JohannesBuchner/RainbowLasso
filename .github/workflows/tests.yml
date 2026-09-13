@@ -14,10 +14,6 @@ jobs:
         with:
           python-version: "3.x"
       - name: Install dependencies
-        run: pip install -e ".[dev]"
+        run: make install
       - name: Run tests
-        run: make coverage
-      - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        run: make test
