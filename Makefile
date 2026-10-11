@@ -623,8 +623,10 @@ ALLOW_POINTLIKE ?= 1
 release: ## package and upload a release
 	echo "releases are directly through the git repo"
 
-test:
-	$(MAKE) -B dr16QWX_selection_all_lite.fits
+# the full data pipeline (requires stilts and NOIRLab login):
+# $(MAKE) -B dr16QWX_selection_all_lite.fits
+test: ## smoke-test the lite catalogue filtering with astropy (no stilts/noirlab needed)
+	python3 test_lite.py
 
 install: ## install the required packages 
 	pip install requests_cache astropy numpy pandas tqdm astro-datalab uncertainties dustmaps
