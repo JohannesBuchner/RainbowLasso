@@ -3,7 +3,6 @@
 Retrieves aperture fluxes from HSC survey via noirlab.
 """
 
-import csv
 import io
 import json
 import os
@@ -12,7 +11,6 @@ import time
 
 import astropy.io.fits as pyfits
 import requests
-import tqdm
 from astropy.table import Table, vstack
 
 import joblib

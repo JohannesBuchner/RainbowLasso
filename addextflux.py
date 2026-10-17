@@ -1,3 +1,4 @@
+"""Adds external aperture fluxes (with uncertainties) columns to a catalogue."""
 import numpy as np
 import sys
 from astropy.table import Table

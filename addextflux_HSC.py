@@ -1,3 +1,4 @@
+"""Computes HSC external aperture fluxes per object, with diagnostic plots."""
 import os
 import sys
 from io import BytesIO

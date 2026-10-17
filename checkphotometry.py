@@ -1,3 +1,4 @@
+"""Plots fluxes and errors of a photometric catalogue into diagnostic PDFs."""
 import matplotlib.pyplot as plt
 from astropy.table import Table
 import sys

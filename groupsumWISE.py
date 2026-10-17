@@ -1,6 +1,4 @@
-"""
-
-"""
+"""Sums the matched AllWISE fluxes per source into a single measurement."""
 import numpy as np
 from astropy.table import Table
 import sys

@@ -1,3 +1,4 @@
+"""Plots the external flux measurements of each object into PDFs."""
 import numpy as np
 import sys
 from astropy.table import Table

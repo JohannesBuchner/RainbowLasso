@@ -1,4 +1,4 @@
-.PHONY: all test
+.PHONY: all test lint
 .SUFFIXES: # no built-in rules
 .SECONDARY: # do not delete intermediate products
 
@@ -619,6 +619,11 @@ ALLOW_POINTLIKE ?= 1
 
 .SECONDARY:
 .PRECIOUS:
+
+lint: ## check style of the python scripts with flake8, pycodestyle and pydocstyle
+	flake8 *.py
+	pycodestyle *.py
+	pydocstyle *.py
 
 release: ## package and upload a release
 	echo "releases are directly through the git repo"

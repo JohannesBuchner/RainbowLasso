@@ -1,9 +1,7 @@
-import numpy as np
-from astropy.units import deg
+"""Adds the SFD E(B-V) values to the GALEX catalogue centres table."""
 from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from dustmaps.sfd import SFDQuery
-import tqdm
 
 sfd = SFDQuery()
 
