@@ -168,15 +168,15 @@ all:
 		ocmd='addcol A_lam_fuv "A_v>0 ? A_v*(-0.3459882441104826 + 9.173790513029425/3.1): -99."' \
 		ocmd='addcol A_lam_nuv "A_v>0 ? A_v*(0.6743929174392934 + 1.2480067831962458/3.1): -99."' \
 		\
-		ocmd='addcol FUV "FUVmag>0&&FUVmag<20.8 ? FUVmag-(8.286*EBmV): -99."' \
-		ocmd='addcol NUV "NUVmag>0&&NUVmag<19.9 ? NUVmag-(8.621*EBmV): -99."' \
-		ocmd='addcol e_FUV "FUVmag>0&&FUVmag<20.8 ?e_FUVmag:-99"' \
-		ocmd='addcol e_NUV "NUVmag>0&&NUVmag<19.9 ?e_NUVmag:-99"' \
+		ocmd='addcol FUV "FUVmag>0&&FUVmag<19.9 ? FUVmag-(8.286*EBmV): -99."' \
+		ocmd='addcol NUV "NUVmag>0&&NUVmag<20.8 ? NUVmag-(8.621*EBmV): -99."' \
+		ocmd='addcol e_FUV "FUVmag>0&&FUVmag<19.9 ?e_FUVmag:-99"' \
+		ocmd='addcol e_NUV "NUVmag>0&&NUVmag<20.8 ?e_NUVmag:-99"' \
 		\
-		ocmd='addcol FUV_aper "FUVmag>0&&FUVmag<20.8 ? FUV_4+18.82-(8.286*EBmV): -99."' \
-		ocmd='addcol NUV_aper "NUVmag>0&&NUVmag<19.9 ? NUV_4+20.08-(8.621*EBmV): -99."' \
-		ocmd='addcol e_FUV_aper "FUVmag>0&&FUVmag<20.8 ? e_FUV_4:-99"' \
-		ocmd='addcol e_NUV_aper "NUVmag>0&&NUVmag<19.9 ? e_NUV_4:-99"' \
+		ocmd='addcol FUV_aper "FUVmag>0&&FUVmag<19.9 ? FUV_4+18.82-(8.286*EBmV): -99."' \
+		ocmd='addcol NUV_aper "NUVmag>0&&NUVmag<20.8 ? NUV_4+20.08-(8.621*EBmV): -99."' \
+		ocmd='addcol e_FUV_aper "FUVmag>0&&FUVmag<19.9 ? e_FUV_4:-99"' \
+		ocmd='addcol e_NUV_aper "NUVmag>0&&NUVmag<20.8 ? e_NUV_4:-99"' \
 		\
 		ocmd='addcol Fflux_aper "e_FUV_aper>0 ? pow(10, -0.4*FUV_aper)*1e6*3631 : -99."' \
 		ocmd='addcol Nflux_aper "e_NUV_aper>0 ? pow(10, -0.4*NUV_aper)*1e6*3631 : -99."' \
@@ -624,6 +624,10 @@ lint: ## check style of the python scripts with flake8, pycodestyle and pydocsty
 	flake8 *.py
 	pycodestyle *.py
 	pydocstyle *.py
+
+docs: ## extract Makefile segments and build the sphinx documentation
+	python3 makefilesegments.py
+	$(MAKE) -C doc html
 
 release: ## package and upload a release
 	echo "releases are directly through the git repo"
