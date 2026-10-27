@@ -4,9 +4,11 @@
 GALEX upper limits
 ======================
 
-For sources without a GALEX detection, the pipeline estimates a 3 sigma
-NUV upper limit from the GALEX AIS coverage and the Milky Way dust
-column (no FUV upper limit is provided, see :doc:`galex`).
+For sources *without any GALEX detection*, the pipeline estimates a NUV
+upper limit from the GALEX AIS coverage and the Milky Way dust column.
+This is a separate mechanism from the GALEX catalog match (which
+provides no upper limits at all, see :doc:`galex`); no FUV upper limit
+is provided.
 
 Coverage table
 --------------
@@ -31,11 +33,10 @@ is scaled up with the Galactic extinction towards the tile center:
    :language: make
 
 The rule computes ``NUV_fluxlim = 0.02 * 10^(EBV_min * 1.35)`` (mJy),
-i.e. the 3 sigma sensitivity (0.02 mJy) degraded by the dust
-transmission. In the final merge (see :doc:`legacysurvey` and
-:doc:`outputs`), sources without a GALEX detection get
-``NUV = 3 * NUV_fluxlim`` (a 3 sigma upper limit, negative error
-convention) and ``NUV_err = -NUV``.
+i.e. the base NUV sensitivity (0.02 mJy) degraded by the dust
+transmission. In the final merge (see :doc:`outputs`), sources without
+a GALEX detection get ``NUV = 3 * NUV_fluxlim`` (a 3 sigma upper limit,
+negative error convention) and ``NUV_err = -NUV``.
 
 References
 ----------

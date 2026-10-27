@@ -50,20 +50,25 @@ arcsec radius aperture, ``FUV_4``/``NUV_4``), converted to AB
 magnitudes by adding the AB zeropoints (+18.82 in FUV, +20.08 in NUV),
 alongside the total magnitudes.
 
-No upper limits
----------------
+No upper limits from the catalog match
+--------------------------------------
 
-GALEX upper limits are deliberately *not* provided, because:
+The GALEX catalog match itself provides *no* upper limits, because:
 
 * only no-entry cases (no match within the search radius) would be
-  suitable;
+  suitable as an upper limit;
 * in the Milky Way, the upper limit would need to be corrected up, and
   thus be drastically weaker (higher);
 * GALEX is very shallow already, so those upper limits are probably not
   so informative.
 
-Instead, for sources without a GALEX detection, a 3 sigma NUV upper
-limit is estimated from the survey coverage, see :doc:`galex-coverage`.
+Instead, a 3 sigma NUV upper limit for sources *without any GALEX
+detection* is estimated from the survey coverage. This is a separate
+mechanism (see :doc:`galex-coverage`): it uses the depth of the nearest
+AIS tile, not the GALEX measurement at the source position. In the
+final merge, sources with a GALEX detection get the measured flux, and
+sources without get ``NUV = 3 * NUV_fluxlim`` (NUV only; FUV is set to
+the missing value).
 
 Output columns
 --------------

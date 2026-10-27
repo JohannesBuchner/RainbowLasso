@@ -8,19 +8,39 @@ RainbowLasso - reliable ultraviolet to infrared photometry
    readme
    installation
    apertures
+   outputs
+   TODO
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Data providers:
+
    noirlab
    vizier
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Data sources:
+
    galex
-   galex-coverage
    legacysurvey
    allwise
    vhs
    ukidss
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Upper limit sources:
+
+   galex-coverage
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Optional data sources:
+
    sdss
    hsc
    euclid
-   outputs
-   TODO
 
 
 

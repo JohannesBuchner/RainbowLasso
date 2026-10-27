@@ -629,6 +629,21 @@ docs: ## extract Makefile segments and build the sphinx documentation
 	python3 makefilesegments.py
 	$(MAKE) -C doc html
 
+gh-pages: docs ## update the orphan gh-pages branch with the built documentation
+	rm -rf doc/_ghpages
+	git clone -q --no-local . doc/_ghpages
+	cd doc/_ghpages && (git checkout -q gh-pages 2>/dev/null || git checkout -q --orphan gh-pages)
+	cd doc/_ghpages && (git rm -rfq . 2>/dev/null || true)
+	cd doc/_ghpages && find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+	cd doc/_ghpages && cp -r ../_build/html/. .
+	cd doc/_ghpages && rm -rf .doctrees .buildinfo
+	cd doc/_ghpages && touch .nojekyll
+	cd doc/_ghpages && git add -A
+	cd doc/_ghpages && git diff --cached --quiet || git commit -qm "update doc"
+	cd doc/_ghpages && git push -q origin gh-pages
+	rm -rf doc/_ghpages
+	@echo "gh-pages branch updated; publish with: git push -f origin gh-pages"
+
 release: ## package and upload a release
 	echo "releases are directly through the git repo"
 
