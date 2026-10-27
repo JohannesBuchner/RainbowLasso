@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Output files &#8212; RainbowLasso  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'outputs';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://johannesbuchner.github.io/RainbowLasso/outputs.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TODO" href="TODO.html" />
+    <link rel="prev" title="Matched apertures" href="apertures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="RainbowLasso  documentation - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="RainbowLasso  documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">RainbowLasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apertures.html">Matched apertures</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TODO.html">TODO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data providers:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="noirlab.html">NOAO Data Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vizier.html">CDS / VizieR</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex.html">GALEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacysurvey.html">Legacy Survey (optical)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhs.html">VISTA Hemisphere Survey (VHS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ukidss.html">UKIDSS (near-infrared)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Upper limit sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex-coverage.html">GALEX upper limits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sdss.html">SDSS (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hsc.html">HSC-WIDE (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="euclid.html">Euclid Q1 (optional)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/outputs.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Output files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-convention">Column convention</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-columns">Flux columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-naming">Band naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostic-columns">Diagnostic columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-large-files">Reading large files</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="output-files">
+<span id="outputs"></span><h1>Output files<a class="headerlink" href="#output-files" title="Link to this heading">#</a></h1>
+<p>The pipeline produces a series of FITS files next to the input catalog.
+For an input <code class="docutils literal notranslate"><span class="pre">myfilename.fits</span></code>, the main products are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>file</p></th>
+<th class="head"><p>contents</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_all_lite.fits</span></code></p></td>
+<td><p>reduced merged catalog, ready for use with GRAHSP/CIGALE</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_all.fits</span></code></p></td>
+<td><p>merged catalog with all columns from the input catalogs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_all_extflux.fits</span></code></p></td>
+<td><p>merged catalog with galaxy total-flux priors (<code class="docutils literal notranslate"><span class="pre">prior_GALflux_decam_*</span></code>) from LS apertures</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_all_extflux_withEuclid.fits</span></code></p></td>
+<td><p>with the priors overridden by Euclid Q1 constraints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_HSCall.fits</span></code></p></td>
+<td><p>merged catalog using HSC-WIDE (requires both LS and HSC detections)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_HSCall_extflux.fits</span></code></p></td>
+<td><p>with galaxy total-flux priors from HSC apertures</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">myfilename_withSDSS.fits</span></code></p></td>
+<td><p>merged catalog with SDSS magnitudes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Additionally, intermediate files are kept (<code class="docutils literal notranslate"><span class="pre">.SECONDARY</span></code> in the
+Makefile): <code class="docutils literal notranslate"><span class="pre">myfilename_coords.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">myfilename_GALEX.fits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">myfilename_GALEX_UL.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">myfilename_LS_noirlab.fits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">myfilename_LS.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">myfilename_UKIDSS_noirlab.fits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">myfilename_UKIDSS.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">myfilename_VHS_noirlab.fits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">myfilename_VHS.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">myfilename_ALLWISE_all.fits</span></code>,
+<code class="docutils literal notranslate"><span class="pre">myfilename_ALLWISE_sum.fits</span></code>. They document the per-catalog cuts and
+can be deleted to save space.</p>
+<section id="format">
+<h2>Format<a class="headerlink" href="#format" title="Link to this heading">#</a></h2>
+<p>All merged outputs are FITS binary tables with <strong>one row per input
+source</strong>. The input columns (<code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">RA</span></code>, <code class="docutils literal notranslate"><span class="pre">DEC</span></code>, and any additional
+input catalog columns) are copied to the output. Only the id, RA and DEC
+columns are uploaded to the external services; additional input columns
+are not uploaded anywhere.</p>
+<p>Merging is done by exact id match (<code class="docutils literal notranslate"><span class="pre">stilts</span> <span class="pre">tmatchn</span></code>), so missing
+surveys simply leave the respective columns at the missing value.</p>
+</section>
+<section id="column-convention">
+<h2>Column convention<a class="headerlink" href="#column-convention" title="Link to this heading">#</a></h2>
+<section id="flux-columns">
+<h3>Flux columns<a class="headerlink" href="#flux-columns" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>All final flux columns are in <strong>mJy</strong> (1e-26 erg/s/cm^2/Hz), e.g.
+<code class="docutils literal notranslate"><span class="pre">decam_g</span></code>, <code class="docutils literal notranslate"><span class="pre">UV_J</span></code>, <code class="docutils literal notranslate"><span class="pre">WFCAM_Ks</span></code>, <code class="docutils literal notranslate"><span class="pre">WISE1</span></code>, <code class="docutils literal notranslate"><span class="pre">FUV</span></code>, <code class="docutils literal notranslate"><span class="pre">HSC_g</span></code>.</p></li>
+<li><p>Every flux column <code class="docutils literal notranslate"><span class="pre">X</span></code> has an error column <code class="docutils literal notranslate"><span class="pre">X_err</span></code> in the same
+unit.</p></li>
+<li><p>Intermediate per-catalog columns use the internal <strong>LU</strong> unit
+(erg/s/cm^2/Hz; the name goes back to lephare units), e.g.
+<code class="docutils literal notranslate"><span class="pre">LU_flux_g_LS</span></code>, <code class="docutils literal notranslate"><span class="pre">UV_Yapc4flux_VHS</span></code>, <code class="docutils literal notranslate"><span class="pre">Fflux_real_LU_GALEX</span></code>.</p></li>
+<li><p><strong>Missing</strong> information is indicated with the value <strong>-99</strong>.</p></li>
+<li><p><strong>Upper limits</strong>: a <strong>negative error value</strong> indicates that the value
+is a (3 sigma) upper limit, not a detection. For example, a source
+without GALEX detection gets <code class="docutils literal notranslate"><span class="pre">NUV</span> <span class="pre">=</span> <span class="pre">3</span> <span class="pre">*</span> <span class="pre">NUV_fluxlim</span></code> and
+<code class="docutils literal notranslate"><span class="pre">NUV_err</span> <span class="pre">=</span> <span class="pre">-NUV</span></code>; the AllWISE fallback and the WISE3/4 upper limits
+use the same convention. Missing values (-99) can carry either sign
+and should be discarded first.</p></li>
+</ul>
+</section>
+<section id="band-naming">
+<h3>Band naming<a class="headerlink" href="#band-naming" title="Link to this heading">#</a></h3>
+<p>Each telescope/instrument contributes columns named
+<code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;_&lt;band&gt;</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>telescope / instrument</p></th>
+<th class="head"><p>bands</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">decam_</span></code></p></td>
+<td><p>DECam (Legacy Survey)</p></td>
+<td><p>g, r, i, z</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">90prime_</span></code></p></td>
+<td><p>90prime (BASS)</p></td>
+<td><p>g, r</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zd_mosaic</span></code></p></td>
+<td><p>MzLS</p></td>
+<td><p>z (no <code class="docutils literal notranslate"><span class="pre">_&lt;band&gt;</span></code> suffix)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UV_</span></code></p></td>
+<td><p>VISTA (VHS)</p></td>
+<td><p>Y, J, H, K</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WFCAM_</span></code></p></td>
+<td><p>WFCAM (UKIDSS)</p></td>
+<td><p>Y, J, H, Ks</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WISE1..4</span></code></p></td>
+<td><p>WISE (LS deblending or AllWISE)</p></td>
+<td><p>W1, W2, W3, W4</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FUV</span></code>, <code class="docutils literal notranslate"><span class="pre">NUV</span></code></p></td>
+<td><p>GALEX AIS</p></td>
+<td><p>FUV, NUV</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HSC_</span></code></p></td>
+<td><p>Hyper Suprime-Cam (PDR3 WIDE)</p></td>
+<td><p>g, r, i, z, y</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The sky region decides between DECam and BASS/MzLS: sources in the
+BASS/MzLS area (DEC &gt; 32, 90 &lt; RA &lt; 300, column <code class="docutils literal notranslate"><span class="pre">inMzLSBASS</span></code>) get
+<code class="docutils literal notranslate"><span class="pre">90prime_g</span></code>, <code class="docutils literal notranslate"><span class="pre">90prime_r</span></code> and <code class="docutils literal notranslate"><span class="pre">zd_mosaic</span></code> instead of <code class="docutils literal notranslate"><span class="pre">decam_g</span></code>,
+<code class="docutils literal notranslate"><span class="pre">decam_r</span></code>, <code class="docutils literal notranslate"><span class="pre">decam_z</span></code>.</p>
+</section>
+<section id="diagnostic-columns">
+<h3>Diagnostic columns<a class="headerlink" href="#diagnostic-columns" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pointlike</span></code>: whether the source is treated as a point source
+(PSF-like photometry) or extended (aperture photometry).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">goodfitsLS</span></code>, <code class="docutils literal notranslate"><span class="pre">goodfitsg</span></code>, <code class="docutils literal notranslate"><span class="pre">goodfitsr</span></code>, <code class="docutils literal notranslate"><span class="pre">goodfitsz</span></code>,
+<code class="docutils literal notranslate"><span class="pre">goodfitsi</span></code>, <code class="docutils literal notranslate"><span class="pre">goodfitsW1</span></code>, <code class="docutils literal notranslate"><span class="pre">goodfitsW2</span></code>: whether the band
+extraction is trustworthy (blending and image fitting problems).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isolatedLS</span></code>: whether the source is isolated (no bright neighbours,
+from the LS fracflux columns). For a clean sample, sub-select sources
+with <code class="docutils literal notranslate"><span class="pre">isolatedLS</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">W34_blended</span></code>, <code class="docutils literal notranslate"><span class="pre">WISE1_origin</span></code>, <code class="docutils literal notranslate"><span class="pre">WISE2_origin</span></code>, <code class="docutils literal notranslate"><span class="pre">WISE34_origin</span></code>:
+the origin of the WISE values (<code class="docutils literal notranslate"><span class="pre">LS10</span></code> = LS-deblended measurement,
+<code class="docutils literal notranslate"><span class="pre">AllWISE</span></code> = summed AllWISE flux of the neighbours, <code class="docutils literal notranslate"><span class="pre">LS10UL</span></code> =
+conservative 3 sigma upper limit).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prior_GALflux_*</span></code>: galaxy total-flux priors (mJy, with <code class="docutils literal notranslate"><span class="pre">_errlo</span></code>
+and <code class="docutils literal notranslate"><span class="pre">_errhi</span></code> bounds) for the extended-flux products.</p></li>
+</ul>
+</section>
+</section>
+<section id="reading-large-files">
+<h2>Reading large files<a class="headerlink" href="#reading-large-files" title="Link to this heading">#</a></h2>
+<p>If you get the following warning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Using</span> <span class="n">non</span><span class="o">-</span><span class="n">standard</span> <span class="n">extended</span> <span class="n">column</span> <span class="n">convention</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">Other</span> <span class="n">FITS</span> <span class="n">software</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">see</span> <span class="n">columns</span> <span class="mi">999</span><span class="o">-</span><span class="mi">1188</span>
+</pre></div>
+</div>
+<p>then <code class="docutils literal notranslate"><span class="pre">_all.fits</span></code> has over 1000 columns, and astropy will not be able
+to read the last columns. Use <code class="docutils literal notranslate"><span class="pre">_all_lite.fits</span></code> instead, which only
+contains the final flux columns.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="apertures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Matched apertures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="TODO.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TODO</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-convention">Column convention</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flux-columns">Flux columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-naming">Band naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostic-columns">Diagnostic columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-large-files">Reading large files</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johannes Buchner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026, Johannes Buchner.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

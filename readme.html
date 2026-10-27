@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>RainbowLasso &#8212; RainbowLasso  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'readme';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://johannesbuchner.github.io/RainbowLasso/readme.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="RainbowLasso - reliable ultraviolet to infrared photometry" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="RainbowLasso  documentation - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="RainbowLasso  documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">RainbowLasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apertures.html">Matched apertures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TODO.html">TODO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data providers:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="noirlab.html">NOAO Data Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vizier.html">CDS / VizieR</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex.html">GALEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacysurvey.html">Legacy Survey (optical)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhs.html">VISTA Hemisphere Survey (VHS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ukidss.html">UKIDSS (near-infrared)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Upper limit sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex-coverage.html">GALEX upper limits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sdss.html">SDSS (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hsc.html">HSC-WIDE (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="euclid.html">Euclid Q1 (optional)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/readme.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>RainbowLasso</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-rainbowlasso">Download RainbowLasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-surveys">Additional surveys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issues">Known issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo">TODO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributors">Contributors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing">Citing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logo">Logo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="rainbowlasso">
+<h1>RainbowLasso<a class="headerlink" href="#rainbowlasso" title="Link to this heading">#</a></h1>
+<p>RainbowLasso compiles reliable ultraviolet to infrared for
+modelling stars, galaxies and Active Galactic Nuclei
+from public all-sky astronomical surveys.</p>
+<img alt="https://raw.githubusercontent.com/JohannesBuchner/RainbowLasso/main/logo.png" src="https://raw.githubusercontent.com/JohannesBuchner/RainbowLasso/main/logo.png" />
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<p>Understanding the stellar population in galaxies requires constraining
+a model with reliable multi-wavelength (ultraviolet to infrared)
+flux measurements. Since galaxies are extended, to model the same object
+at all wavelength, the same aperture needs to be extracted. This is called
+matched aperture. For point sources (stars or distant quasars),
+measuring the flux weighted by the survey point-spread-function provides
+the best constraints.</p>
+<p>Depending on whether the source is extended or point-like,
+information from the Legacy Survey multi-wavelength source fitting from optical to mid-infrared,
+either PSF-like photometry or a total flux based on an extraction aperture is used.
+Only sources within the Legacy Survey area are handled.</p>
+<p>RainbowLasso fetches and calculates fluxes from these surveys:</p>
+<ul class="simple">
+<li><p>GALEX (far-UV and near-UV),</p></li>
+<li><p>optical (griz bands from Legacy Survey),</p></li>
+<li><p>near-infrared (JKH from VISTA hemisphere survey and UKIDSS)</p></li>
+<li><p>infrared (WISE W1,W2,W3,W4, deblended by Legacy Survey)</p></li>
+</ul>
+<p>RainbowLasso takes a input FITS catalog with coordinates (id, RA, DEC) and
+automatically fetches the necessary photometry from publicly available sources (noirlab, vizier).
+Additional input catalog columns are copied to the output and are not uploaded anywhere.
+The output files should be usable with <a class="reference external" href="https://arxiv.org/abs/2405.19297">GRAHSP</a>, Cigale, LePHARE (TODO).</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Milky Way attenuation by dust is corrected for each band up until the near-infrared. The E(B-V) is taken from <a class="reference external" href="https://www.legacysurvey.org/dr10/catalogs/#galactic-extinction-coefficients">here</a> and for other wavelengths as listed to the COSMOS2015 Laigle+ paper.</p></li>
+<li><p>Reliable flux errors are computed. If needed, they are conservatively estimated from magnitude errors.</p></li>
+<li><p>Unreliable flux estimates are discarded, indicated by flags on blending and image fitting problems</p></li>
+<li><p>Discards blended or problematic photometry in GALEX (artifact and extraction flag, magnitude error)</p></li>
+<li><p>Discards blended or problematic photometry in LS&amp;WISE (fracin, fracflux)</p></li>
+<li><p>Provides upper limits for blended WISE cases
+* conservative 3 sigma upper limits are computed for WISE3&amp;4 based on the total flux of all nearby sources (fracflux) and the error bars.</p></li>
+<li><p>Missing information (lacking information) is indicated (e.g. -99 entries).</p></li>
+<li><p>Automated</p></li>
+<li><p>For a clean sample, you can sub-select sources flagged “isolated”</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>You need to have the programs installed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.star.bristol.ac.uk/~mbt/stilts/sun256/sun256.html">stilts</a></p></li>
+<li><p>make</p></li>
+</ul>
+<p>and the following python libraries:</p>
+<ul class="simple">
+<li><p>requests_cache, astropy, numpy, pandas, tqdm, uncertainties, dustmaps</p></li>
+<li><p>astro-datalab (<a class="reference external" href="https://datalab.noirlab.edu/docs/manual/UsingAstroDataLab/InstallDatalab/InstallDatalab/InstallDatalab.html">see noirlab</a>)</p></li>
+</ul>
+<p>which you could get with something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">requests_cache</span> <span class="n">astropy</span> <span class="n">numpy</span> <span class="n">pandas</span> <span class="n">tqdm</span> <span class="n">astro</span><span class="o">-</span><span class="n">datalab</span> <span class="n">uncertainties</span> <span class="n">dustmaps</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>dustmaps need to be <a class="reference external" href="https://github.com/gregreen/dustmaps/?tab=readme-ov-file#getting-the-data">set up and SFD downloaded</a></p></li>
+</ul>
+</section>
+<section id="download-rainbowlasso">
+<h2>Download RainbowLasso<a class="headerlink" href="#download-rainbowlasso" title="Link to this heading">#</a></h2>
+<p>Get RainbowLasso onto your computer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">JohannesBuchner</span><span class="o">/</span><span class="n">RainbowLasso</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">RainbowLasso</span>
+</pre></div>
+</div>
+<p>This directory contains several scripts and the Makefile.</p>
+<p>Update RainbowLasso to the latest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Make sure RainbowLasso is downloaded and up to date (see above).</p></li>
+<li><p>Prepare an input fits file with columns ‘id’, ‘RA’ and ‘DEC’. Additional columns are fine. See dr16QWX_selection.fits for an example .</p></li>
+<li><p>Log in to datalab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">datalab</span> <span class="n">login</span>
+</pre></div>
+</div>
+</li>
+<li><p>Then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">&lt;</span><span class="n">yourfilename</span><span class="o">&gt;</span><span class="n">_all_lite</span><span class="o">.</span><span class="n">fits</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>If for example the input file is dr16QWX_selection.fits, then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">dr16QWX_selection_all_lite</span><span class="o">.</span><span class="n">fits</span>
+</pre></div>
+</div>
+<p>Files can also be outside the RainbowLasso directory.
+In that case you can either run from the RainbowLasso directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make path/to/data/dr16QWX_selection_all_lite.fits
+</pre></div>
+</div>
+<p>Or you can run from the directory where the file is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make -C path/to/RainbowLasso/ $PWD/dr16QWX_selection_all_lite.fits
+</pre></div>
+</div>
+<p>The Makefile contains the steps performed to fetch the various multiwavelength surveys.</p>
+<p>Important output files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$PWD/dr16QWX_selection_all_lite.fits : File ready for use with GRAHSP/CIGALE.</p></li>
+<li><p>$PWD/dr16QWX_selection_all.fits : this contains all columns from the input catalogs.</p></li>
+</ul>
+</div></blockquote>
+<p>If you get the following warning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Using</span> <span class="n">non</span><span class="o">-</span><span class="n">standard</span> <span class="n">extended</span> <span class="n">column</span> <span class="n">convention</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">Other</span> <span class="n">FITS</span> <span class="n">software</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">see</span> <span class="n">columns</span> <span class="mi">999</span><span class="o">-</span><span class="mi">1188</span>
+</pre></div>
+</div>
+<p>Then _all.fits has over 1000 columns, and astropy will not be able to read the last columns.</p>
+</section>
+<section id="additional-surveys">
+<h2>Additional surveys<a class="headerlink" href="#additional-surveys" title="Link to this heading">#</a></h2>
+<p>If you want SDSS fluxes, you need to put a sciserver username and password
+into a text file ~/.config/sciserver/login.txt:</p>
+<blockquote>
+<div><p>username:password</p>
+</div></blockquote>
+<p>If you also want HSC-WIDE fluxes, you can run:</p>
+<blockquote>
+<div><p>$ make path/to/data/dr16QWX_selection_allHSC_lite.fits</p>
+</div></blockquote>
+</section>
+<section id="quality-control">
+<h2>Quality control<a class="headerlink" href="#quality-control" title="Link to this heading">#</a></h2>
+<p>Create a visualisation of the errors and fluxes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">dr16QWX_selection_all_lite</span><span class="o">.</span><span class="n">fits_errors</span><span class="o">.</span><span class="n">pdf</span> <span class="n">dr16QWX_selection_all_lite</span><span class="o">.</span><span class="n">fits_fluxes</span><span class="o">.</span><span class="n">pdf</span>
+</pre></div>
+</div>
+<p>Examples are uploaded to this repository.</p>
+<p>How to read the diagnostic plot:</p>
+<ul class="simple">
+<li><p>each page is a filter.</p></li>
+<li><p>fluxes.pdf compares the flux (mJy) from one band to the next. If the spectrum is relatively flat, and bands are close together, they should follow the 1:1 line.</p></li>
+<li><p>errors.pdf compares the flux error to the significance of the value (value / error ratio).</p></li>
+<li><p>The previous filter is shown in gray. Within one telescope and filter system, the error properties should be comparable.</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<p>This documentation is also available as sphinx documentation in the
+doc/ folder (start at doc/index.rst). Build it with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<p>Each service and catalog used (noirlab Data Lab, CDS/VizieR, GALEX,
+Legacy Survey, AllWISE, VHS, UKIDSS, SDSS, HSC, Euclid) has a dedicated
+page there, documenting the cuts applied and the Makefile steps, and a
+page explaining the main output files and the column convention.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If none of the sources in the input catalog are in VHS/UKIDSS, the query retrieval returns with no file produced (pandas data frames cannot be concatenated), and the pipeline fails</p>
+<ul>
+<li><p>workaround: insert some source coordinates from the provided example, then delete them after. (thanks to Pietro Baldini)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="todo">
+<h2>TODO<a class="headerlink" href="#todo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>☐ discard blended or problematic photometry in VHS</p></li>
+<li><p>☐ discard blended or problematic photometry in UKIDSS</p></li>
+<li><p>☐ provide upper limits for VHS, UKIDSS (need coverage information for that), available <a class="reference external" href="https://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/">here</a></p></li>
+<li><p>☐ improve efficiency of noirlab fetching of aperture fluxes. They were not able yet to suggest a better working solution.</p></li>
+</ul>
+<p>To add more surveys, contributions are welcome.</p>
+<p><strong>Scope</strong>: The current scope are large-area surveys (ten to ten-thousands of square degrees),
+which provide state-of-the-art photometry to an already-existing selection of sources.
+Cross-matching (see <a class="reference external" href="https://github.com/JohannesBuchner/nway/">NWAY</a>) or image analyses
+are outside the scope of this project.</p>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Suraj D Shankar</p></li>
+<li><p>Mara Salvato</p></li>
+<li><p>Johannes Buchner</p></li>
+<li><p>Isabelle Gauger</p></li>
+</ul>
+</section>
+<section id="citing">
+<h2>Citing<a class="headerlink" href="#citing" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Cite the <a class="reference external" href="https://arxiv.org/abs/2405.19297">accompaning paper</a>.</p></li>
+<li><p>You can also include the repository URL as a footnote.</p></li>
+<li><p>Cite the data products of the surveys used. See the accompaning paper for a list of references.</p></li>
+</ol>
+</section>
+<section id="licence">
+<h2>Licence<a class="headerlink" href="#licence" title="Link to this heading">#</a></h2>
+<p>AGPL-3 (see LICENCE file).</p>
+</section>
+<section id="logo">
+<h2>Logo<a class="headerlink" href="#logo" title="Link to this heading">#</a></h2>
+<p>The logo is based on work by Ivan Abirawa, Those Icons and Freepik.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">RainbowLasso - reliable ultraviolet to infrared photometry</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="installation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-rainbowlasso">Download RainbowLasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-surveys">Additional surveys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issues">Known issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo">TODO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributors">Contributors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing">Citing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logo">Logo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johannes Buchner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026, Johannes Buchner.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

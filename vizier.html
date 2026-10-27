@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CDS / VizieR &#8212; RainbowLasso  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vizier';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://johannesbuchner.github.io/RainbowLasso/vizier.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GALEX" href="galex.html" />
+    <link rel="prev" title="NOAO Data Lab" href="noirlab.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="RainbowLasso  documentation - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="RainbowLasso  documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">RainbowLasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apertures.html">Matched apertures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TODO.html">TODO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data providers:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="noirlab.html">NOAO Data Lab</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">CDS / VizieR</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex.html">GALEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacysurvey.html">Legacy Survey (optical)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhs.html">VISTA Hemisphere Survey (VHS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ukidss.html">UKIDSS (near-infrared)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Upper limit sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex-coverage.html">GALEX upper limits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sdss.html">SDSS (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hsc.html">HSC-WIDE (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="euclid.html">Euclid Q1 (optional)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vizier.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CDS / VizieR</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-pipeline-queries-vizier">How the pipeline queries VizieR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-used">Tables used</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cds-vizier">
+<h1>CDS / VizieR<a class="headerlink" href="#cds-vizier" title="Link to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://cdsxmatch.u-strasbg.fr/xmatch">CDS X-Match service</a> and
+<a class="reference external" href="https://vizier.cds.unistra.fr/">VizieR</a> are queried through the
+<code class="docutils literal notranslate"><span class="pre">stilts</span> <span class="pre">cdsskymatch</span></code> task for the all-sky catalogs (GALEX AIS, AllWISE)
+which do not require a login.</p>
+<section id="how-the-pipeline-queries-vizier">
+<h2>How the pipeline queries VizieR<a class="headerlink" href="#how-the-pipeline-queries-vizier" title="Link to this heading">#</a></h2>
+<p>For example, the GALEX match (see <a class="reference internal" href="galex.html"><span class="doc">GALEX</span></a>):</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">%_GALEX.fits</span><span class="o">:</span><span class="w"> </span>%<span class="n">_coords</span>.<span class="n">csv</span>
+<span class="c">	# NUV measurements are only valid down to NUVmag&lt;20.8 AB mag NFlux&gt;17.4</span>
+<span class="c">	# FUV measurements are only valid down to FUVmag&lt;19.9 AB mag FFlux&gt;39.7</span>
+<span class="c">	# _LU_A: convert energy fluxes [uJy] to photon fluxes in lephare units (LU) (factors of 1e-17/18, per Angstrom?) (?)</span>
+<span class="c">	# _LU: convert units to lephare-units (not used further)</span>
+<span class="c">	#    some factors used here:</span>
+<span class="c">	#    (1.26727*pow(10, -17)) = 1e-29 / (3.34*pow(10, -19))*(pow(1538.6, 2))</span>
+<span class="c">	#    (5.59444*pow(10, -18)) = 1e-29 / (3.34*pow(10, -19))*(pow(2315.7, 2))</span>
+<span class="c">	# _real_LU_A: correct _LU_A by milky way absorption</span>
+<span class="c">	# _real_LU: convert photon fluxes back to energy fluxes conversion (?)</span>
+<span class="c">	# conversion from Vega to AB: 18.82, 20.08 (https://asd.gsfc.nasa.gov/archive/galex/FAQ/counts_background.html)</span>
+<span class="c">	# no upper limits are provided for GALEX, because</span>
+<span class="c">	#   only no-entry cases when matching to this catalog would be suitable</span>
+<span class="c">	#   in the milky way, the upper limit would need to be corrected up, and thus be drastically weaker (higher)</span>
+<span class="c">	#   GALEX is very shallow already, so those upper limits are probably not so informative</span>
+<span class="c">	# FUV_4 is an aperture with 4 pixel radius, pixel size is 1.5'' -&gt; 6'' radius: very large!</span>
+<span class="c">	# FWHM of GALEX is very large, best to treat all objects at z&gt;&gt;0 as point sources</span>
+<span class="w">	</span>stilts<span class="w"> </span>cdsskymatch<span class="w"> </span><span class="nv">cdstable</span><span class="o">=</span>II/335/galex_ais<span class="w">  </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">find</span><span class="o">=</span>each<span class="w"> </span><span class="k">in</span><span class="o">=</span>$&lt;<span class="w"> </span><span class="nv">ra</span><span class="o">=</span>RA<span class="w"> </span><span class="nv">dec</span><span class="o">=</span>DEC<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">radius</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="nv">$@</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'fixcolnames'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'colmeta -name EBmV "E_B_V_"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_v "EBmV&gt;0 ? (3.1*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_lam_fuv "A_v&gt;0 ? A_v*(-0.3459882441104826 + 9.173790513029425/3.1): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_lam_nuv "A_v&gt;0 ? A_v*(0.6743929174392934 + 1.2480067831962458/3.1): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? FUVmag-(8.286*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? NUVmag-(8.621*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_FUV "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ?e_FUVmag:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_NUV "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ?e_NUVmag:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV_aper "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? FUV_4+18.82-(8.286*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV_aper "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? NUV_4+20.08-(8.621*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_FUV_aper "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? e_FUV_4:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_NUV_aper "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? e_NUV_4:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_aper "e_FUV_aper&gt;0 ? pow(10, -0.4*FUV_aper)*1e6*3631 : -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_aper "e_NUV_aper&gt;0 ? pow(10, -0.4*NUV_aper)*1e6*3631 : -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_aper "e_FUV_aper&gt;0 ? pow(10, -0.4*(FUV_aper-e_FUV_aper))*1e6*3631 - Fflux_aper : -99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_aper "e_NUV_aper&gt;0 ? pow(10, -0.4*(NUV_aper-e_NUV_aper))*1e6*3631 - Nflux_aper : -99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fgood_extraction "e_Fflux&gt;0&amp;&amp;Fafl==0&amp;&amp;Fexf==0"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Ngood_extraction "e_Nflux&gt;0&amp;&amp;Nafl==0&amp;&amp;Nexf==0"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_real_LU "Fflux&gt;39.7&amp;&amp;Fgood_extraction ? Fflux*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_real_LU "Nflux&gt;17.4&amp;&amp;Ngood_extraction ? Nflux*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_real_LU "Fflux&gt;39.7&amp;&amp;Fgood_extraction ? e_Fflux*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_real_LU "Nflux&gt;17.4&amp;&amp;Ngood_extraction ? e_Nflux*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_aper_real_LU "Fflux_aper&gt;39.7&amp;&amp;Fgood_extraction ? Fflux_aper*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_aper_real_LU "Nflux_aper&gt;17.4&amp;&amp;Ngood_extraction ? Nflux_aper*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_aper_real_LU "Fflux_aper&gt;39.7&amp;&amp;Fgood_extraction ? e_Fflux_aper*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_aper_real_LU "Nflux_aper&gt;17.4&amp;&amp;Ngood_extraction ? e_Nflux_aper*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+</pre></div>
+</div>
+<p>and the AllWISE match (see <a class="reference internal" href="allwise.html"><span class="doc">AllWISE</span></a>):</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">%_ALLWISE_all.fits</span><span class="o">:</span><span class="w"> </span>%<span class="n">_coords</span>.<span class="n">csv</span>
+<span class="c">	# match to AllWISE</span>
+<span class="c">	# convert Vega magnitudes to mJy fluxes</span>
+<span class="c">	# AllWISE is providing detections based on WISE data alone</span>
+<span class="c">	#  and is helpful for providing upper limits, by finding the brightest</span>
+<span class="w">	</span>stilts<span class="w"> </span>cdsskymatch<span class="w"> </span><span class="nv">cdstable</span><span class="o">=</span>II/328/allwise<span class="w">  </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">find</span><span class="o">=</span>all<span class="w"> </span><span class="k">in</span><span class="o">=</span>$&lt;<span class="w"> </span><span class="nv">ra</span><span class="o">=</span>RA<span class="w"> </span><span class="nv">dec</span><span class="o">=</span>DEC<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">radius</span><span class="o">=</span><span class="m">20</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="nv">$@</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE1 "W1mag&gt;0 ? (pow(10, -(W1mag+2.699+48.60)/(2.5)))*1e26: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE1_err "e_W1mag&gt;0 ? (pow(10, -(W1mag-e_W1mag+2.699+48.60)/(2.5)))*1e26-WISE1: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE2 "W2mag&gt;0 ? (pow(10, -(W2mag+3.339+48.60)/(2.5)))*1e26: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE2_err "e_W2mag&gt;0 ? (pow(10, -(W2mag-e_W2mag+3.339+48.60)/(2.5)))*1e26-WISE2: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE3 "W3mag&gt;0 ? (pow(10, -(W3mag+5.174+48.60)/(2.5)))*1e26: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE3_err "e_W3mag&gt;0 ? (pow(10, -(W3mag-e_W3mag+5.174+48.60)/(2.5)))*1e26-WISE3: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE4 "W4mag&gt;0 ? (pow(10, -(W4mag+6.620+48.60)/(2.5)))*1e26: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE4_err "e_W4mag&gt;0 ? (pow(10, -(W4mag-e_W4mag+6.620+48.60)/(2.5)))*1e26-WISE4: -99."'</span><span class="w"> </span><span class="se">\</span>
+</pre></div>
+</div>
+</section>
+<section id="tables-used">
+<h2>Tables used<a class="headerlink" href="#tables-used" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>catalog</p></th>
+<th class="head"><p>table</p></th>
+<th class="head"><p>matched within</p></th>
+<th class="head"><p>find</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GALEX AIS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">II/335/galex_ais</span></code></p></td>
+<td><p>4 arcsec</p></td>
+<td><p>each</p></td>
+</tr>
+<tr class="row-odd"><td><p>AllWISE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">II/328/allwise</span></code></p></td>
+<td><p>4 arcsec (<code class="docutils literal notranslate"><span class="pre">%_ALLWISE.fits</span></code>)</p></td>
+<td><p>each</p></td>
+</tr>
+<tr class="row-even"><td><p>AllWISE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">II/328/allwise</span></code></p></td>
+<td><p>20 arcsec (<code class="docutils literal notranslate"><span class="pre">%_ALLWISE_all.fits</span></code>)</p></td>
+<td><p>all</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cdstable</span></code> needs the full table identifier including the table name
+(e.g. <code class="docutils literal notranslate"><span class="pre">II/335/galex_ais</span></code>, not just <code class="docutils literal notranslate"><span class="pre">II/335</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">radius</span></code> of the X-Match service is capped at 180 arcsec
+server-side.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">find=all</span></code> output carries an <code class="docutils literal notranslate"><span class="pre">angDist</span></code> column (arcsec) with the
+distance to each match, used by the AllWISE aggregation
+(<a class="reference internal" href="allwise.html"><span class="doc">AllWISE</span></a>).</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2000A%26AS..143...23O/abstract">Ochsenbein, Bauer &amp; Marcout 2000</a>
+(A&amp;AS 143, 23): the VizieR catalog service.</p></li>
+<li><p><a class="reference external" href="https://cdsxmatch.u-strasbg.fr/xmatch">CDS X-Match service</a>:
+the position cross-matching API behind <code class="docutils literal notranslate"><span class="pre">cdsskymatch</span></code>
+(<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2017A%26C....1...51P">Pineau et al. 2017</a>).</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/astro-ph/0607353">Taylor 2006</a> (ADASS XV):
+the STILTS tool that drives the queries.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="noirlab.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">NOAO Data Lab</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="galex.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">GALEX</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-pipeline-queries-vizier">How the pipeline queries VizieR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-used">Tables used</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johannes Buchner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026, Johannes Buchner.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

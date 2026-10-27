@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GALEX &#8212; RainbowLasso  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'galex';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://johannesbuchner.github.io/RainbowLasso/galex.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Legacy Survey (optical)" href="legacysurvey.html" />
+    <link rel="prev" title="CDS / VizieR" href="vizier.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="RainbowLasso  documentation - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="RainbowLasso  documentation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">RainbowLasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apertures.html">Matched apertures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TODO.html">TODO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data providers:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="noirlab.html">NOAO Data Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vizier.html">CDS / VizieR</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data sources:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">GALEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legacysurvey.html">Legacy Survey (optical)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhs.html">VISTA Hemisphere Survey (VHS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ukidss.html">UKIDSS (near-infrared)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Upper limit sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="galex-coverage.html">GALEX upper limits</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional data sources:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sdss.html">SDSS (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hsc.html">HSC-WIDE (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="euclid.html">Euclid Q1 (optional)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/galex.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GALEX</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching">Matching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuts-applied">Cuts applied</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aperture-fluxes">Aperture fluxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-upper-limits-from-the-catalog-match">No upper limits from the catalog match</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-columns">Output columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="galex">
+<span id="id1"></span><h1>GALEX<a class="headerlink" href="#galex" title="Link to this heading">#</a></h1>
+<p><em>Catalog</em>: GUVcat_AIS, the revised catalog of GALEX ultraviolet sources
+(<a class="reference external" href="https://arxiv.org/abs/1704.05903">Bianchi, Shiao &amp; Thilker 2017</a>),
+queried through VizieR as table <code class="docutils literal notranslate"><span class="pre">II/335/galex_ais</span></code>
+(see <a class="reference internal" href="vizier.html"><span class="doc">CDS / VizieR</span></a>).</p>
+<p><em>Wavelengths</em>: far-UV (FUV, ~1540 A) and near-UV (NUV, ~2320 A).</p>
+<p><em>Depth</em>: “The typical depth of the GUVcat_AIS catalog is
+FUV=19.9, NUV=20.8 ABmag” (from the paper abstract). Measurements
+fainter than these depths are unreliable and are discarded.</p>
+<section id="matching">
+<h2>Matching<a class="headerlink" href="#matching" title="Link to this heading">#</a></h2>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">%_GALEX.fits</span><span class="o">:</span><span class="w"> </span>%<span class="n">_coords</span>.<span class="n">csv</span>
+<span class="c">	# NUV measurements are only valid down to NUVmag&lt;20.8 AB mag NFlux&gt;17.4</span>
+<span class="c">	# FUV measurements are only valid down to FUVmag&lt;19.9 AB mag FFlux&gt;39.7</span>
+<span class="c">	# _LU_A: convert energy fluxes [uJy] to photon fluxes in lephare units (LU) (factors of 1e-17/18, per Angstrom?) (?)</span>
+<span class="c">	# _LU: convert units to lephare-units (not used further)</span>
+<span class="c">	#    some factors used here:</span>
+<span class="c">	#    (1.26727*pow(10, -17)) = 1e-29 / (3.34*pow(10, -19))*(pow(1538.6, 2))</span>
+<span class="c">	#    (5.59444*pow(10, -18)) = 1e-29 / (3.34*pow(10, -19))*(pow(2315.7, 2))</span>
+<span class="c">	# _real_LU_A: correct _LU_A by milky way absorption</span>
+<span class="c">	# _real_LU: convert photon fluxes back to energy fluxes conversion (?)</span>
+<span class="c">	# conversion from Vega to AB: 18.82, 20.08 (https://asd.gsfc.nasa.gov/archive/galex/FAQ/counts_background.html)</span>
+<span class="c">	# no upper limits are provided for GALEX, because</span>
+<span class="c">	#   only no-entry cases when matching to this catalog would be suitable</span>
+<span class="c">	#   in the milky way, the upper limit would need to be corrected up, and thus be drastically weaker (higher)</span>
+<span class="c">	#   GALEX is very shallow already, so those upper limits are probably not so informative</span>
+<span class="c">	# FUV_4 is an aperture with 4 pixel radius, pixel size is 1.5'' -&gt; 6'' radius: very large!</span>
+<span class="c">	# FWHM of GALEX is very large, best to treat all objects at z&gt;&gt;0 as point sources</span>
+<span class="w">	</span>stilts<span class="w"> </span>cdsskymatch<span class="w"> </span><span class="nv">cdstable</span><span class="o">=</span>II/335/galex_ais<span class="w">  </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">find</span><span class="o">=</span>each<span class="w"> </span><span class="k">in</span><span class="o">=</span>$&lt;<span class="w"> </span><span class="nv">ra</span><span class="o">=</span>RA<span class="w"> </span><span class="nv">dec</span><span class="o">=</span>DEC<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">radius</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="nv">$@</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'fixcolnames'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'colmeta -name EBmV "E_B_V_"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_v "EBmV&gt;0 ? (3.1*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_lam_fuv "A_v&gt;0 ? A_v*(-0.3459882441104826 + 9.173790513029425/3.1): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol A_lam_nuv "A_v&gt;0 ? A_v*(0.6743929174392934 + 1.2480067831962458/3.1): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? FUVmag-(8.286*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? NUVmag-(8.621*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_FUV "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ?e_FUVmag:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_NUV "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ?e_NUVmag:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV_aper "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? FUV_4+18.82-(8.286*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV_aper "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? NUV_4+20.08-(8.621*EBmV): -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_FUV_aper "FUVmag&gt;0&amp;&amp;FUVmag&lt;19.9 ? e_FUV_4:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_NUV_aper "NUVmag&gt;0&amp;&amp;NUVmag&lt;20.8 ? e_NUV_4:-99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_aper "e_FUV_aper&gt;0 ? pow(10, -0.4*FUV_aper)*1e6*3631 : -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_aper "e_NUV_aper&gt;0 ? pow(10, -0.4*NUV_aper)*1e6*3631 : -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_aper "e_FUV_aper&gt;0 ? pow(10, -0.4*(FUV_aper-e_FUV_aper))*1e6*3631 - Fflux_aper : -99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_aper "e_NUV_aper&gt;0 ? pow(10, -0.4*(NUV_aper-e_NUV_aper))*1e6*3631 - Nflux_aper : -99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fgood_extraction "e_Fflux&gt;0&amp;&amp;Fafl==0&amp;&amp;Fexf==0"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Ngood_extraction "e_Nflux&gt;0&amp;&amp;Nafl==0&amp;&amp;Nexf==0"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_real_LU "Fflux&gt;39.7&amp;&amp;Fgood_extraction ? Fflux*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_real_LU "Nflux&gt;17.4&amp;&amp;Ngood_extraction ? Nflux*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_real_LU "Fflux&gt;39.7&amp;&amp;Fgood_extraction ? e_Fflux*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_real_LU "Nflux&gt;17.4&amp;&amp;Ngood_extraction ? e_Nflux*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Fflux_aper_real_LU "Fflux_aper&gt;39.7&amp;&amp;Fgood_extraction ? Fflux_aper*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol Nflux_aper_real_LU "Nflux_aper&gt;17.4&amp;&amp;Ngood_extraction ? Nflux_aper*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Fflux_aper_real_LU "Fflux_aper&gt;39.7&amp;&amp;Fgood_extraction ? e_Fflux_aper*pow(10, (0.4*A_lam_fuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol e_Nflux_aper_real_LU "Nflux_aper&gt;17.4&amp;&amp;Ngood_extraction ? e_Nflux_aper*pow(10, (0.4*A_lam_nuv))*1e-29: -99."'</span><span class="w"> </span><span class="se">\</span>
+</pre></div>
+</div>
+<p>Each input position is matched against GUVcat_AIS with the CDS X-Match
+service (<code class="docutils literal notranslate"><span class="pre">stilts</span> <span class="pre">cdsskymatch</span></code>) within a 4 arcsec radius, and the
+closest match is used (<code class="docutils literal notranslate"><span class="pre">find=each</span></code>).</p>
+</section>
+<section id="cuts-applied">
+<h2>Cuts applied<a class="headerlink" href="#cuts-applied" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Depth cuts</strong>: only detections brighter than the catalog depth are
+used, FUVmag &lt; 19.9 and NUVmag &lt; 20.8 (AB). Fainter measurements are
+set to -99 (missing).</p></li>
+<li><p><strong>Flux cuts</strong>: the total fluxes must be brighter than the depth
+equivalent, Fflux &gt; 39.7 uJy (FUV) and Nflux &gt; 17.4 uJy (NUV).</p></li>
+<li><p><strong>Extraction quality</strong>: the artifact flag (<code class="docutils literal notranslate"><span class="pre">Fafl</span></code>, <code class="docutils literal notranslate"><span class="pre">Nafl</span></code>) and the
+extraction flag (<code class="docutils literal notranslate"><span class="pre">Fexf</span></code>, <code class="docutils literal notranslate"><span class="pre">Nexf</span></code>) must be zero
+(<code class="docutils literal notranslate"><span class="pre">Fgood_extraction</span></code>, <code class="docutils literal notranslate"><span class="pre">Ngood_extraction</span></code>).</p></li>
+<li><p><strong>Milky Way extinction</strong>: the magnitudes are dereddened with
+<code class="docutils literal notranslate"><span class="pre">EBmV</span></code> from the catalog (8.286*EBmV in FUV, 8.621*EBmV in NUV), and
+the energy fluxes are corrected by <code class="docutils literal notranslate"><span class="pre">10^(0.4*A_lam)</span></code>.</p></li>
+</ul>
+</section>
+<section id="aperture-fluxes">
+<h2>Aperture fluxes<a class="headerlink" href="#aperture-fluxes" title="Link to this heading">#</a></h2>
+<p>The GALEX PSF is very large (FWHM ~4-5 arcsec), so all objects at
+z &gt;&gt; 0 are treated as point sources. The pipeline stores the aperture
+magnitudes within a 4 pixel radius (pixel size 1.5 arcsec, i.e. a 6
+arcsec radius aperture, <code class="docutils literal notranslate"><span class="pre">FUV_4</span></code>/<code class="docutils literal notranslate"><span class="pre">NUV_4</span></code>), converted to AB
+magnitudes by adding the AB zeropoints (+18.82 in FUV, +20.08 in NUV),
+alongside the total magnitudes.</p>
+</section>
+<section id="no-upper-limits-from-the-catalog-match">
+<h2>No upper limits from the catalog match<a class="headerlink" href="#no-upper-limits-from-the-catalog-match" title="Link to this heading">#</a></h2>
+<p>The GALEX catalog match itself provides <em>no</em> upper limits, because:</p>
+<ul class="simple">
+<li><p>only no-entry cases (no match within the search radius) would be
+suitable as an upper limit;</p></li>
+<li><p>in the Milky Way, the upper limit would need to be corrected up, and
+thus be drastically weaker (higher);</p></li>
+<li><p>GALEX is very shallow already, so those upper limits are probably not
+so informative.</p></li>
+</ul>
+<p>Instead, a 3 sigma NUV upper limit for sources <em>without any GALEX
+detection</em> is estimated from the survey coverage. This is a separate
+mechanism (see <a class="reference internal" href="galex-coverage.html"><span class="doc">GALEX upper limits</span></a>): it uses the depth of the nearest
+AIS tile, not the GALEX measurement at the source position. In the
+final merge, sources with a GALEX detection get the measured flux, and
+sources without get <code class="docutils literal notranslate"><span class="pre">NUV</span> <span class="pre">=</span> <span class="pre">3</span> <span class="pre">*</span> <span class="pre">NUV_fluxlim</span></code> (NUV only; FUV is set to
+the missing value).</p>
+</section>
+<section id="output-columns">
+<h2>Output columns<a class="headerlink" href="#output-columns" title="Link to this heading">#</a></h2>
+<p>The Makefile rule produces, per band (prefix F = FUV, N = NUV):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FUV</span></code>, <code class="docutils literal notranslate"><span class="pre">NUV</span></code>: dereddened total magnitudes (AB).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FUV_aper</span></code>, <code class="docutils literal notranslate"><span class="pre">NUV_aper</span></code>: dereddened aperture magnitudes (AB).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fflux</span></code>, <code class="docutils literal notranslate"><span class="pre">Nflux</span></code>, <code class="docutils literal notranslate"><span class="pre">Fflux_aper</span></code>, <code class="docutils literal notranslate"><span class="pre">Nflux_aper</span></code>: energy fluxes
+and errors (uJy, AB-based).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fflux_real_LU</span></code>, <code class="docutils literal notranslate"><span class="pre">Nflux_real_LU</span></code> (and <code class="docutils literal notranslate"><span class="pre">_aper</span></code> variants):
+extinction-corrected energy fluxes in the internal LU unit
+(erg/s/cm^2/Hz), which feed the final <code class="docutils literal notranslate"><span class="pre">FUV</span></code>/<code class="docutils literal notranslate"><span class="pre">NUV</span></code> mJy columns of
+the merged catalog (see <a class="reference internal" href="outputs.html"><span class="doc">Output files</span></a>).</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/1704.05903">Bianchi, Shiao &amp; Thilker 2017</a>
+(GUVcat_AIS, ApJS 230, 24): the catalog, its depth and columns
+(documented in the <a class="reference external" href="http://vizier.cds.unistra.fr/viz-bin/ReadMe/II/335">VizieR II/335 ReadMe</a>).</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/astro-ph/0703531">Morrissey et al. 2007</a>
+(ApJS 173, 682): the GALEX instrument, calibration and AB zeropoints
+(see also the <a class="reference external" href="https://asd.gsfc.nasa.gov/archive/galex/FAQ/counts_background.html">GALEX FAQ on counts and background</a>).</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1009.2514">Schlafly &amp; Finkbeiner 2011</a>
+(ApJ 737, 103): the per-band Milky Way extinction coefficients used
+for the dereddening (8.286 in FUV, 8.621 in NUV).</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vizier.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CDS / VizieR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="legacysurvey.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Legacy Survey (optical)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matching">Matching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuts-applied">Cuts applied</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aperture-fluxes">Aperture fluxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-upper-limits-from-the-catalog-match">No upper limits from the catalog match</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-columns">Output columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johannes Buchner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2026, Johannes Buchner.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
