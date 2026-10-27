@@ -13,7 +13,7 @@ queried through the NOAO Data Lab (see :doc:`noirlab`):
 Matching
 --------
 
-.. literalinclude:: _segments/euclid-fetch.mk
+.. literalinclude:: segments/euclid-fetch.mk
    :language: make
 
 The nearest source within 1 arcsec is retrieved (SQL ``q3c_join`` via
@@ -27,7 +27,7 @@ diameters. We follow other studies and assume the morphology is
 ~wavelength-independent, so the Euclid extended flux fraction is
 applied to the optical flux columns as a prior:
 
-.. literalinclude:: _segments/euclid-prior.mk
+.. literalinclude:: segments/euclid-prior.mk
    :language: make
 
 * **Reliability** (``DET_QUALITY_FLAG < 4 && SPURIOUS_FLAG == 0``):

@@ -471,7 +471,7 @@ results are cached by <code class="docutils literal notranslate"><span class="pr
 <p>Each documentation page for a survey/catalog includes the relevant
 Makefile rule (target + recipe) via <code class="docutils literal notranslate"><span class="pre">literalinclude</span></code>. The script
 <code class="docutils literal notranslate"><span class="pre">makefilesegments.py</span></code> extracts these rule segments from the Makefile
-into the <code class="docutils literal notranslate"><span class="pre">doc/_segments/</span></code> folder:</p>
+into the <code class="docutils literal notranslate"><span class="pre">doc/segments/</span></code> folder:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3<span class="w"> </span>makefilesegments.py<span class="w">            </span><span class="c1"># extract all segments</span>
 <span class="gp">$ </span>python3<span class="w"> </span>makefilesegments.py<span class="w"> </span>galex<span class="w">      </span><span class="c1"># extract one segment</span>
 <span class="gp">$ </span>python3<span class="w"> </span>makefilesegments.py<span class="w"> </span>--list<span class="w">     </span><span class="c1"># list available segments</span>

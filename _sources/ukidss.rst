@@ -13,7 +13,7 @@ Lab (see :doc:`noirlab`): ``ukidss_dr11plus.lassource``.
 Matching
 --------
 
-.. literalinclude:: _segments/ukidss-fetch.mk
+.. literalinclude:: segments/ukidss-fetch.mk
    :language: make
 
 The nearest source within 1 arcsec is retrieved (SQL ``q3c_join`` via
@@ -22,7 +22,7 @@ Data Lab).
 Aperture fluxes
 ---------------
 
-.. literalinclude:: _segments/ukidss-fluxes.mk
+.. literalinclude:: segments/ukidss-fluxes.mk
    :language: make
 
 The flux extraction is adapted to the source type:
