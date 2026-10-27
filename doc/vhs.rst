@@ -59,3 +59,13 @@ Output columns
 in the internal LU unit, which feed the final ``UV_Y``, ``UV_J``,
 ``UV_H``, ``UV_K`` mJy columns of the merged catalog (see
 :doc:`outputs`).
+
+References
+----------
+
+* `McMahon et al. 2013 <https://ui.adsabs.harvard.edu/abs/2013Msngr.154...35M/abstract>`_
+  (The Messenger 154, 35): the VHS survey description.
+* `VSA/WSA documentation <http://wsa.roe.ac.uk/>`_ and the `VHS DR5
+  pages <http://wsa.roe.ac.uk/vhsDR5.html>`_: the catalog columns
+  (aperture magnitudes, error bits, per-source extinction ``ay``
+  .. ``aks``).

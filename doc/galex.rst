@@ -45,10 +45,10 @@ Aperture fluxes
 
 The GALEX PSF is very large (FWHM ~4-5 arcsec), so all objects at
 z >> 0 are treated as point sources. The pipeline stores the aperture
-fluxes within a 4 pixel radius (pixel size 1.5 arcsec, i.e. a 6 arcsec
-radius aperture, ``FUV_4``/``NUV_4``) converted from Vega to AB
-magnitudes (+18.82 in FUV, +20.08 in NUV), alongside the total
-magnitudes.
+magnitudes within a 4 pixel radius (pixel size 1.5 arcsec, i.e. a 6
+arcsec radius aperture, ``FUV_4``/``NUV_4``), converted to AB
+magnitudes by adding the AB zeropoints (+18.82 in FUV, +20.08 in NUV),
+alongside the total magnitudes.
 
 No upper limits
 ---------------
@@ -78,3 +78,18 @@ The Makefile rule produces, per band (prefix F = FUV, N = NUV):
   extinction-corrected energy fluxes in the internal LU unit
   (erg/s/cm^2/Hz), which feed the final ``FUV``/``NUV`` mJy columns of
   the merged catalog (see :doc:`outputs`).
+
+References
+----------
+
+* `Bianchi, Shiao & Thilker 2017 <https://arxiv.org/abs/1704.05903>`_
+  (GUVcat_AIS, ApJS 230, 24): the catalog, its depth and columns
+  (documented in the `VizieR II/335 ReadMe
+  <http://vizier.cds.unistra.fr/viz-bin/ReadMe/II/335>`_).
+* `Morrissey et al. 2007 <https://arxiv.org/abs/astro-ph/0703531>`_
+  (ApJS 173, 682): the GALEX instrument, calibration and AB zeropoints
+  (see also the `GALEX FAQ on counts and background
+  <https://asd.gsfc.nasa.gov/archive/galex/FAQ/counts_background.html>`_).
+* `Schlafly & Finkbeiner 2011 <https://arxiv.org/abs/1009.2514>`_
+  (ApJ 737, 103): the per-band Milky Way extinction coefficients used
+  for the dereddening (8.286 in FUV, 8.621 in NUV).

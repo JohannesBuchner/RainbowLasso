@@ -8,16 +8,16 @@
 		in1=$*.fits values1="RA DEC" icmd1='keepcols "id RA DEC"' suffix1=_in \
 		in2=$< values2="RA DEC" suffix2= \
 		ocmd='addcol extended "g_extendedness_value==1||r_extendedness_value==1||i_extendedness_value==1||z_extendedness_value==1||y_extendedness_value==1"' \
-		ocmd='addcol adflux_g "extended ? g_psfflux_flux : g_apertureflux_57_flux"' \
-		ocmd='addcol adflux_r "extended ? r_psfflux_flux : r_apertureflux_57_flux"' \
-		ocmd='addcol adflux_i "extended ? i_psfflux_flux : i_apertureflux_57_flux"' \
-		ocmd='addcol adflux_z "extended ? z_psfflux_flux : z_apertureflux_57_flux"' \
-		ocmd='addcol adflux_y "extended ? y_psfflux_flux : y_apertureflux_57_flux"' \
-		ocmd='addcol adflux_g_err "extended ? g_psfflux_fluxerr : g_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_r_err "extended ? r_psfflux_fluxerr : r_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_i_err "extended ? i_psfflux_fluxerr : i_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_z_err "extended ? z_psfflux_fluxerr : z_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_y_err "extended ? y_psfflux_fluxerr : y_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_g "extended ? g_apertureflux_57_flux : g_psfflux_flux"' \
+		ocmd='addcol adflux_r "extended ? r_apertureflux_57_flux : r_psfflux_flux"' \
+		ocmd='addcol adflux_i "extended ? i_apertureflux_57_flux : i_psfflux_flux"' \
+		ocmd='addcol adflux_z "extended ? z_apertureflux_57_flux : z_psfflux_flux"' \
+		ocmd='addcol adflux_y "extended ? y_apertureflux_57_flux : y_psfflux_flux"' \
+		ocmd='addcol adflux_g_err "extended ? g_apertureflux_57_fluxerr : g_psfflux_fluxerr"' \
+		ocmd='addcol adflux_r_err "extended ? r_apertureflux_57_fluxerr : r_psfflux_fluxerr"' \
+		ocmd='addcol adflux_i_err "extended ? i_apertureflux_57_fluxerr : i_psfflux_fluxerr"' \
+		ocmd='addcol adflux_z_err "extended ? z_apertureflux_57_fluxerr : z_psfflux_fluxerr"' \
+		ocmd='addcol adflux_y_err "extended ? y_apertureflux_57_fluxerr : y_psfflux_fluxerr"' \
 		ocmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -29):-99."' \
 		ocmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -29):-99."' \
 		ocmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -29):-99."' \

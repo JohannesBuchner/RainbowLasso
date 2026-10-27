@@ -87,3 +87,21 @@ Final rule
 The ``%_all.fits`` rule merges all catalogs together (GALEX, LS, UKIDSS,
 VHS, AllWISE, GALEX coverage) and computes the final flux columns; see
 :doc:`outputs` for the column convention.
+
+References
+----------
+
+* `Dey et al. 2019 <https://arxiv.org/abs/1804.08657>`_ (AJ 157, 168):
+  the Legacy Surveys overview paper, describing the Tractor
+  photometry, the source types and the mask bits.
+* `Legacy Survey DR10 documentation <https://www.legacysurvey.org/dr10/catalogs/>`_:
+  the catalog column descriptions (fluxes in nanomaggy, aperture radii,
+  MW_TRANSMISSION), and the `bitmask descriptions
+  <https://www.legacysurvey.org/dr10/bitmasks/>`_ for ``maskbits`` and
+  ``fitbits``.
+* `Lang, Hogg & Schlegel 2014 <https://arxiv.org/abs/1405.7368>`_
+  (AJ 148, 26): the unWISE coadds underlying the WISE deblended
+  photometry in the Legacy Survey.
+* `Schlafly & Finkbeiner 2011 <https://arxiv.org/abs/1009.2514>`_
+  (ApJ 737, 103): the MW transmission coefficients used for the
+  extinction correction.

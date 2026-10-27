@@ -54,3 +54,14 @@ AllWISE measurements are only used as fallback:
 The origin of each WISE1/WISE2 value is recorded in the ``WISE1_origin``
 and ``WISE2_origin`` columns (``LS10``, ``AllWISE`` or ``LS10UL``); see
 :doc:`outputs` for the column convention.
+
+References
+----------
+
+* `Cutri et al. 2013 <https://ui.adsabs.harvard.edu/abs/2013wise.rept...1C>`_
+  (AllWISE Data Release): the catalog and the `explanatory supplement
+  <https://wise2.ipac.caltech.edu/docs/release/allwise/expsup/>`_,
+  which documents the catalog columns and the all-sky sensitivities.
+* `Wright et al. 2010 <https://arxiv.org/abs/1001.0525>`_ (AJ 140,
+  1868): the WISE mission and the Vega zero points underlying the
+  W1-W4 magnitude system.

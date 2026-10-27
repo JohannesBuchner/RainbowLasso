@@ -66,3 +66,14 @@ aperture flux table ``ls_dr10.apflux`` (via ``ls_id``) to obtain the
 aperture fluxes and inverse variances (``apflux_*_1`` .. ``apflux_*_8``,
 ``apflux_ivar_*_1`` .. ``apflux_ivar_*_8``) that the adaptive flux
 calculation needs.
+
+References
+----------
+
+* `Astro Data Lab documentation <https://datalab.noirlab.edu/docs/manual/>`_:
+  the service, the ``datalab`` command line tool and the ``mydb`` and
+  query interfaces.
+* `Koposov & Bartunov 2006 <https://ui.adsabs.harvard.edu/abs/2006ASPC..351..735K/abstract>`_:
+  the q3c sky-indexing that ``q3c_join`` / ``q3c_radial_query`` use.
+* The catalog columns are described in the pages of each survey
+  (:doc:`legacysurvey`, :doc:`vhs`, :doc:`ukidss`, :doc:`euclid`).

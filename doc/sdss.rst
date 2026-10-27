@@ -42,3 +42,15 @@ Output columns
 
 ``u_sdss``, ``g_sdss`` .. (and ``_err``): magnitudes and errors in the
 ``%_withSDSS.fits`` file.
+
+References
+----------
+
+* `York et al. 2000 <https://arxiv.org/abs/astro-ph/0006396>`_ (AJ
+  120, 1579): the SDSS survey.
+* `SDSS photometric flags documentation
+  <https://www.sdss.org/dr16/algorithms/photo_flags/>`_: the flag
+  names decoded by ``fetchSDSS.py``.
+* `SDSS DR16 PhotoObj schema
+  <https://www.sdss.org/dr16/scope/>`_: the catalog columns
+  (psfMag, aper magnitudes).

@@ -27,17 +27,10 @@ Adaptive fluxes
    :language: make
 
 The flux extraction is adapted to the source type (``extended_*``):
-point sources use the 5.75 arcsec radius aperture flux
-(``*_apertureflux_57_flux``), extended sources the PSF flux
-(``*_psfflux_flux``).
 
-.. warning::
-
-   This assignment (``extended ? psfflux : apertureflux_57``) disagrees
-   with the comment in the Makefile (which says point sources use the
-   model flux and extended sources the 5.7 arcsec aperture, as for the
-   Legacy Survey). Treat the HSC fluxes with care until this is
-   resolved.
+* for **point sources**: the PSF model flux (``*_psfflux_flux``),
+* for **extended sources**: the 5.75 arcsec radius aperture flux
+  (``*_apertureflux_57_flux``).
 
 The Milky Way extinction correction uses the extinction coefficients
 ``a_*`` and the conversion ``10^-29`` to flux units.
@@ -68,3 +61,15 @@ Output columns
 
 ``HSC_g``, ``HSC_r``, ``HSC_i``, ``HSC_z``, ``HSC_y`` (and ``_err``):
 fluxes in mJy in the ``%_HSCall.fits`` file.
+
+References
+----------
+
+* `Aihara et al. 2022 <https://arxiv.org/abs/2108.13045>`_ (PASJ 74,
+  247): the HSC PDR3 data release.
+* `Bosch et al. 2018 <https://arxiv.org/abs/1705.06766>`_ (PASJ 70,
+  S5): the hscPipe measurement algorithm behind the fluxes
+  (PSF, aperture, extendedness).
+* `HSC PDR3 schema documentation
+  <https://hsc-release.mtk.nao.ac.jp/doc/>`_: the catalog columns
+  (psfflux, apertureflux, pixelflags).

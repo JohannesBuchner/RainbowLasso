@@ -66,3 +66,17 @@ Output columns
 fluxes in the internal LU unit, which feed the final ``WFCAM_Y``,
 ``WFCAM_J``, ``WFCAM_H``, ``WFCAM_Ks`` mJy columns of the merged
 catalog (see :doc:`outputs`).
+
+References
+----------
+
+* `Lawrence et al. 2007 <https://arxiv.org/abs/astro-ph/0604426>`_
+  (MNRAS 379, 1599): the UKIDSS survey.
+* `Hewett et al. 2006 <https://arxiv.org/abs/astro-ph/0604427>`_
+  (MNRAS 367, 454): the UKIDSS photometric system and the Vega to AB
+  conversion (`WSA copy
+  <http://wsa.roe.ac.uk/pubs/hewett-ukidss.pdf>`_).
+* `WSA lassource column documentation
+  <http://wsa.roe.ac.uk/las_lassource.html>`_: the catalog columns
+  (aperture magnitudes, error bits, per-source extinction ``ay`` ..
+  ``ak``).

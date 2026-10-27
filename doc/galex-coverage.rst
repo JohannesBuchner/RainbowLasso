@@ -36,3 +36,14 @@ transmission. In the final merge (see :doc:`legacysurvey` and
 :doc:`outputs`), sources without a GALEX detection get
 ``NUV = 3 * NUV_fluxlim`` (a 3 sigma upper limit, negative error
 convention) and ``NUV_err = -NUV``.
+
+References
+----------
+
+* `Schlegel, Finkbeiner & Davis 1998 <https://arxiv.org/abs/astro-ph/9803161>`_
+  (ApJ 500, 525): the SFD Milky Way dust maps that ``galexebv.py``
+  queries (via the `dustmaps <https://github.com/gregreen/dustmaps>`_
+  package, `Green 2018 <https://doi.org/10.21105/joss.00695>`_).
+* `Bianchi, Shiao & Thilker 2017 <https://arxiv.org/abs/1704.05903>`_
+  (GUVcat_AIS): the AIS tile grid that the coverage table
+  ``galex_ais_ctrs.fits`` is built from.

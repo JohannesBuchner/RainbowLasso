@@ -45,3 +45,10 @@ Output columns
 
 ``prior_GALflux_decam_g`` and ``prior_GALflux_decam_r`` (with
 ``_errlo``, ``_errhi``) in the ``%_all_extflux_withEuclid.fits`` file.
+
+References
+----------
+
+* `Euclid Collaboration: Mellier et al. 2025 <https://arxiv.org/abs/2503.15302>`_
+  (Euclid Quick Data Release (Q1) - Data release overview): the Q1
+  release, its catalogs and columns.

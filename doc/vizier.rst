@@ -57,3 +57,14 @@ Notes
 * ``find=all`` output carries an ``angDist`` column (arcsec) with the
   distance to each match, used by the AllWISE aggregation
   (:doc:`allwise`).
+
+References
+----------
+
+* `Ochsenbein, Bauer & Marcout 2000 <https://ui.adsabs.harvard.edu/abs/2000A%26AS..143...23O/abstract>`_
+  (A&AS 143, 23): the VizieR catalog service.
+* `CDS X-Match service <https://cdsxmatch.u-strasbg.fr/xmatch>`_:
+  the position cross-matching API behind ``cdsskymatch``
+  (`Pineau et al. 2017 <https://ui.adsabs.harvard.edu/abs/2017A%26C....1...51P>`_).
+* `Taylor 2006 <https://arxiv.org/abs/astro-ph/0607353>`_ (ADASS XV):
+  the STILTS tool that drives the queries.
