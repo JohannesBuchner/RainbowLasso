@@ -24,7 +24,6 @@ RainbowLasso - reliable ultraviolet to infrared photometry
 
    galex
    legacysurvey
-   allwise
    vhs
    ukidss
 
@@ -33,6 +32,7 @@ RainbowLasso - reliable ultraviolet to infrared photometry
    :caption: Upper limit sources:
 
    galex-coverage
+   allwise
 
 .. toctree::
    :maxdepth: 1
