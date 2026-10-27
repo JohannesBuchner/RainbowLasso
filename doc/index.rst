@@ -7,6 +7,7 @@ RainbowLasso - reliable ultraviolet to infrared photometry
 
    readme
    installation
+   apertures
    noirlab
    vizier
    galex
@@ -19,6 +20,7 @@ RainbowLasso - reliable ultraviolet to infrared photometry
    hsc
    euclid
    outputs
+   TODO
 
 
 

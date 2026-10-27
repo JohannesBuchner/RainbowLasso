@@ -28,9 +28,17 @@ Aperture fluxes
 The flux extraction is adapted to the source type:
 
 * for **point sources**: aperture-corrected fluxes within a 2.8 arcsec
-  diameter aperture (``apermag4``),
+  diameter aperture (``apermag4``, 1.4 arcsec radius),
 * for **extended sources**: not-aperture-corrected fluxes within a
-  5.6 arcsec diameter aperture (``apermagnoapercorr6``).
+  5.7 arcsec diameter aperture (``apermagnoapercorr6``, 2.8 arcsec
+  radius).
+
+These apertures follow the CASU aperture sequence (radii 0.5, 0.71,
+1.0, 1.4, 2.0, 2.8, 4.0, 5.66 arcsec, steps of sqrt(2)); the sizes are
+documented in the VizieR `II/367 column descriptions
+<https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=II/367>`_
+("2.8\" aperture diam", "5.7\" aperture diam"). See
+:doc:`apertures` for the matched-aperture table.
 
 The per-source Milky Way extinction (``ay``, ``aj``, ``ah``, ``aks``
 columns) is subtracted from the magnitudes, the constants (0.634, 0.938,

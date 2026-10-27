@@ -28,9 +28,14 @@ Aperture fluxes
 The flux extraction is adapted to the source type:
 
 * for **point sources**: aperture fluxes with a 2.8 arcsec diameter
-  aperture (``apermag4``),
-* for **extended sources**: aperture fluxes with a 5.6 arcsec diameter
-  (``apermag6``).
+  aperture (``apermag4``, 1.4 arcsec radius),
+* for **extended sources**: aperture fluxes with a 5.7 arcsec diameter
+  (``apermag6``, 2.8 arcsec radius).
+
+These apertures follow the CASU aperture sequence (radii 0.5, 0.71,
+1.0, 1.4, 2.0, 2.8, 4.0, 5.66 arcsec, steps of sqrt(2); AperMag3 is
+the 1.0'' radius default aperture). See :doc:`apertures` for the
+matched-aperture table.
 
 .. note::
 
