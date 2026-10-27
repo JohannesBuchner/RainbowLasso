@@ -13,7 +13,7 @@ HSC-WIDE (optional)
 Matching
 --------
 
-.. literalinclude:: _segments/hsc-fetch.mk
+.. literalinclude:: segments/hsc-fetch.mk
    :language: make
 
 The nearest source within 1 arcsec is retrieved (and separately the
@@ -23,7 +23,7 @@ contamination of the images).
 Adaptive fluxes
 ---------------
 
-.. literalinclude:: _segments/hsc-fluxes.mk
+.. literalinclude:: segments/hsc-fluxes.mk
    :language: make
 
 The flux extraction is adapted to the source type (``extended_*``):
@@ -53,7 +53,7 @@ For the ``%_HSCall_extflux.fits`` products, galaxy total-flux priors
 aperture fluxes (``apfluxext_*_40``), for extended, unblended,
 unsaturated sources:
 
-.. literalinclude:: _segments/hsc-extflux.mk
+.. literalinclude:: segments/hsc-extflux.mk
    :language: make
 
 Output columns

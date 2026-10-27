@@ -25,7 +25,7 @@ For each survey, the Makefile follows the same pattern (shown here for
 VHS; the segments are regenerated with ``python3 makefilesegments.py``,
 see :ref:`makefilesegments`):
 
-.. literalinclude:: _segments/vhs-fetch.mk
+.. literalinclude:: segments/vhs-fetch.mk
    :language: make
 
 1. The input catalog is reduced to id, RA, DEC columns

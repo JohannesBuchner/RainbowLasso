@@ -19,7 +19,7 @@ tiles (columns ``RAfdeg``, ``DEfdeg``).
 ``galexebv.py`` adds the SFD Milky Way E(B-V) at each tile center
 (via the ``dustmaps`` package) and writes ``galex_ais_ctrs_ebv.fits``:
 
-.. literalinclude:: _segments/galexebv.mk
+.. literalinclude:: segments/galexebv.mk
    :language: make
 
 Upper limit per position
@@ -29,7 +29,7 @@ Each input position is matched to the nearest GALEX AIS tile center
 within 0.56 degrees (1980 arcsec, the tile diagonal). The NUV flux limit
 is scaled up with the Galactic extinction towards the tile center:
 
-.. literalinclude:: _segments/galex-coverage.mk
+.. literalinclude:: segments/galex-coverage.mk
    :language: make
 
 The rule computes ``NUV_fluxlim = 0.02 * 10^(EBV_min * 1.35)`` (mJy),

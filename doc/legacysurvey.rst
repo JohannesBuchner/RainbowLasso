@@ -18,7 +18,7 @@ Only sources within the Legacy Survey area are handled.
 Adaptive fluxes
 ---------------
 
-.. literalinclude:: _segments/legacysurvey-fluxes.mk
+.. literalinclude:: segments/legacysurvey-fluxes.mk
    :language: make
 
 The flux extraction is adapted to the source type:
@@ -42,7 +42,7 @@ The quality cuts are applied in the final merge
 (:ref:`the final rule <final>`), where the per-band columns
 ``decam_*``, ``90prime_*``, ``zd_mosaic`` are computed:
 
-.. literalinclude:: _segments/final.mk
+.. literalinclude:: segments/final.mk
    :language: make
 
 * **Image fitting problems** (``fitbits_LS``): for point sources, the
@@ -70,10 +70,10 @@ priors (``prior_GALflux_decam_*``) are computed from the LS aperture
 fluxes (aperture radius 4, i.e. 11.4 arcsec diameter), for extended
 sources only:
 
-.. literalinclude:: _segments/legacysurvey-extflux.mk
+.. literalinclude:: segments/legacysurvey-extflux.mk
    :language: make
 
-.. literalinclude:: _segments/legacysurvey-extflux-merge.mk
+.. literalinclude:: segments/legacysurvey-extflux-merge.mk
    :language: make
 
 These require ``TYPE != PSF``, ``fracflux < 0.1`` and positive errors,

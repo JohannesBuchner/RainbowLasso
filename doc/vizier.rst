@@ -16,12 +16,12 @@ How the pipeline queries VizieR
 
 For example, the GALEX match (see :doc:`galex`):
 
-.. literalinclude:: _segments/galex.mk
+.. literalinclude:: segments/galex.mk
    :language: make
 
 and the AllWISE match (see :doc:`allwise`):
 
-.. literalinclude:: _segments/allwise-fetch.mk
+.. literalinclude:: segments/allwise-fetch.mk
    :language: make
 
 Tables used

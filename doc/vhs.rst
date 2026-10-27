@@ -13,7 +13,7 @@ Lab (see :doc:`noirlab`): ``vhs_dr5.vhs_cat_v3``.
 Matching
 --------
 
-.. literalinclude:: _segments/vhs-fetch.mk
+.. literalinclude:: segments/vhs-fetch.mk
    :language: make
 
 The nearest source within 1 arcsec is retrieved (SQL ``q3c_join`` via
@@ -22,7 +22,7 @@ Data Lab).
 Aperture fluxes
 ---------------
 
-.. literalinclude:: _segments/vhs-fluxes.mk
+.. literalinclude:: segments/vhs-fluxes.mk
    :language: make
 
 The flux extraction is adapted to the source type:

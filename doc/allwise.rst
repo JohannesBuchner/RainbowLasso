@@ -16,14 +16,14 @@ providing upper limits by finding the brightest neighbour.
 Matching and aggregation
 ------------------------
 
-.. literalinclude:: _segments/allwise-fetch.mk
+.. literalinclude:: segments/allwise-fetch.mk
    :language: make
 
 For the upper-limit handling, all AllWISE sources within 20 arcsec are
 matched (``find=all``); ``groupsumWISE.py`` then sums the fluxes of all
 matches per input source (flux sum, error as norm):
 
-.. literalinclude:: _segments/allwise-sum.mk
+.. literalinclude:: segments/allwise-sum.mk
    :language: make
 
 * The Vega magnitudes are converted to fluxes (AB offsets 2.699, 3.339,

@@ -3,7 +3,7 @@ Extracts Makefile rule segments into files for the sphinx documentation.
 
 Each documentation page for a survey/catalog includes the relevant Makefile
 rule (target + recipe) via sphinx literalinclude. This script parses the
-Makefile and writes one file per segment into doc/_segments/.
+Makefile and writes one file per segment into doc/segments/.
 
 Usage::
 
@@ -93,15 +93,15 @@ def extract_segment(rules, target):
 
 
 def main():
-	"""Writes the requested Makefile segments into doc/_segments/."""
+	"""Writes the requested Makefile segments into doc/segments/."""
 	parser = argparse.ArgumentParser(
 		description="Extract Makefile rule segments for the sphinx docs.")
 	parser.add_argument('segments', nargs='*', default=None,
 		help="segment names to extract (default: all)")
 	parser.add_argument('--makefile', default='Makefile',
 		help="Makefile to parse (default: Makefile)")
-	parser.add_argument('--outdir', default=os.path.join('doc', '_segments'),
-		help="output directory (default: doc/_segments)")
+	parser.add_argument('--outdir', default=os.path.join('doc', 'segments'),
+		help="output directory (default: doc/segments)")
 	parser.add_argument('--list', action='store_true',
 		help="list available segments and exit")
 	args = parser.parse_args()

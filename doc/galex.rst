@@ -18,7 +18,7 @@ fainter than these depths are unreliable and are discarded.
 Matching
 --------
 
-.. literalinclude:: _segments/galex.mk
+.. literalinclude:: segments/galex.mk
    :language: make
 
 Each input position is matched against GUVcat_AIS with the CDS X-Match

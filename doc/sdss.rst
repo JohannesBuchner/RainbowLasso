@@ -20,7 +20,7 @@ file ``~/.config/sciserver/login.txt``::
 Matching and fluxes
 -------------------
 
-.. literalinclude:: _segments/sdss-fetch.mk
+.. literalinclude:: segments/sdss-fetch.mk
    :language: make
 
 The nearest source within 1 arcsec is retrieved
@@ -29,7 +29,7 @@ flag names, and the usable flags are computed (see ``fetchSDSS.py``).
 
 In the final ``%_withSDSS.fits`` file:
 
-.. literalinclude:: _segments/sdss-fluxes.mk
+.. literalinclude:: segments/sdss-fluxes.mk
    :language: make
 
 the flux extraction is adapted to the source type:

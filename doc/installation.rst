@@ -84,7 +84,7 @@ Makefile segments for the documentation
 Each documentation page for a survey/catalog includes the relevant
 Makefile rule (target + recipe) via ``literalinclude``. The script
 ``makefilesegments.py`` extracts these rule segments from the Makefile
-into the ``doc/_segments/`` folder:
+into the ``doc/segments/`` folder:
 
 .. code-block:: console
 
