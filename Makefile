@@ -120,16 +120,16 @@ all:
 		in1=$*.fits values1="RA DEC" icmd1='keepcols "id RA DEC"' suffix1=_in \
 		in2=$< values2="RA DEC" suffix2= \
 		ocmd='addcol extended "g_extendedness_value==1||r_extendedness_value==1||i_extendedness_value==1||z_extendedness_value==1||y_extendedness_value==1"' \
-		ocmd='addcol adflux_g "extended ? g_psfflux_flux : g_apertureflux_57_flux"' \
-		ocmd='addcol adflux_r "extended ? r_psfflux_flux : r_apertureflux_57_flux"' \
-		ocmd='addcol adflux_i "extended ? i_psfflux_flux : i_apertureflux_57_flux"' \
-		ocmd='addcol adflux_z "extended ? z_psfflux_flux : z_apertureflux_57_flux"' \
-		ocmd='addcol adflux_y "extended ? y_psfflux_flux : y_apertureflux_57_flux"' \
-		ocmd='addcol adflux_g_err "extended ? g_psfflux_fluxerr : g_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_r_err "extended ? r_psfflux_fluxerr : r_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_i_err "extended ? i_psfflux_fluxerr : i_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_z_err "extended ? z_psfflux_fluxerr : z_apertureflux_57_fluxerr"' \
-		ocmd='addcol adflux_y_err "extended ? y_psfflux_fluxerr : y_apertureflux_57_fluxerr"' \
+		ocmd='addcol adflux_g "extended ? g_apertureflux_57_flux : g_psfflux_flux"' \
+		ocmd='addcol adflux_r "extended ? r_apertureflux_57_flux : r_psfflux_flux"' \
+		ocmd='addcol adflux_i "extended ? i_apertureflux_57_flux : i_psfflux_flux"' \
+		ocmd='addcol adflux_z "extended ? z_apertureflux_57_flux : z_psfflux_flux"' \
+		ocmd='addcol adflux_y "extended ? y_apertureflux_57_flux : y_psfflux_flux"' \
+		ocmd='addcol adflux_g_err "extended ? g_apertureflux_57_fluxerr : g_psfflux_fluxerr"' \
+		ocmd='addcol adflux_r_err "extended ? r_apertureflux_57_fluxerr : r_psfflux_fluxerr"' \
+		ocmd='addcol adflux_i_err "extended ? i_apertureflux_57_fluxerr : i_psfflux_fluxerr"' \
+		ocmd='addcol adflux_z_err "extended ? z_apertureflux_57_fluxerr : z_psfflux_fluxerr"' \
+		ocmd='addcol adflux_y_err "extended ? y_apertureflux_57_fluxerr : y_psfflux_fluxerr"' \
 		ocmd='addcol LU_flux_g "ADFLUX_G>-10000000000L ? ((ADFLUX_G/1000*(pow(10, -(-a_g)/(2.5)))))*pow(10, -29):-99."' \
 		ocmd='addcol LU_flux_r "ADFLUX_R>-10000000000L ? ((ADFLUX_R/1000*(pow(10, -(-a_r)/(2.5)))))*pow(10, -29):-99."' \
 		ocmd='addcol LU_flux_i "ADFLUX_I>-10000000000L ? ((ADFLUX_I/1000*(pow(10, -(-a_i)/(2.5)))))*pow(10, -29):-99."' \
@@ -168,15 +168,15 @@ all:
 		ocmd='addcol A_lam_fuv "A_v>0 ? A_v*(-0.3459882441104826 + 9.173790513029425/3.1): -99."' \
 		ocmd='addcol A_lam_nuv "A_v>0 ? A_v*(0.6743929174392934 + 1.2480067831962458/3.1): -99."' \
 		\
-		ocmd='addcol FUV "FUVmag>0&&FUVmag<20.8 ? FUVmag-(8.286*EBmV): -99."' \
-		ocmd='addcol NUV "NUVmag>0&&NUVmag<19.9 ? NUVmag-(8.621*EBmV): -99."' \
-		ocmd='addcol e_FUV "FUVmag>0&&FUVmag<20.8 ?e_FUVmag:-99"' \
-		ocmd='addcol e_NUV "NUVmag>0&&NUVmag<19.9 ?e_NUVmag:-99"' \
+		ocmd='addcol FUV "FUVmag>0&&FUVmag<19.9 ? FUVmag-(8.286*EBmV): -99."' \
+		ocmd='addcol NUV "NUVmag>0&&NUVmag<20.8 ? NUVmag-(8.621*EBmV): -99."' \
+		ocmd='addcol e_FUV "FUVmag>0&&FUVmag<19.9 ?e_FUVmag:-99"' \
+		ocmd='addcol e_NUV "NUVmag>0&&NUVmag<20.8 ?e_NUVmag:-99"' \
 		\
-		ocmd='addcol FUV_aper "FUVmag>0&&FUVmag<20.8 ? FUV_4+18.82-(8.286*EBmV): -99."' \
-		ocmd='addcol NUV_aper "NUVmag>0&&NUVmag<19.9 ? NUV_4+20.08-(8.621*EBmV): -99."' \
-		ocmd='addcol e_FUV_aper "FUVmag>0&&FUVmag<20.8 ? e_FUV_4:-99"' \
-		ocmd='addcol e_NUV_aper "NUVmag>0&&NUVmag<19.9 ? e_NUV_4:-99"' \
+		ocmd='addcol FUV_aper "FUVmag>0&&FUVmag<19.9 ? FUV_4+18.82-(8.286*EBmV): -99."' \
+		ocmd='addcol NUV_aper "NUVmag>0&&NUVmag<20.8 ? NUV_4+20.08-(8.621*EBmV): -99."' \
+		ocmd='addcol e_FUV_aper "FUVmag>0&&FUVmag<19.9 ? e_FUV_4:-99"' \
+		ocmd='addcol e_NUV_aper "NUVmag>0&&NUVmag<20.8 ? e_NUV_4:-99"' \
 		\
 		ocmd='addcol Fflux_aper "e_FUV_aper>0 ? pow(10, -0.4*FUV_aper)*1e6*3631 : -99."' \
 		ocmd='addcol Nflux_aper "e_NUV_aper>0 ? pow(10, -0.4*NUV_aper)*1e6*3631 : -99."' \
@@ -624,6 +624,11 @@ lint: ## check style of the python scripts with flake8, pycodestyle and pydocsty
 	flake8 *.py
 	pycodestyle *.py
 	pydocstyle *.py
+
+docs: ## extract Makefile segments and build the sphinx documentation
+	python3 makefilesegments.py
+	$(MAKE) -C doc html
+	@echo "to update the gh-pages branch: make -C doc update-gh-pages"
 
 release: ## package and upload a release
 	echo "releases are directly through the git repo"

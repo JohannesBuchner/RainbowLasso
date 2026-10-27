@@ -5,7 +5,7 @@ RainbowLasso compiles reliable ultraviolet to infrared for
 modelling stars, galaxies and Active Galactic Nuclei
 from public all-sky astronomical surveys.
 
-.. image:: logo.png
+.. image:: https://raw.githubusercontent.com/JohannesBuchner/RainbowLasso/main/logo.png
 
 How it works
 ------------
@@ -153,6 +153,19 @@ How to read the diagnostic plot:
 * fluxes.pdf compares the flux (mJy) from one band to the next. If the spectrum is relatively flat, and bands are close together, they should follow the 1:1 line.
 * errors.pdf compares the flux error to the significance of the value (value / error ratio). 
 * The previous filter is shown in gray. Within one telescope and filter system, the error properties should be comparable.
+
+Documentation
+-------------
+
+This documentation is also available as sphinx documentation in the
+doc/ folder (start at doc/index.rst). Build it with::
+
+	make docs
+
+Each service and catalog used (noirlab Data Lab, CDS/VizieR, GALEX,
+Legacy Survey, AllWISE, VHS, UKIDSS, SDSS, HSC, Euclid) has a dedicated
+page there, documenting the cuts applied and the Makefile steps, and a
+page explaining the main output files and the column convention.
 
 Known issues
 ------------
