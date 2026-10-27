@@ -16,66 +16,66 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
   
-  <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'legacysurvey';</script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="canonical" href="https://johannesbuchner.github.io/RainbowLasso/legacysurvey.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="AllWISE" href="allwise.html" />
+    <link rel="next" title="VISTA Hemisphere Survey (VHS)" href="vhs.html" />
     <link rel="prev" title="GALEX" href="galex.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-  
-    
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="searchindex.js"></script>
-  
   </head>
-  <body data-default-mode="">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  
-  <dialog id="pst-search-dialog">
-    
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -83,6 +83,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -90,59 +91,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -151,8 +108,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -182,17 +138,21 @@
     
     
     <img src="_static/logo.png" class="logo__image only-light" alt="RainbowLasso  documentation - Home"/>
-    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="RainbowLasso  documentation - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="RainbowLasso  documentation - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
@@ -212,13 +172,13 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="galex.html">GALEX</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Legacy Survey (optical)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vhs.html">VISTA Hemisphere Survey (VHS)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ukidss.html">UKIDSS (near-infrared)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Upper limit sources:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="galex-coverage.html">GALEX upper limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="allwise.html">AllWISE</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Optional data sources:</span></p>
 <ul class="nav bd-sidenav">
@@ -233,14 +193,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -323,7 +278,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  class="btn btn-sm btn-fullscreen-button"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -337,24 +292,25 @@
 
 
 
-<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
-  </ul>
-</div>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -376,7 +332,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="pst-show_toc_level nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-fluxes">Adaptive fluxes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuts-applied">Cuts applied</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-source-flux-priors">Extended-source flux priors</a></li>
@@ -407,43 +363,43 @@ Legacy Survey).</p>
 <h2>Adaptive fluxes<a class="headerlink" href="#adaptive-fluxes" title="Link to this heading">#</a></h2>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">%_LS.fits</span><span class="o">:</span><span class="w"> </span>%<span class="n">_LS_noirlab</span>.<span class="n">fits</span>
 <span class="c">	# adflux_* = adaptive flux column, depending on source type</span>
-<span class="c">	# for extended sources: 3.5'' radius aperture = 7'' diameter aperture = OPT:apflux_*_6 and IR:apflux_*_1</span>
+<span class="c">	# for extended sources: 3.5&#39;&#39; radius aperture = 7&#39;&#39; diameter aperture = OPT:apflux_*_6 and IR:apflux_*_1</span>
 <span class="c">	# for point sources: model flux</span>
 <span class="c">	# Milky way extinction correction</span>
 <span class="c">	# 28.44 is to convert to erg/s/cm^2/Hz</span>
 <span class="w">	</span>stilts<span class="w"> </span>tpipe<span class="w"> </span><span class="k">in</span><span class="o">=</span>$^<span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="nv">$@</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_g "type==\"PSF\" ? flux_g : apflux_g_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_r "type==\"PSF\" ? flux_r : apflux_r_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_i "type==\"PSF\" ? flux_i : apflux_i_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_z "type==\"PSF\" ? flux_z : apflux_z_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_W1 "type==\"PSF\" ? flux_W1 : apflux_W1_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_W2 "type==\"PSF\" ? flux_W2 : apflux_W2_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_W3 "type==\"PSF\" ? flux_W3 : apflux_W3_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_W4 "type==\"PSF\" ? flux_W4 : apflux_W4_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_g  "type==\"PSF\" ? flux_ivar_g : apflux_ivar_g_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_r  "type==\"PSF\" ? flux_ivar_r : apflux_ivar_r_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_i  "type==\"PSF\" ? flux_ivar_i : apflux_ivar_i_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_z  "type==\"PSF\" ? flux_ivar_z : apflux_ivar_z_6"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_W1 "type==\"PSF\" ? flux_ivar_W1 : apflux_ivar_W1_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_W2 "type==\"PSF\" ? flux_ivar_W2 : apflux_ivar_W2_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_W3 "type==\"PSF\" ? flux_ivar_W3 : apflux_ivar_W3_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol adflux_ivar_W4 "type==\"PSF\" ? flux_ivar_W4 : apflux_ivar_W4_1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_g "FLUX_G&gt;-10000000000L ? ((ADFLUX_G/MW_TRANSMISSION_G))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_r "FLUX_R&gt;-10000000000L ? ((ADFLUX_R/MW_TRANSMISSION_R))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_i "FLUX_I&gt;-10000000000L ? ((ADFLUX_I/MW_TRANSMISSION_I))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_z "FLUX_Z&gt;-10000000000L ? ((ADFLUX_Z/MW_TRANSMISSION_Z))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w1 "FLUX_W1&gt;-10000000000L ? ((ADFLUX_W1/MW_TRANSMISSION_W1))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w2 "FLUX_W2&gt;-10000000000L ? ((ADFLUX_W2/MW_TRANSMISSION_W2))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w3 "FLUX_W3&gt;-10000000000L ? ((ADFLUX_W3/MW_TRANSMISSION_W3))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w4 "FLUX_W4&gt;-10000000000L ? ((ADFLUX_W4/MW_TRANSMISSION_W4))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_g_err "ADFLUX_IVAR_G&gt;0 ? (((1/pow(ADFLUX_IVAR_G, 0.5))/MW_TRANSMISSION_G))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_r_err "ADFLUX_IVAR_R&gt;0 ? (((1/pow(ADFLUX_IVAR_R, 0.5))/MW_TRANSMISSION_R))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_i_err "ADFLUX_IVAR_I&gt;0 ? (((1/pow(ADFLUX_IVAR_I, 0.5))/MW_TRANSMISSION_I))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_z_err "ADFLUX_IVAR_Z&gt;0 ? (((1/pow(ADFLUX_IVAR_Z, 0.5))/MW_TRANSMISSION_Z))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w1_err "ADFLUX_IVAR_W1&gt;0 ? (((1/pow(ADFLUX_IVAR_W1, 0.5))/MW_TRANSMISSION_W1))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w2_err "ADFLUX_IVAR_W2&gt;0 ? (((1/pow(ADFLUX_IVAR_W2, 0.5))/MW_TRANSMISSION_W2))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w3_err "ADFLUX_IVAR_W3&gt;0 ? (((1/pow(ADFLUX_IVAR_W3, 0.5))/MW_TRANSMISSION_W3))*pow(10, -28.44):-99."'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">'addcol LU_flux_w4_err "ADFLUX_IVAR_W4&gt;0 ? (((1/pow(ADFLUX_IVAR_W4, 0.5))/MW_TRANSMISSION_W4))*pow(10, -28.44):-99."'</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_g &quot;type==\&quot;PSF\&quot; ? flux_g : apflux_g_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_r &quot;type==\&quot;PSF\&quot; ? flux_r : apflux_r_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_i &quot;type==\&quot;PSF\&quot; ? flux_i : apflux_i_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_z &quot;type==\&quot;PSF\&quot; ? flux_z : apflux_z_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_W1 &quot;type==\&quot;PSF\&quot; ? flux_W1 : apflux_W1_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_W2 &quot;type==\&quot;PSF\&quot; ? flux_W2 : apflux_W2_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_W3 &quot;type==\&quot;PSF\&quot; ? flux_W3 : apflux_W3_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_W4 &quot;type==\&quot;PSF\&quot; ? flux_W4 : apflux_W4_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_g  &quot;type==\&quot;PSF\&quot; ? flux_ivar_g : apflux_ivar_g_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_r  &quot;type==\&quot;PSF\&quot; ? flux_ivar_r : apflux_ivar_r_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_i  &quot;type==\&quot;PSF\&quot; ? flux_ivar_i : apflux_ivar_i_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_z  &quot;type==\&quot;PSF\&quot; ? flux_ivar_z : apflux_ivar_z_6&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_W1 &quot;type==\&quot;PSF\&quot; ? flux_ivar_W1 : apflux_ivar_W1_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_W2 &quot;type==\&quot;PSF\&quot; ? flux_ivar_W2 : apflux_ivar_W2_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_W3 &quot;type==\&quot;PSF\&quot; ? flux_ivar_W3 : apflux_ivar_W3_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol adflux_ivar_W4 &quot;type==\&quot;PSF\&quot; ? flux_ivar_W4 : apflux_ivar_W4_1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_g &quot;FLUX_G&gt;-10000000000L ? ((ADFLUX_G/MW_TRANSMISSION_G))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_r &quot;FLUX_R&gt;-10000000000L ? ((ADFLUX_R/MW_TRANSMISSION_R))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_i &quot;FLUX_I&gt;-10000000000L ? ((ADFLUX_I/MW_TRANSMISSION_I))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_z &quot;FLUX_Z&gt;-10000000000L ? ((ADFLUX_Z/MW_TRANSMISSION_Z))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w1 &quot;FLUX_W1&gt;-10000000000L ? ((ADFLUX_W1/MW_TRANSMISSION_W1))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w2 &quot;FLUX_W2&gt;-10000000000L ? ((ADFLUX_W2/MW_TRANSMISSION_W2))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w3 &quot;FLUX_W3&gt;-10000000000L ? ((ADFLUX_W3/MW_TRANSMISSION_W3))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w4 &quot;FLUX_W4&gt;-10000000000L ? ((ADFLUX_W4/MW_TRANSMISSION_W4))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_g_err &quot;ADFLUX_IVAR_G&gt;0 ? (((1/pow(ADFLUX_IVAR_G, 0.5))/MW_TRANSMISSION_G))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_r_err &quot;ADFLUX_IVAR_R&gt;0 ? (((1/pow(ADFLUX_IVAR_R, 0.5))/MW_TRANSMISSION_R))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_i_err &quot;ADFLUX_IVAR_I&gt;0 ? (((1/pow(ADFLUX_IVAR_I, 0.5))/MW_TRANSMISSION_I))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_z_err &quot;ADFLUX_IVAR_Z&gt;0 ? (((1/pow(ADFLUX_IVAR_Z, 0.5))/MW_TRANSMISSION_Z))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w1_err &quot;ADFLUX_IVAR_W1&gt;0 ? (((1/pow(ADFLUX_IVAR_W1, 0.5))/MW_TRANSMISSION_W1))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w2_err &quot;ADFLUX_IVAR_W2&gt;0 ? (((1/pow(ADFLUX_IVAR_W2, 0.5))/MW_TRANSMISSION_W2))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w3_err &quot;ADFLUX_IVAR_W3&gt;0 ? (((1/pow(ADFLUX_IVAR_W3, 0.5))/MW_TRANSMISSION_W3))*pow(10, -28.44):-99.&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">cmd</span><span class="o">=</span><span class="s1">&#39;addcol LU_flux_w4_err &quot;ADFLUX_IVAR_W4&gt;0 ? (((1/pow(ADFLUX_IVAR_W4, 0.5))/MW_TRANSMISSION_W4))*pow(10, -28.44):-99.&quot;&#39;</span>
 </pre></div>
 </div>
 <p>The flux extraction is adapted to the source type:</p>
@@ -485,62 +441,62 @@ columns. The flux unit is nanomaggy; multiplying by <code class="docutils litera
 <span class="w">		</span><span class="nv">in6</span><span class="o">=</span><span class="nv">$*</span>_ALLWISE_sum.fits<span class="w"> </span><span class="nv">suffix6</span><span class="o">=</span>_ALLWISE<span class="w"> </span><span class="nv">values6</span><span class="o">=</span>id<span class="w"> </span><span class="se">\</span>
 <span class="w">		</span><span class="nv">in7</span><span class="o">=</span><span class="nv">$*</span>_GALEX_UL.fits<span class="w"> </span><span class="nv">suffix7</span><span class="o">=</span>_GALEXUL<span class="w"> </span><span class="nv">values7</span><span class="o">=</span>id<span class="w"> </span><span class="se">\</span>
 <span class="w">		</span><span class="nv">fixcols</span><span class="o">=</span>all<span class="w"> </span><span class="nv">matcher</span><span class="o">=</span>exact<span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol pointlike "!(type_LS != \"PSF\")&amp;&amp;1=='</span><span class="si">${</span><span class="nv">ALLOW_POINTLIKE</span><span class="si">}</span><span class="s1">'"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol inMzLSBASS "DEC&gt;32&amp;&amp;RA&gt;90&amp;&amp;RA&lt;300"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsLS "(pointlike ? (fitbits_LS &amp; (1 | 4 | 8)) == 0 : 1==1) &amp;&amp; (maskbits_LS &amp; (1024 | 2048)) == 0"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsg "goodfitsLS &amp;&amp; (maskbits_LS &amp; 4) == 0 &amp;&amp; fracin_g_LS&gt;0.5"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsr "goodfitsLS &amp;&amp; (maskbits_LS &amp; 8) == 0 &amp;&amp; fracin_r_LS&gt;0.5"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsz "goodfitsLS &amp;&amp; (maskbits_LS &amp; 16) == 0 &amp;&amp; fracin_z_LS&gt;0.5"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsi "goodfitsLS &amp;&amp; (maskbits_LS &amp; 16384) == 0 &amp;&amp; fracin_i_LS&gt;0.5"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsW1 "goodfitsLS &amp;&amp; wisemask_w1_LS == 0"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol goodfitsW2 "goodfitsLS &amp;&amp; wisemask_w2_LS == 0"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol isolatedLS "(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)&lt;0.1&amp;&amp;max(fracflux_w3_LS,fracflux_w4_LS)&lt;10)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol W34_blended "max(fracflux_w1_LS,fracflux_w2_LS)&gt;0.1||max(fracflux_w4_LS,fracflux_w3_LS)&gt;1"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV "e_Fflux_real_LU_GALEX&gt;0 ? Fflux_real_LU_GALEX*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol FUV_err "e_Fflux_real_LU_GALEX&gt;0 ? e_Fflux_real_LU_GALEX*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV "e_Nflux_real_LU_GALEX&gt;0 ? Nflux_real_LU_GALEX*1e26 : 3 * NUV_fluxlim_GALEXUL"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol NUV_err "e_Nflux_real_LU_GALEX&gt;0 ? e_Nflux_real_LU_GALEX*1e26 : -NUV"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_g "(!inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_r "(!inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_i "(goodfitsi?LU_flux_i_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_z "(!inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_g_err "(!inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_r_err "(!inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_i_err "(goodfitsi?LU_flux_i_err_LS*1e26/fracin_i_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol decam_z_err "(!inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol 90prime_r "(inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol 90prime_g "(inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol zd_mosaic "(inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_LS*1e26:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol 90prime_r_err "(inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol zd_mosaic_err "(inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol 90prime_g_err "(inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_Y "Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_J "Jerrbits_VHS==0?(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_H "Herrbits_VHS==0?(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_K "Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_VHS:UV_Ksap6flux_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_Y_err "Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_err_VHS:UV_Yap6flux_err_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_J_err "Jerrbits_VHS==0?(pointlike?UV_Japc4flux_err_VHS:UV_Jap6flux_err_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_H_err "Herrbits_VHS==0?(pointlike?UV_Hapc4flux_err_VHS:UV_Hap6flux_err_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol UV_K_err "Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_err_VHS:UV_Ksap6flux_err_VHS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_Y "Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_UKIDSS:WFCAM_Yap6flux_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_J "Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_UKIDSS:WFCAM_Jap6flux_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_H "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_UKIDSS:WFCAM_Hap6flux_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_Ks "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_UKIDSS:WFCAM_Kap6flux_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_Y_err "Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_err_UKIDSS:WFCAM_Yap6flux_err_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_J_err "Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_H_err "Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WFCAM_Ks_err "Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE1_origin "isolatedLS&amp;&amp;goodfitsW1 ? \"LS10\" : ( (fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? \"AllWISE\" : \"LS10UL\")"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE1        "isolatedLS&amp;&amp;goodfitsW1 ? LU_flux_w1_LS * 1e26 : ((fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? WISE1_ALLWISE : (LU_flux_w1_LS + LU_flux_w1_err_LS) * 1e26 * (1 + fracflux_w1_LS))"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE1_err "isolatedLS&amp;&amp;goodfitsW1 ? LU_flux_w1_err_LS * 1e26 : ((fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? -WISE1_ALLWISE : -LU_flux_w1_err_LS * 1e26 * (1 + fracflux_w1_LS))"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE2_origin "isolatedLS&amp;&amp;goodfitsW2 ? \"LS10\" : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? \"AllWISE\" : \"LS10UL\")"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE2 "isolatedLS&amp;&amp;goodfitsW2 ? LU_flux_w2_LS * 1e26 : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? WISE2_ALLWISE : (LU_flux_w2_LS + LU_flux_w2_err_LS) * 1e26 * (1 + fracflux_w2_LS))"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE2_err "isolatedLS&amp;&amp;goodfitsW2 ? LU_flux_w2_err_LS * 1e26 : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? -WISE2_ALLWISE : -LU_flux_w2_err_LS * 1e26 * (1 + fracflux_w2_LS))"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE34_origin "isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? \"LS10\" : \"AllWISE\""'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE3 "isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w3_LS*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE3_err "isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w3_err_LS*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE4 "isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w4_LS*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol WISE4_err "isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w4_err_LS*1e26 : -99"'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol pointlike &quot;!(type_LS != \&quot;PSF\&quot;)&amp;&amp;1==&#39;</span><span class="si">${</span><span class="nv">ALLOW_POINTLIKE</span><span class="si">}</span><span class="s1">&#39;&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol inMzLSBASS &quot;DEC&gt;32&amp;&amp;RA&gt;90&amp;&amp;RA&lt;300&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsLS &quot;(pointlike ? (fitbits_LS &amp; (1 | 4 | 8)) == 0 : 1==1) &amp;&amp; (maskbits_LS &amp; (1024 | 2048)) == 0&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsg &quot;goodfitsLS &amp;&amp; (maskbits_LS &amp; 4) == 0 &amp;&amp; fracin_g_LS&gt;0.5&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsr &quot;goodfitsLS &amp;&amp; (maskbits_LS &amp; 8) == 0 &amp;&amp; fracin_r_LS&gt;0.5&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsz &quot;goodfitsLS &amp;&amp; (maskbits_LS &amp; 16) == 0 &amp;&amp; fracin_z_LS&gt;0.5&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsi &quot;goodfitsLS &amp;&amp; (maskbits_LS &amp; 16384) == 0 &amp;&amp; fracin_i_LS&gt;0.5&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsW1 &quot;goodfitsLS &amp;&amp; wisemask_w1_LS == 0&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol goodfitsW2 &quot;goodfitsLS &amp;&amp; wisemask_w2_LS == 0&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol isolatedLS &quot;(max(fracflux_g_LS,fracflux_r_LS,fracflux_z_LS,fracflux_w1_LS,fracflux_w2_LS)&lt;0.1&amp;&amp;max(fracflux_w3_LS,fracflux_w4_LS)&lt;10)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol W34_blended &quot;max(fracflux_w1_LS,fracflux_w2_LS)&gt;0.1||max(fracflux_w4_LS,fracflux_w3_LS)&gt;1&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol FUV &quot;e_Fflux_real_LU_GALEX&gt;0 ? Fflux_real_LU_GALEX*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol FUV_err &quot;e_Fflux_real_LU_GALEX&gt;0 ? e_Fflux_real_LU_GALEX*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol NUV &quot;e_Nflux_real_LU_GALEX&gt;0 ? Nflux_real_LU_GALEX*1e26 : 3 * NUV_fluxlim_GALEXUL&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol NUV_err &quot;e_Nflux_real_LU_GALEX&gt;0 ? e_Nflux_real_LU_GALEX*1e26 : -NUV&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_g &quot;(!inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_r &quot;(!inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_i &quot;(goodfitsi?LU_flux_i_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_z &quot;(!inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_g_err &quot;(!inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_r_err &quot;(!inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_i_err &quot;(goodfitsi?LU_flux_i_err_LS*1e26/fracin_i_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol decam_z_err &quot;(!inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol 90prime_r &quot;(inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol 90prime_g &quot;(inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol zd_mosaic &quot;(inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_LS*1e26:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol 90prime_r_err &quot;(inMzLSBASS &amp;&amp; goodfitsr?LU_flux_r_err_LS*1e26/fracin_r_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol zd_mosaic_err &quot;(inMzLSBASS &amp;&amp; goodfitsz?LU_flux_z_err_LS*1e26/fracin_z_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol 90prime_g_err &quot;(inMzLSBASS &amp;&amp; goodfitsg?LU_flux_g_err_LS*1e26/fracin_g_LS:-99)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_Y &quot;Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_VHS:UV_Yap6flux_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_J &quot;Jerrbits_VHS==0?(pointlike?UV_Japc4flux_VHS:UV_Jap6flux_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_H &quot;Herrbits_VHS==0?(pointlike?UV_Hapc4flux_VHS:UV_Hap6flux_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_K &quot;Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_VHS:UV_Ksap6flux_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_Y_err &quot;Yerrbits_VHS==0?(pointlike?UV_Yapc4flux_err_VHS:UV_Yap6flux_err_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_J_err &quot;Jerrbits_VHS==0?(pointlike?UV_Japc4flux_err_VHS:UV_Jap6flux_err_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_H_err &quot;Herrbits_VHS==0?(pointlike?UV_Hapc4flux_err_VHS:UV_Hap6flux_err_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol UV_K_err &quot;Kserrbits_VHS==0?(pointlike?UV_Ksapc4flux_err_VHS:UV_Ksap6flux_err_VHS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_Y &quot;Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_UKIDSS:WFCAM_Yap6flux_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_J &quot;Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_UKIDSS:WFCAM_Jap6flux_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_H &quot;Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_UKIDSS:WFCAM_Hap6flux_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_Ks &quot;Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_UKIDSS:WFCAM_Kap6flux_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_Y_err &quot;Yerrbits_UKIDSS==0?(pointlike?WFCAM_Yapc4flux_err_UKIDSS:WFCAM_Yap6flux_err_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_J_err &quot;Jerrbits_UKIDSS==0?(pointlike?WFCAM_Japc4flux_err_UKIDSS:WFCAM_Jap6flux_err_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_H_err &quot;Herrbits_UKIDSS==0?(pointlike?WFCAM_Hapc4flux_err_UKIDSS:WFCAM_Hap6flux_err_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WFCAM_Ks_err &quot;Kerrbits_UKIDSS==0?(pointlike?WFCAM_Kapc4flux_err_UKIDSS:WFCAM_Kap6flux_err_UKIDSS)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE1_origin &quot;isolatedLS&amp;&amp;goodfitsW1 ? \&quot;LS10\&quot; : ( (fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? \&quot;AllWISE\&quot; : \&quot;LS10UL\&quot;)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE1        &quot;isolatedLS&amp;&amp;goodfitsW1 ? LU_flux_w1_LS * 1e26 : ((fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? WISE1_ALLWISE : (LU_flux_w1_LS + LU_flux_w1_err_LS) * 1e26 * (1 + fracflux_w1_LS))&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE1_err &quot;isolatedLS&amp;&amp;goodfitsW1 ? LU_flux_w1_err_LS * 1e26 : ((fracflux_w1_LS &gt; 1 || WISE1_ALLWISE &lt; LU_flux_w1_LS * 1e26 * (1 + fracflux_w1_LS)) ? -WISE1_ALLWISE : -LU_flux_w1_err_LS * 1e26 * (1 + fracflux_w1_LS))&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE2_origin &quot;isolatedLS&amp;&amp;goodfitsW2 ? \&quot;LS10\&quot; : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? \&quot;AllWISE\&quot; : \&quot;LS10UL\&quot;)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE2 &quot;isolatedLS&amp;&amp;goodfitsW2 ? LU_flux_w2_LS * 1e26 : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? WISE2_ALLWISE : (LU_flux_w2_LS + LU_flux_w2_err_LS) * 1e26 * (1 + fracflux_w2_LS))&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE2_err &quot;isolatedLS&amp;&amp;goodfitsW2 ? LU_flux_w2_err_LS * 1e26 : ((fracflux_w2_LS &gt; 1 || WISE2_ALLWISE &lt; LU_flux_w2_LS * 1e26 * (1 + fracflux_w2_LS)) ? -WISE2_ALLWISE : -LU_flux_w2_err_LS * 1e26 * (1 + fracflux_w2_LS))&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE34_origin &quot;isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? \&quot;LS10\&quot; : \&quot;AllWISE\&quot;&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE3 &quot;isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w3_LS*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE3_err &quot;isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w3_err_LS*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE4 &quot;isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w4_LS*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol WISE4_err &quot;isolatedLS&amp;&amp;goodfitsW1&amp;&amp;goodfitsW2&amp;&amp;!W34_blended ? LU_flux_w4_err_LS*1e26 : -99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -573,23 +529,23 @@ sources only:</p>
 </pre></div>
 </div>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">%_all_extflux.fits</span><span class="o">:</span><span class="w"> </span>%<span class="n">_all</span>.<span class="n">fits</span> %<span class="n">_LS_extaper</span>.<span class="n">fits</span>
-<span class="c">	# use aperture photometry until 1.5'', after that the PSF wings are not Gaussian anymore</span>
+<span class="c">	# use aperture photometry until 1.5&#39;&#39;, after that the PSF wings are not Gaussian anymore</span>
 <span class="w">	</span>stilts<span class="w"> </span>tmatch2<span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="nv">$@</span><span class="w"> </span><span class="nv">matcher</span><span class="o">=</span>exact<span class="w"> </span><span class="nv">find</span><span class="o">=</span>best<span class="w"> </span><span class="nv">join</span><span class="o">=</span>all1<span class="w"> </span><span class="nv">fixcols</span><span class="o">=</span>dups<span class="w"> </span><span class="se">\</span>
 <span class="w">		</span><span class="nv">in1</span><span class="o">=</span><span class="nv">$*</span>_all.fits<span class="w"> </span><span class="nv">values1</span><span class="o">=</span>id<span class="w"> </span><span class="nv">suffix1</span><span class="o">=</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">in2</span><span class="o">=</span><span class="nv">$*</span>_LS_extaper.fits<span class="w"> </span><span class="nv">values2</span><span class="o">=</span>id<span class="w">  </span><span class="nv">icmd2</span><span class="o">=</span><span class="s1">'keepcols "id apfluxext*_4 MW_TRANSMISSION_*"'</span><span class="w"> </span><span class="nv">suffix2</span><span class="o">=</span>_LS_extaper<span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol usable_extflux_g "(TYPE_LS!=\"PSF\"&amp;&amp;fracflux_g_LS&lt;0.1&amp;&amp;decam_g_err&gt;0&amp;&amp;apfluxext_err_g_4&gt;0&amp;&amp;(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26&gt;decam_g*0.01)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol usable_extflux_r "(TYPE_LS!=\"PSF\"&amp;&amp;fracflux_r_LS&lt;0.1&amp;&amp;decam_r_err&gt;0&amp;&amp;apfluxext_err_r_4&gt;0&amp;&amp;(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26&gt;decam_r*0.01)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol usable_extflux_z "(TYPE_LS!=\"PSF\"&amp;&amp;fracflux_z_LS&lt;0.1&amp;&amp;decam_z_err&gt;0&amp;&amp;apfluxext_err_z_4&gt;0&amp;&amp;(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26&gt;decam_z*0.01)"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_g "usable_extflux_g?(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_r "usable_extflux_r?(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_z "usable_extflux_z?(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_g_errlo "usable_extflux_g?(apfluxext_err_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_r_errlo "usable_extflux_r?(apfluxext_err_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_z_errlo "usable_extflux_z?(apfluxext_err_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_g_errhi "1e10"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_r_errhi "1e10"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'addcol prior_GALflux_decam_z_errhi "1e10"'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">'delcols "apfluxext* usable_extflux* MW_TRANSMISSION_* *_LS_extaper"'</span>
+<span class="w">		</span><span class="nv">in2</span><span class="o">=</span><span class="nv">$*</span>_LS_extaper.fits<span class="w"> </span><span class="nv">values2</span><span class="o">=</span>id<span class="w">  </span><span class="nv">icmd2</span><span class="o">=</span><span class="s1">&#39;keepcols &quot;id apfluxext*_4 MW_TRANSMISSION_*&quot;&#39;</span><span class="w"> </span><span class="nv">suffix2</span><span class="o">=</span>_LS_extaper<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol usable_extflux_g &quot;(TYPE_LS!=\&quot;PSF\&quot;&amp;&amp;fracflux_g_LS&lt;0.1&amp;&amp;decam_g_err&gt;0&amp;&amp;apfluxext_err_g_4&gt;0&amp;&amp;(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26&gt;decam_g*0.01)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol usable_extflux_r &quot;(TYPE_LS!=\&quot;PSF\&quot;&amp;&amp;fracflux_r_LS&lt;0.1&amp;&amp;decam_r_err&gt;0&amp;&amp;apfluxext_err_r_4&gt;0&amp;&amp;(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26&gt;decam_r*0.01)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol usable_extflux_z &quot;(TYPE_LS!=\&quot;PSF\&quot;&amp;&amp;fracflux_z_LS&lt;0.1&amp;&amp;decam_z_err&gt;0&amp;&amp;apfluxext_err_z_4&gt;0&amp;&amp;(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26&gt;decam_z*0.01)&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_g &quot;usable_extflux_g?(apfluxext_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_r &quot;usable_extflux_r?(apfluxext_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_z &quot;usable_extflux_z?(apfluxext_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_g_errlo &quot;usable_extflux_g?(apfluxext_err_g_4/MW_TRANSMISSION_G)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_r_errlo &quot;usable_extflux_r?(apfluxext_err_r_4/MW_TRANSMISSION_R)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_z_errlo &quot;usable_extflux_z?(apfluxext_err_z_4/MW_TRANSMISSION_Z)*pow(10, -28.44)*1e26:-99&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_g_errhi &quot;1e10&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_r_errhi &quot;1e10&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;addcol prior_GALflux_decam_z_errhi &quot;1e10&quot;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">ocmd</span><span class="o">=</span><span class="s1">&#39;delcols &quot;apfluxext* usable_extflux* MW_TRANSMISSION_* *_LS_extaper&quot;&#39;</span>
 </pre></div>
 </div>
 <p>These require <code class="docutils literal notranslate"><span class="pre">TYPE</span> <span class="pre">!=</span> <span class="pre">PSF</span></code>, <code class="docutils literal notranslate"><span class="pre">fracflux</span> <span class="pre">&lt;</span> <span class="pre">0.1</span></code> and positive errors,
@@ -642,11 +598,11 @@ extinction correction.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="allwise.html"
+       href="vhs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AllWISE</p>
+        <p class="prev-next-title">VISTA Hemisphere Survey (VHS)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -657,17 +613,15 @@ extinction correction.</p></li>
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-fluxes">Adaptive fluxes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuts-applied">Cuts applied</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-source-flux-priors">Extended-source flux priors</a></li>
@@ -721,8 +675,8 @@ By Johannes Buchner
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
