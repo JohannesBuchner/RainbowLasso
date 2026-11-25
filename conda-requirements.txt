@@ -9,3 +9,4 @@ tqdm
 uncertainties
 pillow
 dustmaps
+sphinx_book_theme
